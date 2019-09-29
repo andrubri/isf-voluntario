@@ -1,10 +1,10 @@
 export const locale = {
-    lang: 'en',
+    lang: 'es',
     data: {
         'NAV': {
-            'APPLICATIONS': 'Applications',
+            'APPLICATIONS': 'Aplicación',
             'SAMPLE'        : {
-                'TITLE': 'Sample',
+                'TITLE': 'simple',
                 'BADGE': '25'
             }
         }
