@@ -27,6 +27,8 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/page/sample/sample.module';
+import { LoginComponent } from './main/page/login/login.component';
+import {  MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 
 
@@ -34,12 +36,17 @@ const appRoutes: Routes = [
     {
         path      : '**',
         redirectTo: 'sample'
-    }
+    },
+    {
+        path        : 'page',
+        loadChildren: './main/page/pages.module#PagesModule'
+    },
 ];
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent
     ],
     imports     : [
         BrowserModule,
@@ -67,6 +74,11 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
+        
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatInputModule,
+        
 
         // App modules
         LayoutModule,
