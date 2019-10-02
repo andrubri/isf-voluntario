@@ -27,26 +27,35 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/page/sample/sample.module';
-import { LoginComponent } from './main/page/login/login.component';
 import {  MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { LoginModule } from './main/page/login/login.module';
+import { RegisterModule } from './main/page/register/register.module';
 
 
 
 const appRoutes: Routes = [
     {
-        path      : '**',
+        path      : 'sample',
         redirectTo: 'sample'
+    },
+    {
+        path      : 'login',
+        redirectTo: 'page/login'    
+    },
+    {
+        path      : 'register',
+        redirectTo: 'page/register'
     },
     {
         path        : 'page',
         loadChildren: './main/page/pages.module#PagesModule'
-    },
+    }
 ];
 
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent
+        
     ],
     imports     : [
         BrowserModule,
@@ -82,7 +91,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+        LoginModule,
+        RegisterModule
     ],
     providers: [ISFService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
     bootstrap   : [

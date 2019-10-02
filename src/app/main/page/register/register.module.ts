@@ -4,18 +4,18 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, 
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { LoginComponent } from 'app/main/page/login/login.component';
+import { RegisterComponent } from 'app/main/page/register/register.component';
 
 const routes = [
     {
-        path     : 'login',
-        component: LoginComponent
+        path     : 'register',
+        component: RegisterComponent
     }
 ];
 
 @NgModule({
     declarations: [
-        LoginComponent 
+        RegisterComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -25,9 +25,10 @@ const routes = [
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+
         FuseSharedModule
     ]
 })
-export class LoginModule
+export class RegisterModule
 {
 }

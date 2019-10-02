@@ -2,25 +2,89 @@ import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
     {
-        id       : 'applications',
-        title    : 'Applications',
-        translate: 'NAV.APPLICATIONS',
+        id       : 'Usuarios',
+        title    : 'Usuarios',
+        translate: 'Usuarios',
+        type     : 'item',
+        icon     : 'person',
+        url      : '/login',
+
+    },
+    {
+        id       : 'Actividad',
+        title    : 'Actividad',
+        translate: 'Actividad',
         type     : 'group',
+        url      : '/login',
+
         children : [
             {
-                id       : 'sample',
-                title    : 'Sample',
-                translate: 'NAV.SAMPLE.TITLE',
+                id       : 'pileta',
+                title    : 'pileta',
+                translate: 'pileta',
                 type     : 'item',
-                icon     : 'email',
-                url      : '/sample',
-                badge    : {
-                    title    : '25',
-                    translate: 'NAV.SAMPLE.BADGE',
-                    bg       : '#F44336',
-                    fg       : '#FFFFFF'
-                }
-            }
+                icon     : 'pool',
+                url      : '/login',
+
+            },
+            {
+                id       : 'puente',
+                title    : 'puente',
+                translate: 'puente',
+                type     : 'item',
+                icon     : 'forward',
+                url      : '/login',
+
+            },
+            {
+                id       : 'cancha',
+                title    : 'cancha',
+                translate: 'cancha',
+                type     : 'item',
+                icon     : 'sports_tennis',
+                url      : '/login',
+
+            },
+            
         ]
-    }
+    },
+    {
+        id       : 'Jornada',
+        title    : 'Jornada',
+        translate: 'Jornada',
+        type     : 'group',
+        url      : '/login',
+
+        children : [
+            {
+                id       : 'pileta',
+                title    : 'pileta',
+                translate: 'pileta',
+                type     : 'item',
+                icon     : 'pool',
+                url      : '/login',
+
+            },
+            {
+                id       : 'puente',
+                title    : 'puente',
+                translate: 'puente',
+                type     : 'item',
+                icon     : 'forward',
+                url      : '/login',
+
+            },
+            {
+                id       : 'cancha',
+                title    : 'cancha',
+                translate: 'cancha',
+                type     : 'item',
+                icon     : 'sports_tennis',
+                url      : '/login',
+
+            },
+            
+        ]
+    },
+    
 ];
