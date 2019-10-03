@@ -35,20 +35,8 @@ import { RegisterModule } from './main/page/register/register.module';
 
 const appRoutes: Routes = [
     {
-        path      : 'sample',
+        path      : '**',
         redirectTo: 'sample'
-    },
-    {
-        path      : 'login',
-        redirectTo: 'page/login'    
-    },
-    {
-        path      : 'register',
-        redirectTo: 'page/register'
-    },
-    {
-        path        : 'page',
-        loadChildren: './main/page/pages.module#PagesModule'
     }
 ];
 
