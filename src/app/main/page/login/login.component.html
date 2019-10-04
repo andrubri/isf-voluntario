@@ -37,11 +37,7 @@
 
                 <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
                      fxLayoutAlign="space-between center">
-                    <mat-checkbox class="remember-me" aria-label="Remember Me">
-                        Recuerdame
-                    </mat-checkbox>
-
-                    <a class="forgot-password" [routerLink]="'/pages/auth/forgot-password'">
+                    <a class="forgot-password" [routerLink]="'/forgot-password'">
                         Olvido su contraseña?
                     </a>
                 </div>
@@ -52,12 +48,6 @@
                 </button>
 
             </form>
-
-            <div class="register" fxLayout="column" fxLayoutAlign="center center">
-                <span class="text">No tienes una cuenta?</span>
-                <a class="link" [routerLink]="'/pages/register'">Crear una cuenta</a>
-            </div>
-
         </div>
 
     </div>

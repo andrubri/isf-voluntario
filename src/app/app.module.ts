@@ -30,7 +30,7 @@ import { SampleModule } from 'app/main/page/sample/sample.module';
 import {  MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { LoginModule } from './main/page/login/login.module';
 import { RegisterModule } from './main/page/register/register.module';
-
+import {ForgotPasswordModule} from './main/page/forgot-password/forgot-password.module';
 
 
 const appRoutes: Routes = [
@@ -81,7 +81,8 @@ const appRoutes: Routes = [
         LayoutModule,
         SampleModule,
         LoginModule,
-        RegisterModule
+        RegisterModule,
+        ForgotPasswordModule
     ],
     providers: [ISFService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
     bootstrap   : [

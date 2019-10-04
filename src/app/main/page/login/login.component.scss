@@ -4,7 +4,7 @@ login {
 
     #login {
         width: 100%;
-        background: white;
+        background: url('/assets/images/backgrounds/dark-material-bg.jpg') no-repeat;
         background-size: cover;
 
         #login-form-wrapper {
@@ -16,6 +16,7 @@ login {
             }
 
             #login-form {
+                background: #FFFFFF;
                 width: 384px;
                 max-width: 384px;
                 padding: 32px;

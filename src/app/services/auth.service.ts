@@ -9,8 +9,6 @@ import {Observable, from} from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-    token: string;
-
     constructor(
         private afAuth: AngularFireAuth,
         private router: Router
