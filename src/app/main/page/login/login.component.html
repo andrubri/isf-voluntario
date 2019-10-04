@@ -10,7 +10,7 @@
 
             <div class="title">LOGIN</div>
 
-            <form name="loginForm" [formGroup]="loginForm" novalidate>
+            <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
@@ -52,14 +52,6 @@
                 </button>
 
             </form>
-
-            <div class="separator">
-                <span class="text">OR</span>
-            </div>
-
-            <button mat-raised-button class="google">
-                Log in con Google
-            </button>
 
             <div class="register" fxLayout="column" fxLayoutAlign="center center">
                 <span class="text">No tienes una cuenta?</span>
