@@ -80,7 +80,7 @@ export class UsersComponent implements OnInit
             txtBoton: "Eliminar",
             callback: async () => {
                 this._fuseProgressBarService.show();
-                await this.mutualService.removeUser(token);
+                await this._isfService.removeUser(token);
                 this.ngOnInit();
             },
             altoModal: "300px",
