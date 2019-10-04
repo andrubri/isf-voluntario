@@ -8,6 +8,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
+import {ISFService} from '../../../services/isf.service';
 
 @Component({
     selector     : 'toolbar',
@@ -25,6 +26,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
     navigation: any;
     selectedLanguage: any;
     userStatusOptions: any[];
+    userInfo: any;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -39,7 +41,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
-        private _translateService: TranslateService
+        private _translateService: TranslateService,
+        private _isfService: ISFService
     )
     {
         // Set the defaults
@@ -97,7 +100,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
+    async ngOnInit(): Promise<void>
     {
         // Subscribe to the config changes
         this._fuseConfigService.config
@@ -110,6 +113,10 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {'id': this._translateService.currentLang});
+
+        this.userInfo = await this._isfService.getMeUser();
+
+
     }
 
     /**
