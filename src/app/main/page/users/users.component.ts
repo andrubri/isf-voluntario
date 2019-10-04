@@ -6,6 +6,7 @@ import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/mat
 import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import {ISFService} from '../../../services/isf.service';
 import {fromEvent} from 'rxjs';
+import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 
 @Component({
     selector   : 'users',
