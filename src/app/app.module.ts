@@ -84,7 +84,8 @@ const appRoutes: Routes = [
         LoginModule,
         RegisterModule,
         ForgotPasswordModule,
-        FormUsersModule
+        FormUsersModule,
+
     ],
     providers: [ISFService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
     bootstrap   : [

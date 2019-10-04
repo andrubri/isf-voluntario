@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
     MatButtonModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -44,7 +44,8 @@ const routes = [
         MatSnackBarModule,
         MatTableModule,
         MatTooltipModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule
     ],
     exports     : [
         UsersComponent

@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import {fuseAnimations} from '../../../../@fuse/animations';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import {ISFService} from '../../../services/isf.service';
 import {fromEvent} from 'rxjs';
@@ -37,7 +37,8 @@ export class UsersComponent implements OnInit
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _fuseProgressBarService: FuseProgressBarService,
-        private _isfService: ISFService
+        private _isfService: ISFService,
+        private _dialog: MatDialog
     )
     {
         this._fuseProgressBarService.show();
@@ -59,5 +60,30 @@ export class UsersComponent implements OnInit
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
         this._fuseProgressBarService.hide();
+    }
+
+    private openDialogConfirm(datos: any) {
+        this._dialog.open(AccionConfirmarComponent, {
+            width: datos.anchoModal ? datos.anchoModal : "50%",
+            height: datos.altoModal ? datos.altoModal : "17%",
+            data: datos,
+            panelClass: "popup"
+        });
+    }
+
+    async remove(token: string){
+        this.openDialogConfirm({
+            etiqueta: "AccionOpciones",
+            titulo1: "¿Esta seguro que desea eliminar ",
+            titulo2: "el usuario?",
+            txtBoton: "Eliminar",
+            callback: async () => {
+                this._fuseProgressBarService.show();
+                await this.mutualService.removeUser(token);
+                this.ngOnInit();
+            },
+            altoModal: "300px",
+            anchoModal: "450px"
+        });
     }
 }

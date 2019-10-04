@@ -53,4 +53,8 @@ export class ISFService {
         return await this._http.post(url, user, this._httpOptions).toPromise();
     }
 
+    public async removeUser(token: string): Promise<any> {
+        const url = `${this._urlBE}/user/${token}`;
+        return await this._http.delete(url, this._httpOptions).toPromise();
+    }
 }

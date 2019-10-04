@@ -1,0 +1,23 @@
+<div>
+    <mat-card-content>
+        <div mat-dialog-content>
+            <div style="text-align:right;margin-bottom: 34px;">
+                <mat-icon (click)="onCloseCancel()" style="cursor: pointer;color: #AEAEAE;">cancel</mat-icon>
+            </div>
+            <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
+                <p style="text-align: center" [innerHTML]="datos.titulo1"></p>
+            </div>
+            <div fxLayout="row" class="tituloModal2" fxLayoutAlign="space-around center">
+                <div style="width: 100%">
+                    <p style="width:100%;text-align: center"> {{datos.titulo2}} </p>
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top: 8%" fxLayoutAlign="space-around center">
+                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()" cdkFocusInitial>{{datos.txtBoton}}</button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <a (click)="onCloseCancel()" class="volver"> Volver </a>
+            </div>
+        </div>
+    </mat-card-content>
+</div>
