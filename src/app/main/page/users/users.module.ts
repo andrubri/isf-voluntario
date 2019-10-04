@@ -4,21 +4,20 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { SampleComponent } from './sample.component';
-import {LoginComponent} from '../login/login.component';
+import { UsersComponent } from './users.component';
 import {AuthGuard} from '../../../services/auth-guard.service';
 
 const routes = [
     {
-        path     : 'sample',
-        component: SampleComponent,
+        path     : 'users',
+        component: UsersComponent,
         canActivate: [AuthGuard]
     }
 ];
 
 @NgModule({
     declarations: [
-        SampleComponent
+        UsersComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -28,10 +27,10 @@ const routes = [
         FuseSharedModule
     ],
     exports     : [
-        SampleComponent
+        UsersComponent
     ]
 })
 
-export class SampleModule
+export class UsersModule
 {
 }

@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
-import { locale as english } from './i18n/en';
-import { locale as turkish } from './i18n/tr';
-
 @Component({
     selector   : 'sample',
-    templateUrl: './sample.component.html',
-    styleUrls  : ['./sample.component.scss']
+    templateUrl: './users.component.html',
+    styleUrls  : ['./users.component.scss']
 })
-export class SampleComponent
+export class UsersComponent
 {
     /**
      * Constructor
@@ -21,6 +18,5 @@ export class SampleComponent
         private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
     {
-        this._fuseTranslationLoaderService.loadTranslations(english, turkish);
     }
 }

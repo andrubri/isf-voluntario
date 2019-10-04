@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         try {
             const user: any = await this._authService.login(this.loginForm.value.email, this.loginForm.value.password);
             if (user) {
-                this._router.navigate(['sample']);
+                this._router.navigate(['users']);
             } else {
                 this.loginForm.value.email = '';
                 this.loginForm.value.password = '';

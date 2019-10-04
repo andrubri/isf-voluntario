@@ -26,7 +26,7 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/page/sample/sample.module';
+import { UsersModule } from 'app/main/page/users/users.module';
 import {  MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { LoginModule } from './main/page/login/login.module';
 import { RegisterModule } from './main/page/register/register.module';
@@ -36,7 +36,7 @@ import {ForgotPasswordModule} from './main/page/forgot-password/forgot-password.
 const appRoutes: Routes = [
     {
         path      : '**',
-        redirectTo: 'sample'
+        redirectTo: 'users'
     }
 ];
 
@@ -79,7 +79,7 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule,
+        UsersModule,
         LoginModule,
         RegisterModule,
         ForgotPasswordModule
