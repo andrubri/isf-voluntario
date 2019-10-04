@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
+import {
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatTooltipModule
+} from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { UsersComponent } from './users.component';
@@ -24,7 +34,17 @@ const routes = [
 
         TranslateModule,
 
-        FuseSharedModule
+        FuseSharedModule,
+
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatPaginatorModule
     ],
     exports     : [
         UsersComponent

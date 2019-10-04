@@ -38,4 +38,19 @@ export class ISFService {
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
+    public async getAllUsers(): Promise<any>{
+        const url = `${this._urlBE}/user`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async saveUser(user: any): Promise<any> {
+        const url = `${this._urlBE}/user/${user.token}`;
+        return await this._http.put(url, user, this._httpOptions).toPromise();
+    }
+
+    public async addUser(user: any): Promise<any> {
+        const url = `${this._urlBE}/user`;
+        return await this._http.post(url, user, this._httpOptions).toPromise();
+    }
+
 }

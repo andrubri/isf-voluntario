@@ -15,8 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return this.auth.GetTokenFirebase()
-            .mergeMap((token: string) => {
+        return this.auth.GetTokenFirebase().mergeMap((token: string) => {
                 if (token) {
                     request = request.clone({
                         setHeaders: {
