@@ -32,6 +32,7 @@ import { LoginModule } from './main/page/login/login.module';
 import { RegisterModule } from './main/page/register/register.module';
 import {ForgotPasswordModule} from './main/page/forgot-password/forgot-password.module';
 import {FormUsersModule} from './main/page/usersforms/formusers.module';
+import {AccionConfirmarModule} from './main/modal/AccionConfirmar/accionconfirmar.module';
 
 
 const appRoutes: Routes = [
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
         RegisterModule,
         ForgotPasswordModule,
         FormUsersModule,
+        AccionConfirmarModule
 
     ],
     providers: [ISFService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
