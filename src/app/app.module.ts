@@ -27,11 +27,15 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { UsersModule } from 'app/main/page/users/users.module';
+import { ActividadesModule } from 'app/main/page/actividades/actividades.module';
+
 import {  MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { LoginModule } from './main/page/login/login.module';
 import { RegisterModule } from './main/page/register/register.module';
 import {ForgotPasswordModule} from './main/page/forgot-password/forgot-password.module';
 import {FormUsersModule} from './main/page/usersforms/formusers.module';
+import {FormActividadesModule} from './main/page/actividadesforms/formactividadesmodule';
+
 import {AccionConfirmarModule} from './main/modal/AccionConfirmar/accionconfirmar.module';
 
 
@@ -82,10 +86,12 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         UsersModule,
+        ActividadesModule,
         LoginModule,
         RegisterModule,
         ForgotPasswordModule,
         FormUsersModule,
+        FormActividadesModule,
         AccionConfirmarModule
 
     ],

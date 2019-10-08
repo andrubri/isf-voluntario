@@ -9,5 +9,13 @@ export const navigation: FuseNavigation[] = [
         icon     : 'person',
         url      : '/users',
 
+    },    {
+        id       : 'Actividades',
+        title    : 'Actividades',
+        translate: 'Actividades',
+        type     : 'item',
+        icon     : 'home',
+        url      : '/Actividades',
+
     }
 ];

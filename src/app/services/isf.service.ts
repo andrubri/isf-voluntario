@@ -57,4 +57,25 @@ export class ISFService {
         const url = `${this._urlBE}/user/${token}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
+    public async getAllActividades(): Promise<any>{
+        const url = `${this._urlBE}/actividad`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+    public async removeActividad(token: string): Promise<any> {
+        const url = `${this._urlBE}/actividad/${token}`;
+        return await this._http.delete(url, this._httpOptions).toPromise();
+    }
+    public async addActividad(actividad: any): Promise<any> {
+        const url = `${this._urlBE}/actividad`;
+        return await this._http.post(url, actividad, this._httpOptions).toPromise();
+    }
+    public async saveActividad(actividad: any): Promise<any> {
+        const url = `${this._urlBE}/actividad/${actividad.token}`;
+        return await this._http.put(url, actividad, this._httpOptions).toPromise();
+    }
+    public async getActividadByToken(token: string): Promise<any> {
+        const url = `${this._urlBE}/actividad/${token}`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
 }

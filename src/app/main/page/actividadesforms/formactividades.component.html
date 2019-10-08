@@ -1,0 +1,102 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'./actividades'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div class="logo mb-24 mb-md-0"
+                     fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        account_circle
+                    </mat-icon>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
+                        {{actividad.nombre}}
+                    </span>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
+                        Nueva actividad
+                    </span>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button mat-raised-button
+                    class="save-product-button"
+                    [disabled]="actividadForm?.invalid"
+                    *ngIf="pageType ==='new'" (click)="addActividad()">
+                <span>AGREGAR</span>
+            </button>
+
+            <button mat-raised-button
+                    class="save-product-button"
+                    [disabled]="actividadForm?.invalid || actividadForm?.pristine"
+                    *ngIf="pageType ==='edit'" (click)="saveActividad()">
+                <span>GRABAR</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content" *ngIf="actividadForm">
+
+                <form name="actividadForm" [formGroup]="actividadForm" class="product w-100-p" fxLayout="column" fxFlex>
+                    <input name="token" formControlName="token" type="hidden">
+                    <div class="tab-content p-24">
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Direccion</mat-label>
+                                <input matInput placeholder="Direccion"
+                                       name="direccion"
+                                       formControlName="direccion"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                        <mat-form-field appearance="standard" class="w-100-p">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre"
+                                   name="nombre"
+                                   formControlName="nombre"
+                                   required>
+                        </mat-form-field>
+                        </div>
+                        <div>
+                        <mat-form-field appearance="standard" class="w-100-p">
+                            <mat-label>Ciudad</mat-label>
+                            <input matInput placeholder="Ciudad"
+                                   name="ciudad"
+                                   formControlName="ciudad"
+                                   required ciudad>
+                        </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>
