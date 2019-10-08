@@ -15,7 +15,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'Actividades',
         type     : 'item',
         icon     : 'home',
-        url      : '/Actividades',
+        url      : '/actividades',
 
     }
 ];

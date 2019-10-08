@@ -19,7 +19,7 @@ import {AuthGuard} from '../../../services/auth-guard.service';
 
 const routes = [
     {
-        path     : 'actividad',
+        path     : 'actividades',
         component: ActividadesComponent,
         canActivate: [AuthGuard]
     }
