@@ -1,4 +1,4 @@
-<div id="users" class="page-layout carded fullwidth inner-scroll">
+<div id="actividades" class="page-layout carded fullwidth inner-scroll">
 
 
     <!-- TOP BACKGROUND -->
@@ -55,36 +55,36 @@
                        fusePerfectScrollbar>
                 <ng-container matColumnDef="direccion">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>direccion</mat-header-cell>
-                    <mat-cell *matCellDef="let user" fxHide fxShow.gt-xs
+                    <mat-cell *matCellDef="let actividad" fxHide fxShow.gt-xs
                               [routerLink]="'/actividades/'+ actividad.token">
                         <p class="text-truncate">{{actividad.direccion}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nombre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Nombre</mat-header-cell>
-                    <mat-cell *matCellDef="let user" fxHide fxShow.gt-xs
+                    <mat-cell *matCellDef="let actividad" fxHide fxShow.gt-xs
                               [routerLink]="'/actividades/'+ actividad.token">
                         <p class="text-truncate">{{actividad.nombre}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="ciudad">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</mat-header-cell>
-                    <mat-cell *matCellDef="let user"
+                    <mat-cell *matCellDef="let actividad"
                               [routerLink]="'/actividades/'+ actividad.token">
                         <p class="text-truncate">{{actividad.ciudad}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="accion" stickyEnd>
                     <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-                    <mat-cell *matCellDef="let user">
-                        <button mat-button (click)="remove(user.token)" [matTooltip]="'Eliminar actividad'">
+                    <mat-cell *matCellDef="let actividad">
+                        <button mat-button (click)="remove(actividad.token)" [matTooltip]="'Eliminar actividad'">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-cell>
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-                <mat-row *matRowDef="let user; columns: displayedColumns;"
+                <mat-row *matRowDef="let actividad; columns: displayedColumns;"
                          class="product" matRipple>
                 </mat-row>
             </mat-table>
