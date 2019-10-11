@@ -37,6 +37,7 @@ import {FormUsersModule} from './main/page/usersforms/formusers.module';
 import {FormActividadesModule} from './main/page/actividadesforms/formactividadesmodule';
 
 import {AccionConfirmarModule} from './main/modal/AccionConfirmar/accionconfirmar.module';
+import {AddvoluntarioModule} from './main/modal/AddVoluntario/addvoluntario.module';
 
 
 const appRoutes: Routes = [
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
         ForgotPasswordModule,
         FormUsersModule,
         FormActividadesModule,
-        AccionConfirmarModule
+        AccionConfirmarModule,
+        AddvoluntarioModule
 
     ],
     providers: [ISFService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],

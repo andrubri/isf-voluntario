@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccionConfirmarComponent } from './accionconfirmar.component';
+import { AddvoluntarioComponent } from './addvoluntario.component';
 
 describe('AddvoluntarioComponent', () => {
-  let component: AccionConfirmarComponent;
-  let fixture: ComponentFixture<AccionConfirmarComponent>;
+  let component: AddvoluntarioComponent;
+  let fixture: ComponentFixture<AddvoluntarioComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccionConfirmarComponent ]
+      declarations: [ AddvoluntarioComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccionConfirmarComponent);
+    fixture = TestBed.createComponent(AddvoluntarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

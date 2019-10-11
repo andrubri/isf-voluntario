@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {Subject} from 'rxjs';
 
 import {fuseAnimations} from '@fuse/animations';
@@ -10,6 +10,8 @@ import {ActivatedRoute} from '@angular/router';
 import {formatDate} from '@angular/common';
 import {ISFService} from '../../../services/isf.service';
 import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
+import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
+import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
 
 @Component({
     selector: 'formactividad',
@@ -23,6 +25,10 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
     actividadForm: FormGroup = null;
     perfiles: any;
     actividad: any;
+    actividad_coordinadores: any[];
+    coordinador_act: any[];
+    public dataSource: MatTableDataSource<any> = new MatTableDataSource();
+    public displayedColumns = ['nombre', 'apellido'];
 
     constructor(
         private _isfService: ISFService,
@@ -30,7 +36,8 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
         private _matSnackBar: MatSnackBar,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _fuseProgressBarService: FuseProgressBarService
+        private _fuseProgressBarService: FuseProgressBarService,
+        private _dialog: MatDialog
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
@@ -45,7 +52,10 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
      */
     async ngOnInit(): Promise<void> {
         if (this._route.snapshot.paramMap.get('actividad') && this._route.snapshot.paramMap.get('actividad') !== 'new') {
-            this.actividad = await this._isfService.getActividadById(Number(this._route.snapshot.paramMap.get('actividad')));
+            const idAct = Number(this._route.snapshot.paramMap.get('actividad'));
+            this.actividad = await this._isfService.getActividadById(idAct);
+            this.dataSource.data = await this._isfService.getCoordinadoresAct(idAct);
+            this.coordinador_act = await this._isfService.getCoordinadores();
             this.pageType = 'edit';
         } else {
             this.pageType = 'new';
@@ -54,6 +64,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
                 direccion: '',
                 ciudad: ''
             };
+            this.dataSource.data = [];
         }
 
         this.actividadForm = this.createActividadForm();
@@ -76,7 +87,6 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
      * @returns {FormGroup}
      */
     createActividadForm(): FormGroup {
-        console.log(this.actividad.createdAt);
         return this._formBuilder.group({
             nombre: [this.actividad.nombre],
             direccion: [this.actividad.direccion],
@@ -93,7 +103,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
         const data = this.actividadForm.getRawValue();
         data.handle = FuseUtils.handleize(data.nombre);
 
-        await this._isfService.saveActividad(data);
+        await this._isfService.saveActividad(data, this.dataSource.data);
 
         this._matSnackBar.open('Actividad grabada', 'OK', {
             verticalPosition: 'top',
@@ -113,7 +123,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             const data = this.actividadForm.getRawValue();
             data.handle = FuseUtils.handleize(data.nombre);
 
-            await this._isfService.addActividad(data);
+            await this._isfService.addActividad(data, this.dataSource.data);
 
             // Show the success message
             this._matSnackBar.open('Actividad grabada', 'OK', {
@@ -138,6 +148,31 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             }
         }
         this._fuseProgressBarService.hide();
+    }
+
+    private openDialogAdd(datos: any) {
+        this._dialog.open(AddvoluntarioComponent, {
+            width: datos.anchoModal ? datos.anchoModal : '50%',
+            height: datos.altoModal ? datos.altoModal : '17%',
+            data: datos,
+            panelClass: 'popup'
+        });
+    }
+
+    addCoordinador(): void {
+
+        this.openDialogAdd({
+            etiqueta: 'AddVoluntario',
+            txtBoton: 'Seleccionar',
+            items: this.coordinador_act,
+            callback: async (item) => {
+                const info = this.dataSource.data;
+                info.push(item);
+                this.dataSource.data = info;
+            },
+            altoModal: '300px',
+            anchoModal: '450px'
+        });
     }
 
 }

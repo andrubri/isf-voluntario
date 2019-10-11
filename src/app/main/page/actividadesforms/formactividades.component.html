@@ -22,10 +22,12 @@
                     <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                         home
                     </mat-icon>
-                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                          *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
                         {{actividad.nombre}}
                     </span>
-                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                          *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
                         Nueva actividad
                     </span>
                 </div>
@@ -55,37 +57,75 @@
             <div class="content" *ngIf="actividadForm">
 
                 <form name="actividadForm" [formGroup]="actividadForm" class="product w-100-p" fxLayout="column" fxFlex>
-                    <input name="token" formControlName="token" type="hidden">
-                    <div class="tab-content p-24">
-                        <div>
-                            <mat-form-field appearance="standard" class="w-100-p">
-                                <mat-label>Direccion</mat-label>
-                                <input matInput placeholder="Direccion"
-                                       name="direccion"
-                                       formControlName="direccion"
-                                       required>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                        <mat-form-field appearance="standard" class="w-100-p">
-                            <mat-label>Nombre</mat-label>
-                            <input matInput placeholder="Nombre"
-                                   name="nombre"
-                                   formControlName="nombre"
-                                   required>
-                        </mat-form-field>
-                        </div>
-                        <div>
-                        <mat-form-field appearance="standard" class="w-100-p">
-                            <mat-label>Ciudad</mat-label>
-                            <input matInput placeholder="Ciudad"
-                                   name="ciudad"
-                                   formControlName="ciudad"
-                                   required>
-                        </mat-form-field>
-                        </div>
+                    <input name="idActividad" formControlName="idActividad" type="hidden">
+                    <mat-tab-group>
+                        <mat-tab label="Actividad">
+                            <div class="tab-content p-24">
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Direccion</mat-label>
+                                        <input matInput placeholder="Direccion"
+                                               name="direccion"
+                                               formControlName="direccion"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="Nombre"
+                                               name="nombre"
+                                               formControlName="nombre"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Ciudad</mat-label>
+                                        <input matInput placeholder="Ciudad"
+                                               name="ciudad"
+                                               formControlName="ciudad"
+                                               required>
+                                    </mat-form-field>
+                                </div>
 
-                    </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Coordinadores">
+                            <div class="tab-content p-24">
+                                <button mat-fab class="add-event-button mat-accent" (click)="addCoordinador()" aria-label="Agregar Coordinador"
+                                        [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <mat-table class="products-table"
+                                           #table [dataSource]="dataSource"
+                                           [@animateStagger]="{value:'50'}"
+                                           fusePerfectScrollbar>
+                                    <ng-container matColumnDef="nombre">
+                                        <mat-header-cell *matHeaderCellDef >
+                                            Nombre
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let coordinador">
+                                            <p class="text-truncate">{{coordinador.nombre}}</p>
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="apellido">
+                                        <mat-header-cell *matHeaderCellDef  >
+                                            Apellido
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let coordinador">
+                                            <p class="text-truncate">{{coordinador.apellido}}</p>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+                                    <mat-row *matRowDef="let coordinador; columns: displayedColumns;"
+                                             class="product" matRipple>
+                                    </mat-row>
+                                </mat-table>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
 
 
                 </form>

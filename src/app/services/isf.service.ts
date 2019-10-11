@@ -38,7 +38,7 @@ export class ISFService {
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getAllUsers(): Promise<any>{
+    public async getAllUsers(): Promise<any> {
         const url = `${this._urlBE}/user`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
@@ -57,25 +57,47 @@ export class ISFService {
         const url = `${this._urlBE}/user/${token}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
-    public async getAllActividades(): Promise<any>{
+
+    public async getAllActividades(): Promise<any> {
         const url = `${this._urlBE}/actividad`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
+
     public async removeActividad(idActividad: number): Promise<any> {
         const url = `${this._urlBE}/actividad/${idActividad}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
-    public async addActividad(actividad: any): Promise<any> {
+
+    public async addActividad(actividad: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/actividad`;
-        return await this._http.post(url, actividad, this._httpOptions).toPromise();
+        let req = {actividad: actividad, coordinadores: coordinadores};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
     }
-    public async saveActividad(actividad: any): Promise<any> {
+
+    public async saveActividad(actividad: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/actividad/${actividad.idActividad}`;
-        return await this._http.put(url, actividad, this._httpOptions).toPromise();
+        let req = {actividad: actividad, coordinadores: coordinadores};
+        return await this._http.put(url, req, this._httpOptions).toPromise();
     }
+
     public async getActividadById(idActividad: number): Promise<any> {
         const url = `${this._urlBE}/actividad/${idActividad}`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
+    public async getCoordinadores(): Promise<any> {
+        const coordinadores = [];
+        const usuarios = await this.getAllUsers();
+        for (const user of usuarios) {
+            if (user.idvoluntario) {
+                coordinadores.push(user);
+            }
+        }
+        return coordinadores;
+    }
+
+    public async getCoordinadoresAct(idActividad: number): Promise<any> {
+        const url = `${this._urlBE}/actividad/${idActividad}/coordinador`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
 }

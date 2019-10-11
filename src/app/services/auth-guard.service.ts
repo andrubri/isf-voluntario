@@ -8,12 +8,12 @@ export class AuthGuard implements CanActivate {
 
     }
 
-    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        return this.auth.isLogin().then(result => {
-            if (!result){
-                this.auth.logout();
-            }
-            return result;
-        });
+    async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        const result = await this.auth.isLogin();
+
+        if (!result){
+            this.auth.logout();
+        }
+        return result;
     }
 }

@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import {
     MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
     MatSortModule,
-    MatTableModule, MatTabsModule
+    MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
 
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -33,7 +33,7 @@ const routes = [
         MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
         MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
         MatSortModule,
-        MatTableModule, MatTabsModule,
+        MatTableModule, MatTabsModule, MatTooltipModule,
 
         FuseSharedModule
     ]
