@@ -72,7 +72,7 @@ export class ActividadesComponent implements OnInit
         });
     }
 
-    async remove(token: string){
+    async remove(idActividad: number){
         this.openDialogConfirm({
             etiqueta: "AccionOpciones",
             titulo1: "¿Esta seguro que desea eliminar ",
@@ -80,7 +80,7 @@ export class ActividadesComponent implements OnInit
             txtBoton: "Eliminar",
             callback: async () => {
                 this._fuseProgressBarService.show();
-                await this._isfService.removeActividad(token);
+                await this._isfService.removeActividad(idActividad);
                 this.ngOnInit();
             },
             altoModal: "300px",

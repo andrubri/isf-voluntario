@@ -45,7 +45,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
      */
     async ngOnInit(): Promise<void> {
         if (this._route.snapshot.paramMap.get('actividad') && this._route.snapshot.paramMap.get('actividad') !== 'new') {
-            this.actividad = await this._isfService.getActividadByToken(this._route.snapshot.paramMap.get('actividad'));
+            this.actividad = await this._isfService.getActividadById(Number(this._route.snapshot.paramMap.get('actividad')));
             this.pageType = 'edit';
         } else {
             this.pageType = 'new';
@@ -81,7 +81,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             nombre: [this.actividad.nombre],
             direccion: [this.actividad.direccion],
             ciudad: [this.actividad.ciudad],
-            token: [this.actividad.token]
+            idActividad: [this.actividad.idActividad]
         });
     }
 

@@ -56,28 +56,28 @@
                 <ng-container matColumnDef="direccion">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>direccion</mat-header-cell>
                     <mat-cell *matCellDef="let actividad" fxHide fxShow.gt-xs
-                              [routerLink]="'/actividades/'+ actividad.token">
+                              [routerLink]="'/actividades/'+ actividad.idActividad">
                         <p class="text-truncate">{{actividad.direccion}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nombre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Nombre</mat-header-cell>
                     <mat-cell *matCellDef="let actividad" fxHide fxShow.gt-xs
-                              [routerLink]="'/actividades/'+ actividad.token">
+                              [routerLink]="'/actividades/'+ actividad.idActividad">
                         <p class="text-truncate">{{actividad.nombre}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="ciudad">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</mat-header-cell>
                     <mat-cell *matCellDef="let actividad"
-                              [routerLink]="'/actividades/'+ actividad.token">
+                              [routerLink]="'/actividades/'+ actividad.idActividad">
                         <p class="text-truncate">{{actividad.ciudad}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="accion" stickyEnd>
                     <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                     <mat-cell *matCellDef="let actividad">
-                        <button mat-button (click)="remove(actividad.token)" [matTooltip]="'Eliminar actividad'">
+                        <button mat-button (click)="remove(actividad.idActividad)" [matTooltip]="'Eliminar actividad'">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-cell>
