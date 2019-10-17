@@ -1,0 +1,28 @@
+<div>
+    <mat-card-content>
+        <div mat-dialog-content>
+            <div style="text-align:right;margin-bottom: 34px;">
+                <mat-icon (click)="onCloseCancel()" style="cursor: pointer;color: #AEAEAE;">cancel</mat-icon>
+            </div>
+            <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
+                <form class="w-100-p">
+                    <mat-form-field class="w-100-p">
+                        <input type="text" placeholder="Jornada" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{date}} 
+                            </mat-option><!--datepicker-->                           
+
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div fxLayout="row" style="margin-top: 8%" fxLayoutAlign="space-around center">
+                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()" cdkFocusInitial>{{datos.txtBoton}}</button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <a (click)="onCloseCancel()" class="volver"> Volver </a>
+            </div>
+        </div>
+    </mat-card-content>
+</div>

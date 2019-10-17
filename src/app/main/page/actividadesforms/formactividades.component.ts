@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {Subject} from 'rxjs';
@@ -12,6 +12,7 @@ import {ISFService} from '../../../services/isf.service';
 import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
+import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
 
 @Component({
     selector: 'formactividad',
@@ -26,6 +27,8 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
     perfiles: any;
     actividad: any;
     actividad_coordinadores: any[];
+    jornada_act: any[];
+    voluntario_act: any[];
     coordinador_act: any[];
     public dataSource: MatTableDataSource<any> = new MatTableDataSource();
     public displayedColumns = ['nombre', 'apellido'];
@@ -56,6 +59,8 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             this.actividad = await this._isfService.getActividadById(idAct);
             this.dataSource.data = await this._isfService.getCoordinadoresAct(idAct);
             this.coordinador_act = await this._isfService.getCoordinadores();
+ //           this.jornada_act = await this._isfService.getJornadas();
+ //           this.dataSource.data = await this._isfService.getJornadasAct(idAct);
             this.pageType = 'edit';
         } else {
             this.pageType = 'new';
@@ -158,7 +163,14 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             panelClass: 'popup'
         });
     }
-
+    private openDialogAddJornada(datos: any) {
+        this._dialog.open(AddjornadaComponent, {
+            width: datos.anchoModal ? datos.anchoModal : '50%',
+            height: datos.altoModal ? datos.altoModal : '17%',
+            data: datos,
+            panelClass: 'popup'
+        });
+    }
     addCoordinador(): void {
 
         this.openDialogAdd({
@@ -174,5 +186,34 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             anchoModal: '450px'
         });
     }
+    addVoluntario(): void {
 
+        this.openDialogAdd({
+            etiqueta: 'AddVoluntario',
+            txtBoton: 'Seleccionar',
+            items: this.coordinador_act,
+            callback: async (item) => {
+                const info = this.dataSource.data;
+                info.push(item);
+                this.dataSource.data = info;
+            },
+            altoModal: '300px',
+            anchoModal: '450px'
+        });
+    }
+    addJornada(): void {
+
+        this.openDialogAddJornada({
+            etiqueta: 'AddJornada',
+            txtBoton: 'Agregar',
+            items: Input,
+            callback: async (item) => {
+                const info = this.dataSource.data;
+                info.push(item);
+                this.dataSource.data = info;
+            },
+            altoModal: '300px',
+            anchoModal: '450px'
+        });
+    }
 }

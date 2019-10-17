@@ -38,6 +38,7 @@ import {FormActividadesModule} from './main/page/actividadesforms/formactividade
 
 import {AccionConfirmarModule} from './main/modal/AccionConfirmar/accionconfirmar.module';
 import {AddvoluntarioModule} from './main/modal/AddVoluntario/addvoluntario.module';
+import {AddjornadaModule} from './main/modal/AddJornada/addjornada.module';
 
 
 const appRoutes: Routes = [
@@ -94,7 +95,9 @@ const appRoutes: Routes = [
         FormUsersModule,
         FormActividadesModule,
         AccionConfirmarModule,
-        AddvoluntarioModule
+        AddvoluntarioModule,
+        AddjornadaModule
+        
 
     ],
     providers: [ISFService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],

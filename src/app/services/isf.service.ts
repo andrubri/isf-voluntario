@@ -100,4 +100,20 @@ export class ISFService {
         const url = `${this._urlBE}/actividad/${idActividad}/coordinador`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
+
+   /* public async getJornadas(): Promise<any> {
+        const jornadas = [];
+        const actividades = await this.getAllActividades();
+        for (const actividad of actividades) {
+            if (actividades.idActividad) {
+                jornadas.push(actividad);
+            }
+        }
+        return jornadas;
+    }
+
+    public async getJornadasAct(idActividad: number): Promise<any> {
+        const url = `${this._urlBE}/actividad/${idActividad}/jornada`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }*/
 }

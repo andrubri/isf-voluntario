@@ -64,9 +64,11 @@
 
     }
     .add-event-button {
-        position: absolute;
-        right: 18px;
-        top: -26px;
+        position: relative;
+        left: 95%;
+        top: -10px;
         z-index: 100;
+
+        
     }
 }

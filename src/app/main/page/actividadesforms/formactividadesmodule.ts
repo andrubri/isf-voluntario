@@ -10,6 +10,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import {AuthGuard} from '../../../services/auth-guard.service';
 import {FormActividadesComponent} from './formactividades.component';
 
+
 const routes = [
     {
         path     : 'actividades/:actividad',
@@ -26,6 +27,7 @@ const routes = [
 @NgModule({
     declarations: [
         FormActividadesComponent
+        
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -35,7 +37,8 @@ const routes = [
         MatSortModule,
         MatTableModule, MatTabsModule, MatTooltipModule,
 
-        FuseSharedModule
+        FuseSharedModule,
+        
     ]
 })
 export class FormActividadesModule

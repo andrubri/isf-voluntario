@@ -125,6 +125,72 @@
                                 </mat-table>
                             </div>
                         </mat-tab>
+                        <mat-tab label="Voluntarios">
+                                <div class="tab-content p-24">
+                                    <button mat-fab class="add-event-button mat-accent" (click)="addVoluntario()" aria-label="Agregar Coordinador"
+                                            [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <mat-table class="products-table"
+                                               #table [dataSource]="dataSource"
+                                               [@animateStagger]="{value:'30'}"
+                                               fusePerfectScrollbar>
+                                        <ng-container matColumnDef="nombre">
+                                            <mat-header-cell *matHeaderCellDef >
+                                                Nombre
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let voluntario">
+                                                <p class="text-truncate">{{voluntario.nombre}}</p>
+                                            </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="apellido">
+                                            <mat-header-cell *matHeaderCellDef  >
+                                                Apellido
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let voluntario">
+                                                <p class="text-truncate">{{voluntario.apellido}}</p>
+                                            </mat-cell>
+                                        </ng-container>
+    
+                                        <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+                                        <mat-row *matRowDef="let voluntario; columns: displayedColumns;"
+                                                 class="product" matRipple>
+                                        </mat-row>
+                                    </mat-table>
+                                </div>
+                            </mat-tab>
+                        <mat-tab label="Jornadas">
+                                <div class="tab-content p-24">
+                                        <button mat-fab class="add-event-button mat-accent" (click)="addJornada()" aria-label="Agregar Jornada"
+                                                [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
+                                            <mat-icon>add</mat-icon>
+                                        </button>
+                                        <mat-table class="products-table"
+                                                   #table [dataSource]="dataSource"
+                                                   [@animateStagger]="{value:'50'}"
+                                                   fusePerfectScrollbar>
+                                            <ng-container matColumnDef="nombre">
+                                                <mat-header-cell *matHeaderCellDef >
+                                                    Fecha
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let jornada">
+                                                    <p class="text-truncate"></p>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="apellido">
+                                                <mat-header-cell *matHeaderCellDef  >
+                                                    
+                                                </mat-header-cell>
+
+                                            </ng-container>
+        
+                                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+                                            <mat-row *matRowDef="let jornada; columns: displayedColumns;"
+                                                     class="product" matRipple>
+                                            </mat-row>
+                                        </mat-table>
+                                    </div>                       
+                        </mat-tab>
                     </mat-tab-group>
 
 
