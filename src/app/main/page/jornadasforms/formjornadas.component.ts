@@ -12,21 +12,20 @@ import {ISFService} from '../../../services/isf.service';
 import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
-import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
 
 @Component({
-    selector: 'formactividad',
-    templateUrl: './formactividades.component.html',
-    styleUrls: ['./formactividades.component.scss'],
+    selector: 'formjornada',
+    templateUrl: './formjornadas.component.html',
+    styleUrls: ['./formjornadas.component.scss'],
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class FormActividadesComponent implements OnInit, OnDestroy {
+export class FormjornadasComponent implements OnInit, OnDestroy {
     pageType: string;
-    actividadForm: FormGroup = null;
+    jornadaForm: FormGroup = null;
     perfiles: any;
-    actividad: any;
-    actividad_coordinadores: any[];
+    jornada: any;
+    jornada_coordinadores: any[];
     jornada_act: any[];
     voluntario_act: any[];
     coordinador_act: any[];
@@ -54,30 +53,23 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
      * On init
      */
     async ngOnInit(): Promise<void> {
-        if (this._route.snapshot.paramMap.get('actividad') && this._route.snapshot.paramMap.get('actividad') !== 'new') {
-            const idAct = Number(this._route.snapshot.paramMap.get('actividad'));
-            this.actividad = await this._isfService.getActividadById(idAct);
+        if (this._route.snapshot.paramMap.get('jornada') && this._route.snapshot.paramMap.get('jornada') !== 'new') {
+            const idAct = Number(this._route.snapshot.paramMap.get('jornada'));
+            this.jornada = await this._isfService.getJornadaById(idAct);
             this.dataSource.data = await this._isfService.getCoordinadoresAct(idAct);
             this.coordinador_act = await this._isfService.getCoordinadores();
- //           this.jornada_act = await this._isfService.getJornadas();
- //           this.dataSource.data = await this._isfService.getJornadasAct(idAct);
             this.pageType = 'edit';
         } else {
             this.pageType = 'new';
-            this.actividad = {
-                nombre: '',
-                descripcion: '',
-                estado: '',
-                ciudad:'',
-                provincia: '',
-                categoria: '',
-                inicio:'',
-                fin:''
+            this.jornada = {
+                fecha: '',
+                direccion: '',
+                descripcion: ''
             };
             this.dataSource.data = [];
         }
 
-        this.actividadForm = this.createActividadForm();
+        this.jornadaForm = this.createjornadaForm();
         this._fuseProgressBarService.hide();
     }
 
@@ -96,58 +88,53 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
      *
      * @returns {FormGroup}
      */
-    createActividadForm(): FormGroup {
+    createjornadaForm(): FormGroup {
         return this._formBuilder.group({
-            nombre: [this.actividad.nombre],
-            descripcion: [this.actividad.descripcion],
-            estado: [this.actividad.estado],
-            ciudad: [this.actividad.ciudad],
-            provincia: [this.actividad.provincia],
-            categoria: [this.actividad.categoria],
-            inicio: [this.actividad.inicio],
-            fin: [this.actividad.fin],
-            idActividad: [this.actividad.idActividad]
+            fecha: [this.jornada.fecha],
+            direccion: [this.jornada.direccion],
+            descripcion: [this.jornada.descripcion],
+            idjornada: [this.jornada.idjornada]
         });
     }
 
     /**
-     * Save actividad
+     * Save jornada
      */
-    async saveActividad(): Promise<void> {
+    async savejornada(): Promise<void> {
         this._fuseProgressBarService.show();
-        const data = this.actividadForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.nombre);
+        const data = this.jornadaForm.getRawValue();
+        data.handle = FuseUtils.handleize(data.direccion);
 
-        await this._isfService.saveActividad(data, this.dataSource.data);
+        await this._isfService.saveJornada(data, this.dataSource.data);
 
-        this._matSnackBar.open('Actividad grabada', 'OK', {
+        this._matSnackBar.open('jornada grabada', 'OK', {
             verticalPosition: 'top',
             duration: 2000
         });
 
         this._fuseProgressBarService.hide();
-        this._router.navigate(['actividades']);
+        this._router.navigate(['jornadas']);
     }
 
     /**
-     * Add Actividad
+     * Add jornada
      */
-    async addActividad(): Promise<void> {
+    async addjornada(): Promise<void> {
         this._fuseProgressBarService.show();
         try {
-            const data = this.actividadForm.getRawValue();
-            data.handle = FuseUtils.handleize(data.nombre);
+            const data = this.jornadaForm.getRawValue();
+            data.handle = FuseUtils.handleize(data.direccion);
 
-            await this._isfService.addActividad(data, this.dataSource.data);
+            await this._isfService.addJornada(data, this.dataSource.data);
 
             // Show the success message
-            this._matSnackBar.open('Actividad grabada', 'OK', {
+            this._matSnackBar.open('jornada grabada', 'OK', {
                 verticalPosition: 'top',
                 duration: 2000
             });
 
             // Change the location with new one
-            this._router.navigate(['actividades']);
+            this._router.navigate(['jornadas']);
         } catch (e) {
             if (e.error) {
                 this._matSnackBar.open(e.error, 'Aceptar', {
@@ -156,7 +143,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
                     duration: 2000
                 });
             } else {
-                this._matSnackBar.open('Ocurrio un error al grabar la actividad!. Intente más tarde.', 'Aceptar', {
+                this._matSnackBar.open('Ocurrio un error al grabar la jornada!. Intente más tarde.', 'Aceptar', {
                     verticalPosition: 'top',
                     duration: 2000
                 });
@@ -173,6 +160,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             panelClass: 'popup'
         });
     }
+
     addCoordinador(): void {
 
         this.openDialogAdd({
@@ -203,5 +191,5 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
             anchoModal: '450px'
         });
     }
-
+  
 }
