@@ -8,25 +8,25 @@ import {
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import {AuthGuard} from '../../../services/auth-guard.service';
-import {FormActividadesComponent} from './formactividades.component';
+import {FormjornadasComponent} from './formjornadas.component';
 
 
 const routes = [
     {
-        path     : 'actividades/:actividad',
-        component: FormActividadesComponent,
+        path     : 'jornadas/:jornada',
+        component: FormjornadasComponent,
         canActivate: [AuthGuard]
     },
     {
-        path     : 'actividades/new',
-        component: FormActividadesComponent,
+        path     : 'jornadas/new',
+        component: FormjornadasComponent,
         canActivate: [AuthGuard]
     }
 ];
 
 @NgModule({
     declarations: [
-        FormActividadesComponent
+        FormjornadasComponent
         
     ],
     imports     : [
@@ -34,13 +34,14 @@ const routes = [
 
         MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
         MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
-        MatSortModule,MatDatepickerModule,
+        MatSortModule,        MatDatepickerModule,
+
         MatTableModule, MatTabsModule, MatTooltipModule,
 
         FuseSharedModule,
         
     ]
 })
-export class FormActividadesModule
+export class FormjornadasModule
 {
 }

@@ -59,29 +59,29 @@ export class ISFService {
     }
 
     public async getAllActividades(): Promise<any> {
-        const url = `${this._urlBE}/actividad`;
+        const url = `${this._urlBE}/equipo`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
     public async removeActividad(idActividad: number): Promise<any> {
-        const url = `${this._urlBE}/actividad/${idActividad}`;
+        const url = `${this._urlBE}/equipo/${idActividad}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
 
     public async addActividad(actividad: any, coordinadores: any): Promise<any> {
-        const url = `${this._urlBE}/actividad`;
-        let req = {actividad: actividad, coordinadores: coordinadores};
+        const url = `${this._urlBE}/equipo`;
+        let req = {equipo: actividad, coordinadores: coordinadores};
         return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
     public async saveActividad(actividad: any, coordinadores: any): Promise<any> {
-        const url = `${this._urlBE}/actividad/${actividad.idActividad}`;
+        const url = `${this._urlBE}/equipo/${actividad.idActividad}`;
         let req = {actividad: actividad, coordinadores: coordinadores};
         return await this._http.put(url, req, this._httpOptions).toPromise();
     }
 
     public async getActividadById(idActividad: number): Promise<any> {
-        const url = `${this._urlBE}/actividad/${idActividad}`;
+        const url = `${this._urlBE}/equipo/${idActividad}`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
@@ -101,19 +101,32 @@ export class ISFService {
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-   /* public async getJornadas(): Promise<any> {
-        const jornadas = [];
-        const actividades = await this.getAllActividades();
-        for (const actividad of actividades) {
-            if (actividades.idActividad) {
-                jornadas.push(actividad);
-            }
-        }
-        return jornadas;
+    public async getAllJornadas(): Promise<any> {
+        const url = `${this._urlBE}/jornada`;
+        return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getJornadasAct(idActividad: number): Promise<any> {
-        const url = `${this._urlBE}/actividad/${idActividad}/jornada`;
+    public async removeJornada(idJornada: number): Promise<any> {
+        const url = `${this._urlBE}/jornada/${idJornada}`;
+        return await this._http.delete(url, this._httpOptions).toPromise();
+    }
+
+    public async addJornada(jornada: any, coordinadores: any): Promise<any> {
+        const url = `${this._urlBE}/jornada`;
+        let req = {actividad: jornada, coordinadores: coordinadores};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
+    public async saveJornada(jornada: any, coordinadores: any): Promise<any> {
+        const url = `${this._urlBE}/jornada/${jornada.idJornada}`;
+        let req = {actividad: jornada, coordinadores: coordinadores};
+        return await this._http.put(url, req, this._httpOptions).toPromise();
+    }
+
+    public async getJornadaById(idJornada: number): Promise<any> {
+        const url = `${this._urlBE}/jornada/${idJornada}`;
         return await this._http.get(url, this._httpOptions).toPromise();
-    }*/
+    }
+
+
 }

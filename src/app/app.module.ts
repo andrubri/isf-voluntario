@@ -7,6 +7,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import 'hammerjs';
+import { MatDatepickerModule } from '@angular/material';
 
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -28,6 +29,8 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { UsersModule } from 'app/main/page/users/users.module';
 import { ActividadesModule } from 'app/main/page/actividades/actividades.module';
+import { jornadasModule } from 'app/main/page/jornadas/jornadas.module';
+
 
 import {  MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { LoginModule } from './main/page/login/login.module';
@@ -35,6 +38,8 @@ import { RegisterModule } from './main/page/register/register.module';
 import {ForgotPasswordModule} from './main/page/forgot-password/forgot-password.module';
 import {FormUsersModule} from './main/page/usersforms/formusers.module';
 import {FormActividadesModule} from './main/page/actividadesforms/formactividadesmodule';
+import {FormjornadasModule} from './main/page/jornadasforms/formjornadasmodule';
+
 
 import {AccionConfirmarModule} from './main/modal/AccionConfirmar/accionconfirmar.module';
 import {AddvoluntarioModule} from './main/modal/AddVoluntario/addvoluntario.module';
@@ -63,6 +68,7 @@ const appRoutes: Routes = [
 
         // Material moment date module
         MatMomentDateModule,
+        MatDatepickerModule,
 
         // Material
         MatButtonModule,
@@ -89,11 +95,13 @@ const appRoutes: Routes = [
         LayoutModule,
         UsersModule,
         ActividadesModule,
+        jornadasModule,
         LoginModule,
         RegisterModule,
         ForgotPasswordModule,
         FormUsersModule,
         FormActividadesModule,
+        FormjornadasModule,
         AccionConfirmarModule,
         AddvoluntarioModule,
         AddjornadaModule

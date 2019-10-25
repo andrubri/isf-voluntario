@@ -13,7 +13,7 @@
             <!-- APP TITLE -->
             <div fxLayout="row" fxLayoutAlign="start center">
 
-                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/actividades'">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/jornadas'">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
@@ -24,11 +24,11 @@
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                           *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
-                        {{actividad.nombre}}
+                        {{jornada.nombre}}
                     </span>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                           *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
-                        Nueva actividad
+                        Nueva jornada
                     </span>
                 </div>
             </div>
@@ -36,15 +36,15 @@
 
             <button mat-raised-button
                     class="save-product-button"
-                    [disabled]="actividadForm?.invalid"
-                    *ngIf="pageType ==='new'" (click)="addActividad()">
+                    [disabled]="jornadaForm?.invalid"
+                    *ngIf="pageType ==='new'" (click)="addjornada()">
                 <span>AGREGAR</span>
             </button>
 
             <button mat-raised-button
                     class="save-product-button"
-                    [disabled]="actividadForm?.invalid || actividadForm?.pristine"
-                    *ngIf="pageType ==='edit'" (click)="saveActividad()">
+                    [disabled]="jornadaForm?.invalid || jornadaForm?.pristine"
+                    *ngIf="pageType ==='edit'" (click)="savejornada()">
                 <span>GRABAR</span>
             </button>
         </div>
@@ -54,76 +54,42 @@
         <div class="content-card">
 
             <!-- CONTENT -->
-            <div class="content" *ngIf="actividadForm">
+            <div class="content" *ngIf="jornadaForm">
 
-                <form name="actividadForm" [formGroup]="actividadForm" class="product w-100-p" fxLayout="column" fxFlex>
-                    <input name="idActividad" formControlName="idActividad" type="hidden">
+                <form name="jornadaForm" [formGroup]="jornadaForm" class="product w-100-p" fxLayout="column" fxFlex>
+                    <input name="idjornada" formControlName="idjornada" type="hidden">
                     <mat-tab-group>
-                        <mat-tab label="Equipo">
+                        <mat-tab label="jornada">
                             <div class="tab-content p-24">
-                               
+                                    <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
+                                            <form class="w-100-p">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput [matDatepicker]="picker" placeholder="Selecciona una fecha" name="fecha"
+                                                    formControlName="fecha"required>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                  </mat-form-field>
+                                                  <button mat-raised-button (click)="picker.open()">Fechas</button>
+                                            </form>
+                                        </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Nombre</mat-label>
-                                        <input matInput placeholder="Nombre"
-                                               name="nombre"
-                                               formControlName="nombre"
+                                        <mat-label>Direccion</mat-label>
+                                        <input matInput placeholder="Direccion"
+                                               name="direccion"
+                                               formControlName="direccion"
                                                required>
                                     </mat-form-field>
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Descripcion</mat-label>
-                                        <input matInput placeholder="descripcion"
+                                        <input matInput placeholder="Descripcion"
                                                name="descripcion"
                                                formControlName="descripcion"
                                                required>
                                     </mat-form-field>
                                 </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Estado</mat-label>
-                                        <input matInput placeholder="estado"
-                                               name="estado"
-                                               formControlName="estado"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Ciudad</mat-label>
-                                        <input matInput placeholder="Ciudad"
-                                               name="ciudad"
-                                               formControlName="ciudad"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Provincia</mat-label>
-                                        <input matInput placeholder="provincia"
-                                               name="provincia"
-                                               formControlName="provincia"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Categoria</mat-label>
-                                        <input matInput placeholder="categoria"
-                                               name="categoria"
-                                               formControlName="categoria"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput [matDatepicker]="picker" placeholder="Selecciona fecha de inicio" name="inicio"
-                                        formControlName="inicio"required>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                      </mat-form-field>
-                                      <button mat-raised-button (click)="picker.open()">Fecha inicio</button>
-                                </div>
+
                             </div>
                         </mat-tab>
                         <mat-tab label="Coordinadores">
@@ -194,38 +160,7 @@
                                     </mat-table>
                                 </div>
                             </mat-tab>
-                        <mat-tab label="Jornadas">
-                                <div class="tab-content p-24">
-                                        <button mat-fab class="add-event-button mat-accent" (click)="addJornada()" aria-label="Agregar Jornada"
-                                                [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
-                                            <mat-icon>add</mat-icon>
-                                        </button>
-                                        <mat-table class="products-table"
-                                                   #table [dataSource]="dataSource"
-                                                   [@animateStagger]="{value:'50'}"
-                                                   fusePerfectScrollbar>
-                                            <ng-container matColumnDef="nombre">
-                                                <mat-header-cell *matHeaderCellDef >
-                                                    Fecha
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let jornada">
-                                                    <p class="text-truncate"></p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="apellido">
-                                                <mat-header-cell *matHeaderCellDef  >
-                                                    
-                                                </mat-header-cell>
-
-                                            </ng-container>
-        
-                                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-                                            <mat-row *matRowDef="let jornada; columns: displayedColumns;"
-                                                     class="product" matRipple>
-                                            </mat-row>
-                                        </mat-table>
-                                    </div>                       
-                        </mat-tab>
+                        
                     </mat-tab-group>
 
 

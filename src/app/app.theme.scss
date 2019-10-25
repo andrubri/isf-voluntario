@@ -82,6 +82,8 @@ $typography: mat-typography-config(
 @import "src/app/layout/components/toolbar/toolbar.theme";
 @import "src/app/main/page/users/users.theme";
 @import "src/app/main/page/actividades/actividades.theme";
+@import "src/app/main/page/jornadas/jornadas.theme";
+
 
 // Define a mixin for easier access
 @mixin components-theme($theme) {
@@ -91,7 +93,9 @@ $typography: mat-typography-config(
     @include toolbar-theme($theme);
 
     @include users($theme);
-    @include actividades($theme)
+    @include actividades($theme);
+    @include jornadas($theme)
+
 }
 
 // -----------------------------------------------------------------------------------------------------

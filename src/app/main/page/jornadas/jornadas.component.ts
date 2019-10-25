@@ -9,16 +9,16 @@ import {fromEvent} from 'rxjs';
 import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 
 @Component({
-    selector   : 'actividades',
-    templateUrl: './actividades.component.html',
-    styleUrls  : ['./actividades.component.scss'],
+    selector   : 'jornadas',
+    templateUrl: './jornadas.component.html',
+    styleUrls  : ['./jornadas.component.scss'],
     animations   : fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class ActividadesComponent implements OnInit
+export class jornadasComponent implements OnInit
 {
     public dataSource: MatTableDataSource<any>;
-    public displayedColumns = ['nombre','descripcion', 'estado',  'ciudad', 'provincia','categoria','inicio','fin', 'accion'];
+    public displayedColumns = ['fecha', 'direccion', 'descripcion', 'accion'];
     public perfiles: [];
 
     @ViewChild(MatPaginator)
@@ -48,7 +48,7 @@ export class ActividadesComponent implements OnInit
 
     async ngOnInit()
     {
-        const data = await this._isfService.getAllActividades();
+        const data = await this._isfService.getAllJornadas();
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -72,15 +72,15 @@ export class ActividadesComponent implements OnInit
         });
     }
 
-    async remove(idActividad: number){
+    async remove(idjornada: number){
         this.openDialogConfirm({
             etiqueta: "AccionOpciones",
             titulo1: "¿Esta seguro que desea eliminar ",
-            titulo2: "la actividad?",
+            titulo2: "la jornada?",
             txtBoton: "Eliminar",
             callback: async () => {
                 this._fuseProgressBarService.show();
-                await this._isfService.removeActividad(idActividad);
+                await this._isfService.removeJornada(idjornada);
                 this.ngOnInit();
             },
             altoModal: "300px",

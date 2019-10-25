@@ -10,12 +10,30 @@ export const navigation: FuseNavigation[] = [
         url      : '/users',
 
     },    {
-        id       : 'Actividades',
-        title    : 'Actividades',
-        translate: 'Actividades',
+        id       : 'Equipos',
+        title    : 'Equipos',
+        translate: 'Equipos',
         type     : 'item',
         icon     : 'home',
         url      : '/actividades',
 
-    }
+    },   
+     {
+        id       : 'Jornadas',
+        title    : 'Jornadas',
+        translate: 'Jornadas',
+        type     : 'item',
+        icon     : 'accessibility_new',
+        url      : '/jornadas',
+
+    },   
+    {
+       id       : 'Logistica',
+       title    : 'Logistica',
+       translate: 'Logistica',
+       type     : 'item',
+       icon     : 'map',
+       url      : '/Logistica',
+
+   }
 ];
