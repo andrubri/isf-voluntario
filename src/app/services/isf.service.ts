@@ -80,6 +80,24 @@ export class ISFService {
         return await this._http.put(url, req, this._httpOptions).toPromise();
     }
 
+    public async addEquipoCoordinador(idEquipo: number, idPersona: number): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}/coordinador`;
+        const req = {idPersona: idPersona};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
+    public async addEquipoVoluntario(idEquipo: number, idPersona: number): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}/voluntario`;
+        const req = {idPersona: idPersona};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
+    public async addEquipoJornada(idEquipo: number, fecha: Date): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}/jornada`;
+        const req = {fecha: fecha};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
     public async getEquipoById(idEquipo: number): Promise<any> {
         const url = `${this._urlBE}/equipo/${idEquipo}`;
         return await this._http.get(url, this._httpOptions).toPromise();

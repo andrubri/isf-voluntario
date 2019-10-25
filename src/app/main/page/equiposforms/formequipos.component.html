@@ -151,7 +151,7 @@
                                             Nombre
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let coordinador">
-                                            <p class="text-truncate">{{coordinador.nombre}}</p>
+                                            <p class="text-truncate">{{coordinador.nombre || coordinador.Persona.nombre}}</p>
                                         </mat-cell>
                                     </ng-container>
                                     <ng-container matColumnDef="apellido">
@@ -159,7 +159,7 @@
                                             Apellido
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let coordinador">
-                                            <p class="text-truncate">{{coordinador.apellido}}</p>
+                                            <p class="text-truncate">{{coordinador.apellido || coordinador.Persona.apellido}}</p>
                                         </mat-cell>
                                     </ng-container>
 
@@ -186,7 +186,7 @@
                                             Nombre
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let voluntario">
-                                            <p class="text-truncate">{{voluntario.nombre}}</p>
+                                            <p class="text-truncate">{{voluntario.nombre || voluntario.Persona.nombre}}</p>
                                         </mat-cell>
                                     </ng-container>
                                     <ng-container matColumnDef="apellido">
@@ -194,7 +194,7 @@
                                             Apellido
                                         </mat-header-cell>
                                         <mat-cell *matCellDef="let voluntario">
-                                            <p class="text-truncate">{{voluntario.apellido}}</p>
+                                            <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}</p>
                                         </mat-cell>
                                     </ng-container>
 

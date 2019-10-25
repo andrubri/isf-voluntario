@@ -73,11 +73,11 @@ export class FormequiposComponent implements OnInit, OnDestroy {
                 nombre: '',
                 descripcion: '',
                 estado: '',
-                ciudad:'',
+                ciudad: '',
                 provincia: '',
                 categoria: '',
-                inicio:'',
-                fin:''
+                inicio: '',
+                fin: ''
             };
             this.dataSource.data = [];
         }
@@ -199,7 +199,14 @@ export class FormequiposComponent implements OnInit, OnDestroy {
             items: this.coordinador_act,
             callback: async (item) => {
                 const info = this.dataSource.data;
-                info.push(item);
+                if (this.equipo.idEquipo) {
+                    const newItem: any = this._isfService.addEquipoCoordinador(this.equipo.idEquipo, item.idPersona);
+                    newItem.nombre = item.nombre;
+                    newItem.apellido = item.apellido;
+                    info.push(newItem);
+                } else {
+                    info.push(item);
+                }
                 this.dataSource.data = info;
             },
             altoModal: '300px',
@@ -216,7 +223,14 @@ export class FormequiposComponent implements OnInit, OnDestroy {
             items: this.personas_act,
             callback: async (item) => {
                 const info = this.dataPersonas.data;
-                info.push(item);
+                if (this.equipo.idEquipo) {
+                    const newItem: any = this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
+                    newItem.nombre = item.nombre;
+                    newItem.apellido = item.apellido;
+                    info.push(newItem);
+                } else {
+                    info.push(item);
+                }
                 this.dataPersonas.data = info;
             },
             altoModal: '300px',
@@ -231,7 +245,13 @@ export class FormequiposComponent implements OnInit, OnDestroy {
             txtBoton: 'Seleccionar',
             callback: async (item) => {
                 const info = this.dataJornadas.data;
-                info.push(item);
+                if (this.equipo.idEquipo) {
+                    const newItem: any = this._isfService.addEquipoJornada(this.equipo.idEquipo, item.fecha);
+                    newItem.fecha = item.fecha;
+                    info.push(newItem);
+                } else {
+                    info.push(item);
+                }
                 this.dataJornadas.data = info;
             },
             altoModal: '300px',
