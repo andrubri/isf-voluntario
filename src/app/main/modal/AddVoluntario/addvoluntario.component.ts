@@ -33,13 +33,15 @@ export class AddvoluntarioComponent implements OnInit {
         this.filteredOptions = this.myControl.valueChanges
             .pipe(
                 startWith(''),
-                map(value => typeof value === 'string' ? value : value.nombre + ' ' + value.apellido),
+                map(value => typeof value === 'string' ? value : (value.nombre || value.Persona.nombre) + ' ' + (value.apellido || value.Persona.apellido)),
                 map(name => name ? this._filter(name) : this.options.slice())
             );
     }
 
     displayFn(user?: any): string | undefined {
-        return user ? user.nombre + ' ' + user.apellido : undefined;
+        const nombre = user.nombre || user.Persona.nombre;
+        const apellido = user.apellido || user.Persona.apellido;
+        return user ? nombre + ' ' + apellido : undefined;
     }
 
     private _filter(name: string): any[] {

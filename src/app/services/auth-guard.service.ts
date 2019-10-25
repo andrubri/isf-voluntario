@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
     async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         const result = await this.auth.isLogin();
-
+        console.log("Login: ", result);
         if (!result){
             this.auth.logout();
         }

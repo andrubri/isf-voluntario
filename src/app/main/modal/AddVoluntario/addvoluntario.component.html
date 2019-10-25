@@ -10,7 +10,7 @@
                         <input type="text" [placeholder]="datos.label" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{option.nombre}} {{option.apellido}}
+                                {{option.nombre || option.Persona.nombre}} {{option.apellido || option.Persona.apellido}}
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>

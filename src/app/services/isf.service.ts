@@ -155,5 +155,20 @@ export class ISFService {
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
+    public async getPersonasJornadaAct(idJornada: number): Promise<any> {
+        const url = `${this._urlBE}/jornada/${idJornada}/persona`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async addPersonaJornada(idJornada: number, idPersona: number): Promise<any> {
+        const url = `${this._urlBE}/jornada/${idJornada}/persona`;
+        return await this._http.post(url, {idPersona: idPersona}, this._httpOptions).toPromise();
+    }
+
+    public async AsistenciaJornada(idJornada: number, idPersona: number, confirmacion: boolean): Promise<any> {
+        const url = `${this._urlBE}/jornada/${idJornada}/persona`;
+        return await this._http.put(url, {idPersona: idPersona, confirmacion: confirmacion}, this._httpOptions).toPromise();
+    }
+
 
 }

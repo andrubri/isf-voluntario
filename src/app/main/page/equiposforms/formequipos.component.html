@@ -163,7 +163,8 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <mat-header-row *matHeaderRowDef="displayedColumnsCoordinador; sticky:true"></mat-header-row>
+                                    <mat-header-row
+                                        *matHeaderRowDef="displayedColumnsCoordinador; sticky:true"></mat-header-row>
                                     <mat-row *matRowDef="let coordinador; columns: displayedColumnsCoordinador;"
                                              class="product" matRipple>
                                     </mat-row>
@@ -198,7 +199,8 @@
                                         </mat-cell>
                                     </ng-container>
 
-                                    <mat-header-row *matHeaderRowDef="displayedColumnsVoluntario; sticky:true"></mat-header-row>
+                                    <mat-header-row
+                                        *matHeaderRowDef="displayedColumnsVoluntario; sticky:true"></mat-header-row>
                                     <mat-row *matRowDef="let voluntario; columns: displayedColumnsVoluntario;"
                                              class="product" matRipple>
                                     </mat-row>
@@ -224,8 +226,18 @@
                                             <p class="text-truncate">{{jornada.fecha | date : 'dd/MM/yyyy'}}</p>
                                         </mat-cell>
                                     </ng-container>
-
-                                    <mat-header-row *matHeaderRowDef="displayedColumnsJornada; sticky:true"></mat-header-row>
+                                    <ng-container matColumnDef="accion">
+                                        <mat-header-cell *matHeaderCellDef>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let jornada">
+                                            <button mat-button [routerLink]="'/equipos/jornada/' +jornada.idJornadas"
+                                                    [matTooltip]="'Ver Jornada'">
+                                                <mat-icon>pageview</mat-icon>
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container>
+                                    <mat-header-row
+                                        *matHeaderRowDef="displayedColumnsJornada; sticky:true"></mat-header-row>
                                     <mat-row *matRowDef="let jornada; columns: displayedColumnsJornada;"
                                              class="product" matRipple>
                                     </mat-row>

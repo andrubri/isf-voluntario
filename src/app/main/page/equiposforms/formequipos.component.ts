@@ -35,7 +35,7 @@ export class FormequiposComponent implements OnInit, OnDestroy {
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource();
     public displayedColumnsCoordinador = ['nombre', 'apellido'];
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
-    public displayedColumnsJornada = ['fecha'];
+    public displayedColumnsJornada = ['fecha', 'accion'];
 
     constructor(
         private _isfService: ISFService,
@@ -224,7 +224,7 @@ export class FormequiposComponent implements OnInit, OnDestroy {
             callback: async (item) => {
                 const info = this.dataPersonas.data;
                 if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
+                    const newItem: any = this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.Persona.idPersona);
                     newItem.nombre = item.nombre;
                     newItem.apellido = item.apellido;
                     info.push(newItem);

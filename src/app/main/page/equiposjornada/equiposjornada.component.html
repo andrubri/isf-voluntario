@@ -1,0 +1,132 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/equipos/' + equipo.idEquipo">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div class="logo mb-24 mb-md-0"
+                     fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        group
+                    </mat-icon>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" fxHide
+                          fxShow.gt-sm>
+                        {{equipo.nombre}} - Jornada {{jornada.fecha | date : dd / MM / yyyy}}
+                    </span>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+
+                <mat-tab-group>
+                    <mat-tab label="Confirmados">
+                        <div class="tab-content p-24">
+                            <button mat-fab class="add-event-button mat-accent" (click)="addVoluntario()"
+                                    aria-label="Agregar Voluntario"
+                                    [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            <mat-table class="products-table"
+                                       #table [dataSource]="dataPersonas"
+                                       [@animateStagger]="{value:'30'}"
+                                       fusePerfectScrollbar>
+                                <ng-container matColumnDef="nombre">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        Nombre
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let voluntario">
+                                        <p class="text-truncate">{{voluntario.nombre || voluntario.Persona.nombre}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="apellido">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        Apellido
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let voluntario">
+                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}</p>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row
+                                    *matHeaderRowDef="displayedColumnsVoluntario; sticky:true"></mat-header-row>
+                                <mat-row *matRowDef="let voluntario; columns: displayedColumnsVoluntario;"
+                                         class="product" matRipple>
+                                </mat-row>
+                            </mat-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Asistencia">
+                        <div class="tab-content p-24">
+                            <mat-table class="products-table"
+                                       #table [dataSource]="dataPersonas"
+                                       [@animateStagger]="{value:'30'}"
+                                       fusePerfectScrollbar>
+                                <ng-container matColumnDef="nombre">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        Nombre
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let voluntario">
+                                        <p class="text-truncate">{{voluntario.nombre || voluntario.Persona.nombre}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="apellido">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        Apellido
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let voluntario">
+                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}</p>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="presente">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        Presente
+                                    </mat-header-cell>
+                                    <mat-cell
+                                        *matCellDef="let voluntario;">
+                                        <p class="text-truncate">
+                                            <mat-slide-toggle [checked]="getStatus(voluntario)"
+                                                              (change)="confAsistencia(voluntario.idPersona, $event)"></mat-slide-toggle>
+                                        </p>
+                                    </mat-cell>
+                                </ng-container>
+                                <mat-header-row
+                                    *matHeaderRowDef="displayedColumnsPresente; sticky:true"></mat-header-row>
+                                <mat-row *matRowDef="let voluntario; columns: displayedColumnsPresente;"
+                                         class="product" matRipple>
+                                </mat-row>
+                            </mat-table>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>
