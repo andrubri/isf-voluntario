@@ -10,7 +10,7 @@ import {
     MatCardModule,
     MatSortModule,
     MatIconModule,
-    MatTableModule,
+    MatTableModule, MatDatepickerModule,
     MatButtonModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 
@@ -40,7 +40,8 @@ const routes = [
         MatCardModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatDatepickerModule
     ],
     exports     : [
       AddjornadaComponent

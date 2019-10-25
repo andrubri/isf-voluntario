@@ -6,14 +6,11 @@
             </div>
             <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
                 <form class="w-100-p">
-                    <mat-form-field class="w-100-p">
-                        <input type="text" placeholder="Jornada" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{date}} 
-                            </mat-option><!--datepicker-->                           
-
-                        </mat-autocomplete>
+                    <mat-form-field appearance="standard" class="w-100-p">
+                        <input matInput [matDatepicker]="fecha" name="fecha"
+                               [formControl]="myControl" placeholder="Fecha">
+                        <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                        <mat-datepicker #fecha></mat-datepicker>
                     </mat-form-field>
                 </form>
             </div>

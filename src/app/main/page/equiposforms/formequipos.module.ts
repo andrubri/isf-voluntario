@@ -1,46 +1,45 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {
     MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
-    MatSortModule,MatDatepickerModule,
+    MatSortModule,
     MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
-
-import { FuseSharedModule } from '@fuse/shared.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {FuseSharedModule} from '@fuse/shared.module';
 import {AuthGuard} from '../../../services/auth-guard.service';
-import {FormActividadesComponent} from './formactividades.component';
+import {FormequiposComponent} from './formequipos.component';
 
 
 const routes = [
     {
-        path     : 'actividades/:actividad',
-        component: FormActividadesComponent,
+        path: 'equipos/:equipo',
+        component: FormequiposComponent,
         canActivate: [AuthGuard]
     },
     {
-        path     : 'actividades/new',
-        component: FormActividadesComponent,
+        path: 'equipos/new',
+        component: FormequiposComponent,
         canActivate: [AuthGuard]
     }
 ];
 
 @NgModule({
     declarations: [
-        FormActividadesComponent
-        
+        FormequiposComponent
+
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
         MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
-        MatSortModule,MatDatepickerModule,
+        MatSortModule, MatDatepickerModule,
         MatTableModule, MatTabsModule, MatTooltipModule,
 
         FuseSharedModule,
-        
+
     ]
 })
-export class FormActividadesModule
-{
+export class FormequiposModule {
 }

@@ -58,46 +58,55 @@ export class ISFService {
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
 
-    public async getAllActividades(): Promise<any> {
+    public async getAllEquipos(): Promise<any> {
         const url = `${this._urlBE}/equipo`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async removeActividad(idActividad: number): Promise<any> {
-        const url = `${this._urlBE}/equipo/${idActividad}`;
+    public async removeEquipo(idEquipo: number): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
 
-    public async addActividad(actividad: any, coordinadores: any): Promise<any> {
+    public async addEquipo(equipo: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/equipo`;
-        let req = {equipo: actividad, coordinadores: coordinadores};
+        let req = {equipo: equipo, coordinadores: coordinadores};
         return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
-    public async saveActividad(actividad: any, coordinadores: any): Promise<any> {
-        const url = `${this._urlBE}/equipo/${actividad.idActividad}`;
-        let req = {actividad: actividad, coordinadores: coordinadores};
+    public async saveEquipo(equipo: any, coordinadores: any): Promise<any> {
+        const url = `${this._urlBE}/equipo/${equipo.idEquipo}`;
+        let req = {equipo: equipo, coordinadores: coordinadores};
         return await this._http.put(url, req, this._httpOptions).toPromise();
     }
 
-    public async getActividadById(idActividad: number): Promise<any> {
-        const url = `${this._urlBE}/equipo/${idActividad}`;
+    public async getEquipoById(idEquipo: number): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
     public async getCoordinadores(): Promise<any> {
-        const coordinadores = [];
-        const usuarios = await this.getAllUsers();
-        for (const user of usuarios) {
-            if (user.idvoluntario) {
-                coordinadores.push(user);
-            }
-        }
-        return coordinadores;
+        const url = `${this._urlBE}/persona/coordinador`;
+        return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getCoordinadoresAct(idActividad: number): Promise<any> {
-        const url = `${this._urlBE}/actividad/${idActividad}/coordinador`;
+    public async getCoordinadoresAct(idEquipo: number): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}/coordinador`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async getPersonas(): Promise<any>{
+        const url = `${this._urlBE}/persona`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async getPersonasAct(idEquipo: number): Promise<any>{
+        const url = `${this._urlBE}/equipo/${idEquipo}/voluntario`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async getJornadasAct(idEquipo: number): Promise<any>{
+        const url = `${this._urlBE}/equipo/${idEquipo}/jornada`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
@@ -113,13 +122,13 @@ export class ISFService {
 
     public async addJornada(jornada: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/jornada`;
-        let req = {actividad: jornada, coordinadores: coordinadores};
+        let req = {jornada: jornada, coordinadores: coordinadores};
         return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
     public async saveJornada(jornada: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/jornada/${jornada.idJornada}`;
-        let req = {actividad: jornada, coordinadores: coordinadores};
+        let req = {jornada: jornada, coordinadores: coordinadores};
         return await this._http.put(url, req, this._httpOptions).toPromise();
     }
 

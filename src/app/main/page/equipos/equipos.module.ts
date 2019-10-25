@@ -14,20 +14,20 @@ import {
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { ActividadesComponent } from './actividades.component';
+import { EquiposComponent } from './equipos.component';
 import {AuthGuard} from '../../../services/auth-guard.service';
 
 const routes = [
     {
-        path     : 'actividades',
-        component: ActividadesComponent,
+        path     : 'equipos',
+        component: EquiposComponent,
         canActivate: [AuthGuard]
     }
 ];
 
 @NgModule({
     declarations: [
-        ActividadesComponent
+        EquiposComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -48,10 +48,10 @@ const routes = [
         MatDialogModule
     ],
     exports     : [
-        ActividadesComponent
+        EquiposComponent
     ]
 })
 
-export class ActividadesModule
+export class EquiposModule
 {
 }

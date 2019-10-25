@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 
+
 @Component({
     selector: 'app-modal',
     templateUrl: './addjornada.component.html',
@@ -53,7 +54,8 @@ export class AddjornadaComponent implements OnInit {
     }
 
     ConfirmarAccion() {
-        this.datos.callback(this.myControl.value);
+        const data = {fecha: this.myControl.value};
+        this.datos.callback(data);
         this.dialogRef.close('Confirm');
     }
 

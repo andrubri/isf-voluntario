@@ -7,7 +7,7 @@
             <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
                 <form class="w-100-p">
                     <mat-form-field class="w-100-p">
-                        <input type="text" placeholder="Coordinador" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <input type="text" [placeholder]="datos.label" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                 {{option.nombre}} {{option.apellido}}

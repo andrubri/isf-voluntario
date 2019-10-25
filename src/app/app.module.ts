@@ -28,7 +28,7 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { UsersModule } from 'app/main/page/users/users.module';
-import { ActividadesModule } from 'app/main/page/actividades/actividades.module';
+import { EquiposModule } from 'app/main/page/equipos/equipos.module';
 import { jornadasModule } from 'app/main/page/jornadas/jornadas.module';
 
 
@@ -37,7 +37,7 @@ import { LoginModule } from './main/page/login/login.module';
 import { RegisterModule } from './main/page/register/register.module';
 import {ForgotPasswordModule} from './main/page/forgot-password/forgot-password.module';
 import {FormUsersModule} from './main/page/usersforms/formusers.module';
-import {FormActividadesModule} from './main/page/actividadesforms/formactividadesmodule';
+import {FormequiposModule} from './main/page/equiposforms/formequipos.module';
 import {FormjornadasModule} from './main/page/jornadasforms/formjornadasmodule';
 
 
@@ -94,13 +94,13 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         UsersModule,
-        ActividadesModule,
+        EquiposModule,
         jornadasModule,
         LoginModule,
         RegisterModule,
         ForgotPasswordModule,
         FormUsersModule,
-        FormActividadesModule,
+        FormequiposModule,
         FormjornadasModule,
         AccionConfirmarModule,
         AddvoluntarioModule,

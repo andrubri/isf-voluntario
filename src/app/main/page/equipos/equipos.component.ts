@@ -9,13 +9,13 @@ import {fromEvent} from 'rxjs';
 import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 
 @Component({
-    selector   : 'actividades',
-    templateUrl: './actividades.component.html',
-    styleUrls  : ['./actividades.component.scss'],
+    selector   : 'equipos',
+    templateUrl: './equipos.component.html',
+    styleUrls  : ['./equipos.component.scss'],
     animations   : fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class ActividadesComponent implements OnInit
+export class EquiposComponent implements OnInit
 {
     public dataSource: MatTableDataSource<any>;
     public displayedColumns = ['nombre','descripcion', 'estado',  'ciudad', 'provincia','categoria','inicio','fin', 'accion'];
@@ -48,7 +48,7 @@ export class ActividadesComponent implements OnInit
 
     async ngOnInit()
     {
-        const data = await this._isfService.getAllActividades();
+        const data = await this._isfService.getAllEquipos();
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -72,7 +72,7 @@ export class ActividadesComponent implements OnInit
         });
     }
 
-    async remove(idActividad: number){
+    async remove(idEquipo: number){
         this.openDialogConfirm({
             etiqueta: "AccionOpciones",
             titulo1: "¿Esta seguro que desea eliminar ",
@@ -80,7 +80,7 @@ export class ActividadesComponent implements OnInit
             txtBoton: "Eliminar",
             callback: async () => {
                 this._fuseProgressBarService.show();
-                await this._isfService.removeActividad(idActividad);
+                await this._isfService.removeEquipo(idEquipo);
                 this.ngOnInit();
             },
             altoModal: "300px",

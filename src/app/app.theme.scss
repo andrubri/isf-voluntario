@@ -81,7 +81,7 @@ $typography: mat-typography-config(
 @import "src/app/layout/components/chat-panel/chat-panel.theme";
 @import "src/app/layout/components/toolbar/toolbar.theme";
 @import "src/app/main/page/users/users.theme";
-@import "src/app/main/page/actividades/actividades.theme";
+@import "src/app/main/page/equipos/equipos.theme";
 @import "src/app/main/page/jornadas/jornadas.theme";
 
 
@@ -93,7 +93,7 @@ $typography: mat-typography-config(
     @include toolbar-theme($theme);
 
     @include users($theme);
-    @include actividades($theme);
+    @include equipos($theme);
     @include jornadas($theme)
 
 }
@@ -120,7 +120,7 @@ body.theme-default {
     // Apply the theme to the Fuse Core
     @include fuse-core-theme($theme);
 
-    // Apply the theme to the user and actividades components
+    // Apply the theme to the user and equipos components
     @include components-theme($theme);
 
     // Generate Fuse color classes for primary, accent and warn colors
@@ -155,7 +155,7 @@ body.theme-yellow-light {
     // Apply the theme to the Fuse Core
     @include fuse-core-theme($yellow-light-theme);
 
-    // Apply the theme to the user and actividades components
+    // Apply the theme to the user and equipos components
     @include components-theme($yellow-light-theme);
 
     // Generate Fuse color classes for primary, accent and warn colors
@@ -190,7 +190,7 @@ body.theme-blue-gray-dark {
     // Apply the theme to the Fuse Core
     @include fuse-core-theme($blue-gray-dark-theme);
 
-    // Apply the theme to the user and actividades components
+    // Apply the theme to the user and equipos components
     @include components-theme($blue-gray-dark-theme);
 
     // Generate Fuse color classes for primary, accent and warn colors
@@ -225,7 +225,7 @@ body.theme-pink-dark {
     // Apply the theme to the Fuse Core
     @include fuse-core-theme($pink-dark-theme);
 
-    // Apply the theme to the user and actividades components
+    // Apply the theme to the user and equipos components
     @include components-theme($pink-dark-theme);
 
     // Generate Fuse color classes for primary, accent and warn colors

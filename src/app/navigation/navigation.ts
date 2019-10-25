@@ -14,8 +14,8 @@ export const navigation: FuseNavigation[] = [
         title    : 'Equipos',
         translate: 'Equipos',
         type     : 'item',
-        icon     : 'home',
-        url      : '/actividades',
+        icon     : 'group',
+        url      : '/equipos',
 
     },   
      {
