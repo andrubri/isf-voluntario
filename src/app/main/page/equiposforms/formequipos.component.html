@@ -48,7 +48,7 @@
                 <span>GRABAR</span>
             </button>
 
-            <button mat-raised-button (click)="sendEmail()" class="add-product-button fuse-white mt-24 mt-md-0">
+            <button mat-raised-button (click)="sendEmail()" *ngIf="pageType ==='edit'" class="add-product-button fuse-white mt-24 mt-md-0">
                 <span>MAIL</span>
             </button>
         </div>
