@@ -80,6 +80,12 @@ export class ISFService {
         return await this._http.put(url, req, this._httpOptions).toPromise();
     }
 
+    public async sendEmailToEquipo(equipo: any, mensaje: any): Promise<any> {
+        const url = `${this._urlBE}/email/${equipo.idEquipo}`;
+        let req = {mensaje: mensaje};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
     public async addEquipoCoordinador(idEquipo: number, idPersona: number): Promise<any> {
         const url = `${this._urlBE}/equipo/${idEquipo}/coordinador`;
         const req = {idPersona: idPersona};
