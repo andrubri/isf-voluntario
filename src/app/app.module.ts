@@ -44,6 +44,7 @@ import {FormjornadasModule} from './main/page/jornadasforms/formjornadasmodule';
 import {AccionConfirmarModule} from './main/modal/AccionConfirmar/accionconfirmar.module';
 import {AddvoluntarioModule} from './main/modal/AddVoluntario/addvoluntario.module';
 import {AddjornadaModule} from './main/modal/AddJornada/addjornada.module';
+import {EmailModule} from './main/modal/Email/email.module';
 import {EquiposJornadaModule} from './main/page/equiposjornada/equiposjornada.module';
 
 
@@ -106,7 +107,8 @@ const appRoutes: Routes = [
         AccionConfirmarModule,
         AddvoluntarioModule,
         AddjornadaModule,
-        EquiposJornadaModule
+        EquiposJornadaModule,
+        EmailModule
         
 
     ],

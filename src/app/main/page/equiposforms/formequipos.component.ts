@@ -13,6 +13,7 @@ import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/
 import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
 import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
+import { EmailComponent } from '../../modal/Email/email.component';
 
 @Component({
     selector: 'formequipos',
@@ -181,6 +182,16 @@ export class FormequiposComponent implements OnInit, OnDestroy {
         });
     }
 
+    private openEmailDialog(datos: any) {
+        this._dialog.open(EmailComponent, {
+            width: datos.anchoModal ? datos.anchoModal : '50%',
+            height: datos.altoModal ? datos.altoModal : '17%',
+            data: datos,
+            panelClass: 'popup'
+        });
+    }
+
+
     private openDialogAddJornada(datos: any) {
         this._dialog.open(AddjornadaComponent, {
             width: datos.anchoModal ? datos.anchoModal : '50%',
@@ -206,6 +217,27 @@ export class FormequiposComponent implements OnInit, OnDestroy {
                     info.push(newItem);
                 } else {
                     info.push(item);
+                }
+                this.dataSource.data = info;
+            },
+            altoModal: '300px',
+            anchoModal: '450px'
+        });
+    }
+
+    sendEmail(): void {
+
+        this.openEmailDialog({
+            etiqueta: 'SendEmail',
+            txtBoton: 'Seleccionar',
+            label: 'Mail',
+            callback: async (item) => {
+                const info = this.dataSource.data;
+                if (this.equipo.idEquipo) {
+                    const newItem: any = this._isfService.sendEmailToEquipo(this.equipo, item);
+                    
+                } else {
+                   
                 }
                 this.dataSource.data = info;
             },
