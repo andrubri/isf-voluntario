@@ -67,6 +67,15 @@ export class ISFService {
         const url = `${this._urlBE}/equipo/${idEquipo}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
+    public async getAllPersonas(): Promise<any> {
+        const url = `${this._urlBE}/persona`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async removePersona(idPersona: number): Promise<any> {
+        const url = `${this._urlBE}/persona/${idPersona}`;
+        return await this._http.delete(url, this._httpOptions).toPromise();
+    }
 
     public async addEquipo(equipo: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/equipo`;
