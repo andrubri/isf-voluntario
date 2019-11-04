@@ -1,4 +1,4 @@
-<div id="personas" class="page-layout carded fullwidth inner-scroll">
+<div id="persona" class="page-layout carded fullwidth inner-scroll">
 
 
     <!-- TOP BACKGROUND -->
@@ -20,7 +20,7 @@
                     group
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    personas
+                    persona
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -36,7 +36,7 @@
 
             <!-- ADD BUTTON -->
             <button mat-raised-button
-                    [routerLink]="'/personas/new'"
+                    [routerLink]="'/persona/new'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
                 <span>AGREGAR PERSONA</span>
             </button>
@@ -57,56 +57,56 @@
                 <ng-container matColumnDef="nombre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Nombre</mat-header-cell>
                     <mat-cell *matCellDef="let persona" fxHide fxShow.gt-xs
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.nombre}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="apellido">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.apellido}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="estado">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Estado</mat-header-cell>
                     <mat-cell *matCellDef="let persona" fxHide fxShow.gt-xs
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.estado}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="ciudadResidencia">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.ciudadResidencia}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="provinciaResidencia">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Provincia</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.provinciaResidencia}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>email</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.email}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="dieta">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>dieta</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.dieta }}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="ocupacion">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>ocupacion</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/personas/'+ persona.idPersona">
+                              [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.ocupacion}}</p>
                     </mat-cell>
                 </ng-container>
