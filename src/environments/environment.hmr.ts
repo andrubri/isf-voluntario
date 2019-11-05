@@ -15,6 +15,6 @@ export const environment = {
 
     //Config APP
     config: {
-        urlBE: 'https://isf-api.herokuapp.com/api'
+        urlBE: 'https://isf-api-desa.herokuapp.com/api'
     }
 };
