@@ -27,6 +27,15 @@ export const navigation: FuseNavigation[] = [
         url      : '/jornadas',
 
     },   
+     {
+        id       : 'Personas',
+        title    : 'Personas',
+        translate: 'Personas',
+        type     : 'item',
+        icon     : 'accessibility_new',
+        url      : '/personas',
+
+    },   
     {
        id       : 'Logistica',
        title    : 'Logistica',

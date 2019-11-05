@@ -67,6 +67,31 @@ export class ISFService {
         const url = `${this._urlBE}/equipo/${idEquipo}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
+    public async getAllPersonas(): Promise<any> {
+        const url = `${this._urlBE}/persona`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+    public async getPersonaById(idPersona: number): Promise<any> {
+        const url = `${this._urlBE}/persona/${idPersona}`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async addPersona(persona: any): Promise<any> {
+        const url = `${this._urlBE}/persona`;
+        let req = {persona: persona ,origenContacto:{} , obraSocial:{}, contactoEmergencia:{}, datosSeguro:{}};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
+    public async savePersona(persona: any): Promise<any> {
+        const url = `${this._urlBE}/persona/${persona.idPersona}`;
+        let req = {persona: persona ,origenContacto:{} , obraSocial:{}, contactoEmergencia:{}, datosSeguro:{}};
+        return await this._http.put(url, req, this._httpOptions).toPromise();
+    }
+
+    public async removePersona(idPersona: number): Promise<any> {
+        const url = `${this._urlBE}/persona/${idPersona}`;
+        return await this._http.delete(url, this._httpOptions).toPromise();
+    }
 
     public async addEquipo(equipo: any, coordinadores: any): Promise<any> {
         const url = `${this._urlBE}/equipo`;
@@ -78,6 +103,12 @@ export class ISFService {
         const url = `${this._urlBE}/equipo/${equipo.idEquipo}`;
         let req = {equipo: equipo, coordinadores: coordinadores};
         return await this._http.put(url, req, this._httpOptions).toPromise();
+    }
+
+    public async sendEmailToEquipo(equipo: any, mensaje: any): Promise<any> {
+        const url = `${this._urlBE}/email/${equipo.idEquipo}`;
+        let req = {mensaje: mensaje};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
     public async addEquipoCoordinador(idEquipo: number, idPersona: number): Promise<any> {
