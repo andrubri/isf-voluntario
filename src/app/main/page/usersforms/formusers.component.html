@@ -17,32 +17,31 @@
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
-                <div class="logo mb-24 mb-md-0"
-                     fxLayout="row" fxLayoutAlign="start center">
+                <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                         account_circle
                     </mat-icon>
-                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                        *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
                         {{user.nombre}}
                     </span>
-                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
+                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
+                        *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
                         Nuevo Usuario
                     </span>
                 </div>
             </div>
             <!-- / APP TITLE -->
 
-            <button mat-raised-button
+            <!--  <button mat-raised-button
                     class="save-product-button"
                     [disabled]="userForm?.invalid"
                     *ngIf="pageType ==='new'" (click)="addUser()">
                 <span>AGREGAR</span>
-            </button>
+            </button> -->
 
-            <button mat-raised-button
-                    class="save-product-button"
-                    [disabled]="userForm?.invalid || userForm?.pristine"
-                    *ngIf="pageType ==='edit'" (click)="saveUser()">
+            <button mat-raised-button class="save-product-button" [disabled]="userForm?.invalid || userForm?.pristine"
+                *ngIf="pageType ==='edit'" (click)="saveUser()">
                 <span>GRABAR</span>
             </button>
         </div>
@@ -58,43 +57,33 @@
                     <input name="token" formControlName="token" type="hidden">
                     <div class="tab-content p-24">
                         <div>
+                            Apellido
+                        </div>
+                        <div>
+                            {{user.apellido}}
+                        </div>
+                        <div>
+                            <div>
+                                Nombre
+                            </div>
+                            <div>
+                                {{user.nombre}}
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                Email
+                            </div>
+                            <div>
+                                {{user.email}}
+                            </div>
+                        </div>
+                        <div>
                             <mat-form-field appearance="standard" class="w-100-p">
-                                <mat-label>Apellido</mat-label>
-                                <input matInput placeholder="Apellido"
-                                       name="apellido"
-                                       formControlName="apellido"
-                                       required>
+                                <mat-label>Clave</mat-label>
+                                <input matInput placeholder="Clave" name="clave" minlength="6" maxlength="8"
+                                    formControlName="clave" type="password" required>
                             </mat-form-field>
-                        </div>
-                        <div>
-                        <mat-form-field appearance="standard" class="w-100-p">
-                            <mat-label>Nombre</mat-label>
-                            <input matInput placeholder="Nombre"
-                                   name="nombre"
-                                   formControlName="nombre"
-                                   required>
-                        </mat-form-field>
-                        </div>
-                        <div>
-                        <mat-form-field appearance="standard" class="w-100-p">
-                            <mat-label>Email</mat-label>
-                            <input matInput placeholder="Email"
-                                   name="email"
-                                   formControlName="email"
-                                   required email>
-                        </mat-form-field>
-                        </div>
-                        <div>
-                        <mat-form-field appearance="standard" class="w-100-p">
-                            <mat-label>Clave</mat-label>
-                            <input matInput placeholder="Clave"
-                                   name="clave"
-                                   minlength="6"
-                                   maxlength="8"
-                                   formControlName="clave"
-                                   type="password"
-                                   required>
-                        </mat-form-field>
                         </div>
                     </div>
 

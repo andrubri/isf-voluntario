@@ -118,6 +118,14 @@
                         </button>
                     </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="user" stickyEnd>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                    <mat-cell *matCellDef="let persona">
+                        <button mat-button (click)="createUser(persona)" [matTooltip]="'Crear Usuario'">
+                            <mat-icon>group_add</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
                 <mat-row *matRowDef="let persona; columns: displayedColumns;"
