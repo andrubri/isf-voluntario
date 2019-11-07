@@ -105,7 +105,7 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
     }
 
     getStatus(value: any): boolean{
-        return (value.PersonaJornadas[0].confirmacion === 'true') ? true : false;
+        return (value.Jornadas[0].PersonaJornada.confirmacion === 'true') ? true : false;
     }
 
 }
