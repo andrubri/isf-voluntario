@@ -83,6 +83,8 @@ $typography: mat-typography-config(
 @import "src/app/main/page/users/users.theme";
 @import "src/app/main/page/equipos/equipos.theme";
 @import "src/app/main/page/jornadas/jornadas.theme";
+@import "src/app/main/page/personas/personas.theme";
+
 
 
 // Define a mixin for easier access
@@ -94,7 +96,9 @@ $typography: mat-typography-config(
 
     @include users($theme);
     @include equipos($theme);
-    @include jornadas($theme)
+    @include jornadas($theme);
+    @include personas($theme);
+
 
 }
 
