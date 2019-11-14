@@ -78,6 +78,17 @@ export class PersonaComponent implements OnInit, OnDestroy {
                 ocupacion: ' ',
                 comentarios:' ' ,
                 dieta: ' ',
+                fechaNacimiento:' ' ,
+    	        descripcion:' ',
+    	        empresa:' ',
+		        plan:' ',
+    	        grupoSanguineo:' ',
+		        emfermedades:' ',
+		        medicaciones:' ',
+    	        nombreContacto:' ',
+                apellidoContacto:' ',
+                telefonoContacto:' ',
+                relacion:' '
             
             };
          
@@ -121,6 +132,18 @@ export class PersonaComponent implements OnInit, OnDestroy {
             comentarios:[this.persona.comentarios] ,
             dieta: [this.persona.dieta],
             idPersona: [this.persona.idPersona],
+            fechaNacimiento:[this.persona.fechaNacimiento] ,
+    	    descripcion:[this.persona.descripcion],
+    	    empresa:[this.persona.empresa],
+		    plan:[this.persona.plan],
+    	    grupoSanguineo:[this.persona.grupoSanguineo],
+		    emfermedades:[this.persona.emfermedades],
+		    medicaciones:[this.persona.medicaciones],
+    	    nombreContacto:[this.persona.nombreContacto],
+            apellidoContacto:[this.persona.apellidoContacto],
+            telefonoContacto:[this.persona.telefonoContacto],
+            relacion:[this.persona.relacion]
+            
 
         });
     }
