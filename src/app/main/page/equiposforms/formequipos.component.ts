@@ -229,7 +229,7 @@ export class FormequiposComponent implements OnInit, OnDestroy {
 
         this.openEmailDialog({
             etiqueta: 'SendEmail',
-            txtBoton: 'Seleccionar',
+            txtBoton: 'Enviar',
             label: 'Mail',
             callback: async (item) => {
                 const info = this.dataSource.data;
