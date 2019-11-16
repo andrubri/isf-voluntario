@@ -23,7 +23,7 @@
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                         *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
-                        {{user.nombre}}
+                        {{user.nombre}} {{user.apellido}}
                     </span>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                         *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
@@ -56,33 +56,15 @@
                 <form name="userForm" [formGroup]="userForm" class="product w-100-p" fxLayout="column" fxFlex>
                     <input name="token" formControlName="token" type="hidden">
                     <div class="tab-content p-24">
+
                         <div>
-                            Apellido
-                        </div>
-                        <div>
-                            {{user.apellido}}
-                        </div>
-                        <div>
-                            <div>
-                                Nombre
-                            </div>
-                            <div>
-                                {{user.nombre}}
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                Email
-                            </div>
-                            <div>
-                                {{user.email}}
-                            </div>
+                            Email: {{user.email}}
                         </div>
                         <div>
                             <mat-form-field appearance="standard" class="w-100-p">
-                                <mat-label>Clave</mat-label>
+                                <mat-label>Modificar clave (6-8 caracteres)</mat-label>
                                 <input matInput placeholder="Clave" name="clave" minlength="6" maxlength="8"
-                                    formControlName="clave" type="password" required>
+                                    formControlName="clave" type="password" required >
                             </mat-form-field>
                         </div>
                     </div>

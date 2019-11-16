@@ -103,7 +103,7 @@ export class PersonasComponent implements OnInit {
                     await this._isfService.addUser(user);
 
                 } catch (error) {
-                    alert('User already exists')
+                    alert('La persona ya existe')
                 }
                 this.ngOnInit();
             },
