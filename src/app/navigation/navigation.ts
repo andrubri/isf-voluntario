@@ -23,7 +23,7 @@ export const navigation: FuseNavigation[] = [
         title    : 'Jornadas',
         translate: 'Jornadas',
         type     : 'item',
-        icon     : 'accessibility_new',
+        icon     : 'home',
         url      : '/jornadas',
 
     },   
