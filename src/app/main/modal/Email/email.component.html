@@ -6,12 +6,12 @@
             </div>
             <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
                 <form class="w-100-p">
-                    <mat-form-field class="w-100-p" >
-                        <textarea type="text" [placeholder]="datos.label" aria-label="Assignee" matInput [formControl]="myControl"  rows="2" cols="50"></textarea>
+                    <mat-form-field class="w-100-p">
+                        <textarea type="text" [placeholder]="datos.label"Mensaje aria-label="Assignee" matInput [formControl]="myControl"  rows="3" cols="50"></textarea>
                     </mat-form-field>
                 </form>
             </div>
-            <div fxLayout="row" style="margin-top: 8%" fxLayoutAlign="space-around center">
+            <div fxLayout="row" style="margin-top: 28%" fxLayoutAlign="space-around center">
                 <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()" cdkFocusInitial>{{datos.txtBoton}}</button>
             </div>
         </div>
