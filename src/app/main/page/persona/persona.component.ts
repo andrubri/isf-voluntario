@@ -86,9 +86,6 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
                 ocupacion: ' ',
                 comentarios: ' ',
                 dieta: ' ',
-<<<<<<< HEAD
-
-=======
                 fechaNacimiento:' ' ,
     	        descripcion:' ',
     	        empresa:' ',
@@ -101,7 +98,6 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
                 telefonoContacto:' ',
                 relacion:' '
             
->>>>>>> master
             };
 
         }
