@@ -1,13 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 
-import {fuseAnimations} from '@fuse/animations';
-import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
-import {ISFService} from '../../../services/isf.service';
-import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
-import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+
+import { fuseAnimations } from '@fuse/animations';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ISFService } from '../../../services/isf.service';
+import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
+import { AddvoluntarioComponent } from '../../modal/AddVoluntario/addvoluntario.component';
 
 @Component({
     selector: 'formequipos',
@@ -25,6 +26,9 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public displayedColumnsPresente = ['nombre', 'apellido', 'presente'];
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
+    lat = -34.6094800;
+    lng = -58.3922500;
+    private geocoder: any;
 
     constructor(
         private _isfService: ISFService,
@@ -37,6 +41,7 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -54,7 +59,7 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
             this.dataPersonas.data = await this._isfService.getPersonasJornadaAct(idAct);
             this.personas_act = await this._isfService.getPersonasAct(this.jornada.idEquipo)
             this.pageType = 'edit';
-        }else{
+        } else {
             this._router.navigate(['equipos']);
         }
 
@@ -100,11 +105,11 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
         });
     }
 
-    confAsistencia(idVoluntario: number, valor: any): void{
+    confAsistencia(idVoluntario: number, valor: any): void {
         this._isfService.AsistenciaJornada(this.jornada.idJornadas, idVoluntario, valor.checked);
     }
 
-    getStatus(value: any): boolean{
+    getStatus(value: any): boolean {
         return (value.Jornadas[0].PersonaJornada.confirmacion === 'true') ? true : false;
     }
 

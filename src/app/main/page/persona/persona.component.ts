@@ -114,10 +114,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     
     ngAfterViewInit(): void {
-        console.log(this.searchElement);
         this.searchElement.changes.subscribe(val => this.autocompleteAdress(val.first.nativeElement)
-        );
-        this.searchElement.changes.subscribe(val => console.log(val.first.nativeElement)
         );
         
     }

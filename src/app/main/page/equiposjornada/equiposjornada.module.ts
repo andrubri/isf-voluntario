@@ -21,6 +21,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {AuthGuard} from '../../../services/auth-guard.service';
 import {EquiposJornadaComponent} from './equiposjornada.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 const routes = [
@@ -38,7 +39,7 @@ const routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
-
+        AgmCoreModule,
         MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
         MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
         MatSortModule, MatDatepickerModule, MatSlideToggleModule,

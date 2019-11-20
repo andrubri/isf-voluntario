@@ -5,7 +5,6 @@ import {
     MatSortModule,
     MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
-import { AgmCoreModule } from '@agm/core';
 import {environment} from 'environments/environment';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -33,10 +32,7 @@ const routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyDSYhDsbX7AnFGu4uiYb7vvP_W7am8qCLE',
-            libraries: ["places"]
-        }),
+        
         MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
         MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
         MatSortModule, MatDatepickerModule,
