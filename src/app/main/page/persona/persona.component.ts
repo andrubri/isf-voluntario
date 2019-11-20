@@ -30,6 +30,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
     personaForm: FormGroup = null;
     perfiles: any;
     persona: any;
+    personaLocation: string;
     /* public dataSource: MatTableDataSource<any> = new MatTableDataSource();
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource(); */
@@ -170,6 +171,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         this._fuseProgressBarService.show();
         const data = this.personaForm.getRawValue();
         data.handle = FuseUtils.handleize(data.nombre);
+        data.provinciaResidencia = this.personaLocation
 
         await this._isfService.savePersona(data);
 
@@ -229,6 +231,10 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
                         if (place.geometry === undefined || place.geometry === null) {
                             return;
                         }
+
+                        this.personaLocation = place.geometry.location.lat() + '&' +
+                        place.geometry.location.lng();
+                        
                     });
                 });
             }
