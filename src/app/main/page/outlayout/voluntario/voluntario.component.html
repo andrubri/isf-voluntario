@@ -13,40 +13,20 @@
             <!-- APP TITLE -->
             <div fxLayout="row" fxLayoutAlign="start center">
 
-                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/personas'">
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-
                 <div class="logo mb-24 mb-md-0"
                      fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                         group
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
-                          *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
-                        {{persona.nombre}}
-                    </span>
-                    <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                           *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
-                        Nueva persona
+                        Inscribite como voluntario/a
                     </span>
                 </div>
             </div>
+
             <!-- / APP TITLE -->
 
-            <button mat-raised-button
-                    class="save-product-button"
-                    [disabled]="personaForm?.invalid"
-                    *ngIf="pageType ==='new'" (click)="addPersona()">
-                <span>AGREGAR</span>
-            </button>
-
-            <button mat-raised-button
-                    class="save-product-button"
-                    [disabled]="personaForm?.invalid || personaForm?.pristine"
-                    *ngIf="pageType ==='edit'" (click)="savePersona()">
-                <span>GRABAR</span>
-            </button>
         </div>
         <!-- / HEADER -->
 
@@ -58,153 +38,180 @@
 
                 <form name="personaForm" [formGroup]="personaForm" class="product w-100-p" fxLayout="column" fxFlex>
                     <input name="idPersona" formControlName="idPersona" type="hidden">
-                            <div class="tab-content p-24">
-
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Nombre</mat-label>
-                                        <input matInput placeholder="Nombre"
-                                               name="nombre"
-                                               formControlName="nombre"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>apellido</mat-label>
-                                        <input matInput placeholder="apellido"
-                                               name="apellido"
-                                               formControlName="apellido"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>tipoDocumento</mat-label>
-                                        <input matInput placeholder="tipoDocumento"
-                                               name="tipoDocumento"
-                                               formControlName="tipoDocumento"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>idDocumento</mat-label>
-                                        <input matInput placeholder="idDocumento"
-                                               name="idDocumento"
-                                               formControlName="idDocumento"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Estado</mat-label>
-                                        <input matInput placeholder="estado"
-                                               name="estado"
-                                               formControlName="estado"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>ciudadResidencia</mat-label>
-                                        <input matInput placeholder="ciudadResidencia"
-                                               name="ciudadResidencia"
-                                               formControlName="ciudadResidencia"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>provinciaResidencia</mat-label>
-                                        <input matInput placeholder="provinciaResidencia"
-                                               name="provinciaResidencia"
-                                               formControlName="provinciaResidencia"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>paisOrigen</mat-label>
-                                        <input matInput placeholder="paisOrigen"
-                                               name="paisOrigen"
-                                               formControlName="paisOrigen"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>telefono</mat-label>
-                                        <input matInput placeholder="telefono"
-                                               name="telefono"
-                                               formControlName="telefono"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>email</mat-label>
-                                        <input matInput placeholder="email"
-                                               name="email"
-                                               formControlName="email"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>nivelEstudios</mat-label>
-                                        <input matInput placeholder="nivelEstudios"
-                                               name="nivelEstudios"
-                                               formControlName="nivelEstudios"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>carrera</mat-label>
-                                        <input matInput placeholder="carrera"
-                                               name="carrera"
-                                               formControlName="carrera"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>universidad</mat-label>
-                                        <input matInput placeholder="universidad"
-                                               name="universidad"
-                                               formControlName="universidad"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>ocupacion</mat-label>
-                                        <input matInput placeholder="ocupacion"
-                                               name="ocupacion"
-                                               formControlName="ocupacion"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>comentarios</mat-label>
-                                        <input matInput placeholder="comentarios"
-                                               name="comentarios"
-                                               formControlName="comentarios"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>dieta</mat-label>
-                                        <input matInput placeholder="dieta"
-                                               name="dieta"
-                                               formControlName="dieta"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                            </div>
+                    <div class="tab-content p-24">
+                        <div class="w-100-p">
+                            Somos una asociación civil interdisciplinaria que trabaja por el desarrollo local de
+                            comunidades en
+                            situación de vulnerabilidad a través de proyectos de ingeniería.<br>
+                            Nuestra misión es:<br>
+                            - Colaborar en la construcción de una sociedad justa, inclusiva y solidaria mediante la
+                            elaboración
+                            participativa de proyectos integrales con base tecnológica.<br>
+                            - Promover una ingeniería orientada al desarrollo humano sostenible, al cumplimiento de los
+                            Derechos
+                            Humanos, al cuidado de la naturaleza y al fortalecimiento de las poblaciones en situación de
+                            vulnerabilidad.<br>
+                            - Impulsar un espacio que integre la diversidad y movilice la participación
+                            ciudadana.<br><br>
+                            (Más info en: www.isf-argentina.org)<br><br>
+                            ----------------------------------<br><br>
+                            Se garantiza la confidencialidad de toda la información relevada, que será de uso exclusivo
+                            para
+                            ISF-Ar.
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="Nombre"
+                                       name="nombre"
+                                       formControlName="nombre"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>apellido</mat-label>
+                                <input matInput placeholder="apellido"
+                                       name="apellido"
+                                       formControlName="apellido"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>tipoDocumento</mat-label>
+                                <input matInput placeholder="tipoDocumento"
+                                       name="tipoDocumento"
+                                       formControlName="tipoDocumento"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>idDocumento</mat-label>
+                                <input matInput placeholder="idDocumento"
+                                       name="idDocumento"
+                                       formControlName="idDocumento"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Estado</mat-label>
+                                <input matInput placeholder="estado"
+                                       name="estado"
+                                       formControlName="estado"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>ciudadResidencia</mat-label>
+                                <input matInput placeholder="ciudadResidencia"
+                                       name="ciudadResidencia"
+                                       formControlName="ciudadResidencia"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>provinciaResidencia</mat-label>
+                                <input matInput placeholder="provinciaResidencia"
+                                       name="provinciaResidencia"
+                                       formControlName="provinciaResidencia"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>paisOrigen</mat-label>
+                                <input matInput placeholder="paisOrigen"
+                                       name="paisOrigen"
+                                       formControlName="paisOrigen"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>telefono</mat-label>
+                                <input matInput placeholder="telefono"
+                                       name="telefono"
+                                       formControlName="telefono"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>email</mat-label>
+                                <input matInput placeholder="email"
+                                       name="email"
+                                       formControlName="email"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>nivelEstudios</mat-label>
+                                <input matInput placeholder="nivelEstudios"
+                                       name="nivelEstudios"
+                                       formControlName="nivelEstudios"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>carrera</mat-label>
+                                <input matInput placeholder="carrera"
+                                       name="carrera"
+                                       formControlName="carrera"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>universidad</mat-label>
+                                <input matInput placeholder="universidad"
+                                       name="universidad"
+                                       formControlName="universidad"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>ocupacion</mat-label>
+                                <input matInput placeholder="ocupacion"
+                                       name="ocupacion"
+                                       formControlName="ocupacion"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>comentarios</mat-label>
+                                <input matInput placeholder="comentarios"
+                                       name="comentarios"
+                                       formControlName="comentarios"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>dieta</mat-label>
+                                <input matInput placeholder="dieta"
+                                       name="dieta"
+                                       formControlName="dieta"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div class="w-100-p" style="text-align: right">
+                            <button mat-raised-button
+                                    class="save-product-button"
+                                    [disabled]="personaForm?.invalid"
+                                    *ngIf="pageType ==='new'" (click)="addPersona()">
+                                <span>Enviar</span>
+                            </button>
+                        </div>
+                    </div>
 
                 </form>
 
@@ -213,7 +220,6 @@
 
         </div>
         <!-- / CONTENT CARD -->
-
     </div>
     <!-- / CENTER -->
 

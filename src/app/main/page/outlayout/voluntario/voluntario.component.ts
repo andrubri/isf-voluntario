@@ -1,14 +1,13 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
-import {Subject} from 'rxjs';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 import {fuseAnimations} from '@fuse/animations';
 import {FuseUtils} from '@fuse/utils';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
-import {ISFService} from '../../../../services/isf.service';
 import {FuseProgressBarService} from '../../../../../@fuse/components/progress-bar/progress-bar.service';
+import {FuseConfigService} from '../../../../../@fuse/services/config.service';
 
 @Component({
     selector: 'voluntario',
@@ -24,16 +23,32 @@ export class VoluntarioComponent implements OnInit, OnDestroy {
     persona: any;
 
     constructor(
-        private _isfService: ISFService,
         private _formBuilder: FormBuilder,
         private _matSnackBar: MatSnackBar,
         private _router: Router,
         private _route: ActivatedRoute,
         private _fuseProgressBarService: FuseProgressBarService,
-        private _dialog: MatDialog
+        private _dialog: MatDialog,
+        private _fuseConfigService: FuseConfigService
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
+        this._fuseConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: true
+                },
+                toolbar: {
+                    hidden: true
+                },
+                footer: {
+                    hidden: true
+                },
+                sidepanel: {
+                    hidden: true
+                }
+            }
+        };
     }
 
     // -----------------------------------------------------------------------------------------------------

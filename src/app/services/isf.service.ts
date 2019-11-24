@@ -17,6 +17,8 @@ import {__await} from 'tslib';
 export class ISFService {
     private _urlBE: string;
     private _me: any;
+    public nombreLogin: string;
+    public apellidoLogin: string;
 
     private _httpOptions: any = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -30,6 +32,8 @@ export class ISFService {
 
     public async getMeUser(): Promise<any> {
         this._me = await this.getUserByToken('me');
+        this.nombreLogin = this._me.nombre;
+        this.apellidoLogin = this._me.apellido;
         return this._me;
     }
 

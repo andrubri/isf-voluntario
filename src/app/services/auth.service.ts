@@ -5,6 +5,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
 
 import {Observable, from} from 'rxjs';
+import {ISFService} from './isf.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

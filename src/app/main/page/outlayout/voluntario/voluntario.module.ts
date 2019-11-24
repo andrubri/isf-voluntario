@@ -7,15 +7,13 @@ import {
 } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FuseSharedModule} from '@fuse/shared.module';
-import {AuthGuard} from '../../../../services/auth-guard.service';
 import {VoluntarioComponent} from './voluntario.component';
 
 
 const routes = [
     {
         path: 'voluntario',
-        component: VoluntarioComponent,
-        canActivate: [AuthGuard]
+        component: VoluntarioComponent
     }
 ];
 
