@@ -48,6 +48,7 @@ import {EmailModule} from './main/modal/Email/email.module';
 import {EquiposJornadaModule} from './main/page/equiposjornada/equiposjornada.module';
 import { PersonasModule } from './main/page/personas/personas.module';
 import { PersonaModule } from './main/page/persona/persona.module';
+import {VoluntarioModule} from './main/page/outlayout/voluntario/voluntario.module';
 
 
 const appRoutes: Routes = [
@@ -112,7 +113,8 @@ const appRoutes: Routes = [
         AddvoluntarioModule,
         AddjornadaModule,
         EquiposJornadaModule,
-        EmailModule
+        EmailModule,
+        VoluntarioModule
         
 
     ],
