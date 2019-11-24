@@ -82,13 +82,19 @@ export class ISFService {
 
     public async addPersona(persona: any): Promise<any> {
         const url = `${this._urlBE}/persona`;
-        let req = {persona: persona ,origenContacto:{} , obraSocial:{}, contactoEmergencia:{}, datosSeguro:{}};
+        let req = {persona: persona};
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
+    public async addPersonaExterno(persona: any): Promise<any> {
+        const url = `${this._urlBE}/persona/externo`;
+        let req = {persona: persona};
         return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
     public async savePersona(persona: any): Promise<any> {
         const url = `${this._urlBE}/persona/${persona.idPersona}`;
-        let req = {persona: persona ,origenContacto:{} , obraSocial:{}, contactoEmergencia:{}, datosSeguro:{}};
+        let req = {persona: persona};
         return await this._http.put(url, req, this._httpOptions).toPromise();
     }
 

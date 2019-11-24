@@ -229,7 +229,7 @@ export class FormequiposComponent implements OnInit, OnDestroy {
 
         this.openEmailDialog({
             etiqueta: 'SendEmail',
-            txtBoton: 'Seleccionar',
+            txtBoton: 'Enviar',
             label: 'Mail',
             callback: async (item) => {
                 const info = this.dataSource.data;
@@ -256,7 +256,7 @@ export class FormequiposComponent implements OnInit, OnDestroy {
             callback: async (item) => {
                 const info = this.dataPersonas.data;
                 if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.Persona.idPersona);
+                    const newItem: any = this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
                     newItem.nombre = item.nombre;
                     newItem.apellido = item.apellido;
                     info.push(newItem);

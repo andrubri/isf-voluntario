@@ -59,7 +59,6 @@
                 <form name="personaForm" [formGroup]="personaForm" class="product w-100-p" fxLayout="column" fxFlex>
                     <input name="idPersona" formControlName="idPersona" type="hidden">
                             <div class="tab-content p-24">
-
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Nombre</mat-label>
@@ -107,19 +106,11 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>ciudadResidencia</mat-label>
+                                        <mat-label>direccion</mat-label>
                                         <input matInput placeholder="ciudadResidencia"
                                                name="ciudadResidencia"
-                                               formControlName="ciudadResidencia"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>provinciaResidencia</mat-label>
-                                        <input matInput placeholder="provinciaResidencia"
-                                               name="provinciaResidencia"
-                                               formControlName="provinciaResidencia"
+                                               formControlName="ciudadResidencia" 
+                                               #search
                                                required>
                                     </mat-form-field>
                                 </div>
@@ -147,6 +138,8 @@
                                         <input matInput placeholder="email"
                                                name="email"
                                                formControlName="email"
+                                               type="email"
+                                               email="true"
                                                required>
                                     </mat-form-field>
                                 </div>
@@ -201,6 +194,104 @@
                                         <input matInput placeholder="dieta"
                                                name="dieta"
                                                formControlName="dieta"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <input matInput [matDatepicker]="fechaNacimiento" name="fechaNacimiento"
+                                               formControlName="fechaNacimiento" placeholder="Fecha de Nacimiento">
+                                        <mat-datepicker-toggle matSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
+                                        <mat-datepicker #fechaNacimiento></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>descripcion Origen Contacto</mat-label>
+                                        <input matInput placeholder="descripcion"
+                                               name="descripcion"
+                                               formControlName="descripcion"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>empresa Obra social</mat-label>
+                                        <input matInput placeholder="empresa"
+                                               name="empresa"
+                                               formControlName="empresa"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>plan</mat-label>
+                                        <input matInput placeholder="plan"
+                                               name="plan"
+                                               formControlName="plan"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>grupoSanguineo</mat-label>
+                                        <input matInput placeholder="grupoSanguineo"
+                                               name="grupoSanguineo"
+                                               formControlName="grupoSanguineo"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>emfermedades</mat-label>
+                                        <input matInput placeholder="emfermedades"
+                                               name="emfermedades"
+                                               formControlName="emfermedades"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>medicaciones</mat-label>
+                                        <input matInput placeholder="medicaciones"
+                                               name="medicaciones"
+                                               formControlName="medicaciones"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>nombre Contacto Emergencia</mat-label>
+                                        <input matInput placeholder="nombreContacto"
+                                               name="nombreContacto"
+                                               formControlName="nombreContacto"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>apellido Contacto Emergencia</mat-label>
+                                        <input matInput placeholder="apellidoContacto"
+                                               name="apellidoContacto"
+                                               formControlName="apellidoContacto"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>telefono Contacto</mat-label>
+                                        <input matInput placeholder="telefonoContacto"
+                                               name="telefonoContacto"
+                                               formControlName="telefonoContacto"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>relacion</mat-label>
+                                        <input matInput placeholder="relacion"
+                                               name="relacion"
+                                               formControlName="relacion"
                                                required>
                                     </mat-form-field>
                                 </div>

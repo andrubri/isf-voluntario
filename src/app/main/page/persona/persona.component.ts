@@ -1,18 +1,20 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
-import {Subject} from 'rxjs';
+/// <reference types="@types/googlemaps" />
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input, NgZone, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { Subject } from 'rxjs';
 
-import {fuseAnimations} from '@fuse/animations';
-import {FuseUtils} from '@fuse/utils';
-import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
-import {formatDate} from '@angular/common';
-import {ISFService} from '../../../services/isf.service';
-import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
-import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
-import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
-import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
+import { fuseAnimations } from '@fuse/animations';
+import { FuseUtils } from '@fuse/utils';
+import { MapsAPILoader } from '@agm/core'
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { formatDate } from '@angular/common';
+import { ISFService } from '../../../services/isf.service';
+import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
+import { AccionConfirmarComponent } from '../../modal/AccionConfirmar/accionconfirmar.component';
+import { AddvoluntarioComponent } from '../../modal/AddVoluntario/addvoluntario.component';
+import { AddjornadaComponent } from '../../modal/AddJornada/addjornada.component';
 import { EmailComponent } from '../../modal/Email/email.component';
 
 @Component({
@@ -22,17 +24,21 @@ import { EmailComponent } from '../../modal/Email/email.component';
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class PersonaComponent implements OnInit, OnDestroy {
+export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
+    
     pageType: string;
     personaForm: FormGroup = null;
     perfiles: any;
     persona: any;
+    personaLocation: string;
     /* public dataSource: MatTableDataSource<any> = new MatTableDataSource();
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource(); */
     public displayedColumnsCoordinador = ['nombre', 'apellido'];
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
     public displayedColumnsJornada = ['fecha', 'accion'];
+    @ViewChildren('search') public searchElement: QueryList<ElementRef>;
+
 
     constructor(
         private _isfService: ISFService,
@@ -41,10 +47,13 @@ export class PersonaComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _route: ActivatedRoute,
         private _fuseProgressBarService: FuseProgressBarService,
-        private _dialog: MatDialog
+        private _dialog: MatDialog,
+        private mapsAPILoader: MapsAPILoader,
+        private ngZone: NgZone
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
+        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -71,16 +80,27 @@ export class PersonaComponent implements OnInit, OnDestroy {
                 provinciaResidencia: '',
                 paisOrigen: '',
                 telefono: '',
-                email:' ' ,
-                nivelEstudios:' ' ,
+                email: ' ',
+                nivelEstudios: ' ',
                 carrera: ' ',
-                universidad:' ' ,
+                universidad: ' ',
                 ocupacion: ' ',
-                comentarios:' ' ,
+                comentarios: ' ',
                 dieta: ' ',
+                fechaNacimiento:' ' ,
+    	        descripcion:' ',
+    	        empresa:' ',
+		        plan:' ',
+    	        grupoSanguineo:' ',
+		        emfermedades:' ',
+		        medicaciones:' ',
+    	        nombreContacto:' ',
+                apellidoContacto:' ',
+                telefonoContacto:' ',
+                relacion:' '
             
             };
-         
+
         }
 
         this.personaForm = this.createPersonaForm();
@@ -91,6 +111,13 @@ export class PersonaComponent implements OnInit, OnDestroy {
      * On destroy
      */
     ngOnDestroy(): void {
+    }
+
+    
+    ngAfterViewInit(): void {
+        this.searchElement.changes.subscribe(val => this.autocompleteAdress(val.first.nativeElement)
+        );
+        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -113,14 +140,26 @@ export class PersonaComponent implements OnInit, OnDestroy {
             provinciaResidencia: [this.persona.provinciaResidencia],
             paisOrigen: [this.persona.paisOrigen],
             telefono: [this.persona.telefono],
-            email: [this.persona.email] ,
-            nivelEstudios:[this.persona.nivelEstudios] ,
+            email: [this.persona.email],
+            nivelEstudios: [this.persona.nivelEstudios],
             carrera: [this.persona.carrera],
-            universidad:[this.persona.universidad] ,
+            universidad: [this.persona.universidad],
             ocupacion: [this.persona.ocupacion],
-            comentarios:[this.persona.comentarios] ,
+            comentarios: [this.persona.comentarios],
             dieta: [this.persona.dieta],
             idPersona: [this.persona.idPersona],
+            fechaNacimiento:[this.persona.fechaNacimiento] ,
+    	    descripcion:[this.persona.descripcion],
+    	    empresa:[this.persona.empresa],
+		    plan:[this.persona.plan],
+    	    grupoSanguineo:[this.persona.grupoSanguineo],
+		    emfermedades:[this.persona.emfermedades],
+		    medicaciones:[this.persona.medicaciones],
+    	    nombreContacto:[this.persona.nombreContacto],
+            apellidoContacto:[this.persona.apellidoContacto],
+            telefonoContacto:[this.persona.telefonoContacto],
+            relacion:[this.persona.relacion]
+            
 
         });
     }
@@ -132,6 +171,7 @@ export class PersonaComponent implements OnInit, OnDestroy {
         this._fuseProgressBarService.show();
         const data = this.personaForm.getRawValue();
         data.handle = FuseUtils.handleize(data.nombre);
+        data.provinciaResidencia = this.personaLocation
 
         await this._isfService.savePersona(data);
 
@@ -180,5 +220,26 @@ export class PersonaComponent implements OnInit, OnDestroy {
         this._fuseProgressBarService.hide();
     }
 
-    
+    autocompleteAdress(element) {
+        this.mapsAPILoader.load().then(
+            () => {
+                let autocomplete = new google.maps.places.Autocomplete(element, { types: ["address"] });
+
+                autocomplete.addListener("place_changed", () => {
+                    this.ngZone.run(() => {
+                        let place : google.maps.places.PlaceResult = autocomplete.getPlace();
+                        if (place.geometry === undefined || place.geometry === null) {
+                            return;
+                        }
+
+                        this.personaLocation = place.geometry.location.lat() + '&' +
+                        place.geometry.location.lng();
+                        
+                    });
+                });
+            }
+        );
+    }
+
+
 }

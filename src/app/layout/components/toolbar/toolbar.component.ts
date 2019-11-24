@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
+import {AuthService} from '../../../services/auth.service';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
@@ -41,7 +42,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
-        public _isfService: ISFService
+        public _isfService: ISFService,
+        private _AuthService: AuthService
     )
     {
         // Set the defaults
@@ -124,6 +126,10 @@ export class ToolbarComponent implements OnInit, OnDestroy
         this._unsubscribeAll.complete();
     }
 
+    logout():void
+    {
+        this._AuthService.logout();
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------

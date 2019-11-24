@@ -37,36 +37,31 @@
             <div class="content horizontal-stepper-wrapper">
                 <mat-horizontal-stepper class="mat-elevation-z4" [linear]="true">
 
-                    <mat-step >
+                    <mat-step [editable]="false">
 
                         <form fxLayout="column">
 
                             <ng-template matStepLabel>Bienvenido</ng-template>
 
                             <div fxFlex="1 0 auto" fxLayout="column">
-                                <div class="w-100-p">
-                                    Somos una asociación civil interdisciplinaria que trabaja por el desarrollo local de
-                                    comunidades en
-                                    situación de vulnerabilidad a través de proyectos de ingeniería.<br>
-                                    Nuestra misión es:<br>
-                                    - Colaborar en la construcción de una sociedad justa, inclusiva y solidaria mediante
-                                    la
-                                    elaboración
-                                    participativa de proyectos integrales con base tecnológica.<br>
-                                    - Promover una ingeniería orientada al desarrollo humano sostenible, al cumplimiento
-                                    de los
-                                    Derechos
-                                    Humanos, al cuidado de la naturaleza y al fortalecimiento de las poblaciones en
-                                    situación de
-                                    vulnerabilidad.<br>
-                                    - Impulsar un espacio que integre la diversidad y movilice la participación
-                                    ciudadana.<br><br>
-                                    (Más info en: www.isf-argentina.org)<br><br>
-                                    ----------------------------------<br><br>
-                                    Se garantiza la confidencialidad de toda la información relevada, que será de uso
-                                    exclusivo
-                                    para
-                                    ISF-Ar.
+                                <div class="w-100-p" style="font-size: 12pt;">
+                                    <span>Somos una asociación civil interdisciplinaria que trabaja por el desarrollo local de comunidades en
+                                        situación de vulnerabilidad a través de proyectos de ingeniería.</span><br><br>
+                                    <span>Nuestra misión es:</span><br>
+                                    <ul>
+                                        <li>Colaborar en la construcción de una sociedad justa, inclusiva y solidaria mediante
+                                            la elaboración participativa de proyectos integrales con base tecnológica.</li>
+                                        <li>Promover una ingeniería orientada al desarrollo humano sostenible, al cumplimiento
+                                            de los Derechos Humanos, al cuidado de la naturaleza y al fortalecimiento de las poblaciones en
+                                            situación de vulnerabilidad.</li>
+                                        <li>Impulsar un espacio que integre la diversidad y movilice la participación
+                                            ciudadana.</li>
+                                    </ul><br>
+                                    <span>(Más info en: <a target="_blank" href="https://www.isf-argentina.org">www.isf-argentina.org</a>)</span><br>
+                                    <br><hr /><br>
+                                    <span style="font-weight: bold;">Se garantiza la confidencialidad de toda la información relevada, que será de uso
+                                        exclusivo para ISF-Ar.</span>
+                                    <br><br>
                                 </div>
 
                             </div>
@@ -81,7 +76,7 @@
 
                     </mat-step>
 
-                    <mat-step [stepControl]="horizontalStepperStep2">
+                    <mat-step [stepControl]="horizontalStepperStep2" [editable]="false">
 
                         <form fxLayout="column" [formGroup]="horizontalStepperStep2">
 
@@ -98,8 +93,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>apellido</mat-label>
-                                    <input matInput placeholder="apellido"
+                                    <mat-label>Apellido</mat-label>
+                                    <input matInput placeholder="Apellido"
                                            name="apellido"
                                            formControlName="apellido"
                                            required>
@@ -107,8 +102,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>tipoDocumento</mat-label>
-                                    <input matInput placeholder="tipoDocumento"
+                                    <mat-label>Tipo Documento</mat-label>
+                                    <input matInput placeholder="Tipo Documento"
                                            name="tipoDocumento"
                                            formControlName="tipoDocumento"
                                            required>
@@ -116,8 +111,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>idDocumento</mat-label>
-                                    <input matInput placeholder="idDocumento"
+                                    <mat-label>Documento</mat-label>
+                                    <input matInput placeholder="Documento"
                                            name="idDocumento"
                                            formControlName="idDocumento"
                                            required>
@@ -125,39 +120,38 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>telefono</mat-label>
-                                    <input matInput placeholder="telefono"
+                                    <mat-label>Telefono</mat-label>
+                                    <input matInput placeholder="Telefono"
                                            name="telefono"
+                                           type="tel"
                                            formControlName="telefono"
                                            required>
                                 </mat-form-field>
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>email</mat-label>
-                                    <input matInput placeholder="email"
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Email"
                                            name="email"
+                                           type="email"
                                            formControlName="email"
                                            required>
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                                    Previous
-                                </button>
                                 <button mat-raised-button matStepperNext type="button" color="accent">
-                                    Next
+                                    Siguiente
                                 </button>
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="horizontalStepperStep3">
+                    <mat-step [stepControl]="horizontalStepperStep3" [editable]="false">
                         <form fxLayout="column" [formGroup]="horizontalStepperStep3">
-                            <ng-template matStepLabel>Domicilio</ng-template>
+                            <ng-template matStepLabel>Lugar de residencia</ng-template>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>ciudadResidencia</mat-label>
-                                    <input matInput placeholder="ciudadResidencia"
+                                    <mat-label>Ciudad de residencia</mat-label>
+                                    <input matInput placeholder="Ciudad de residencia"
                                            name="ciudadResidencia"
                                            formControlName="ciudadResidencia"
                                            required>
@@ -165,8 +159,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>provinciaResidencia</mat-label>
-                                    <input matInput placeholder="provinciaResidencia"
+                                    <mat-label>Provincia de residencia</mat-label>
+                                    <input matInput placeholder="Provincia de residencia"
                                            name="provinciaResidencia"
                                            formControlName="provinciaResidencia"
                                            required>
@@ -174,30 +168,27 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>paisOrigen</mat-label>
-                                    <input matInput placeholder="paisOrigen"
+                                    <mat-label>Pais</mat-label>
+                                    <input matInput placeholder="Pais"
                                            name="paisOrigen"
                                            formControlName="paisOrigen"
                                            required>
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                                    Previous
-                                </button>
                                 <button mat-raised-button matStepperNext type="button" color="accent">
-                                    Next
+                                    Siguiente
                                 </button>
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="horizontalStepperStep4">
+                    <mat-step [stepControl]="horizontalStepperStep4" [editable]="false">
                         <form fxLayout="column" [formGroup]="horizontalStepperStep4">
                             <ng-template matStepLabel>Ocupación</ng-template>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>nivelEstudios</mat-label>
-                                    <input matInput placeholder="nivelEstudios"
+                                    <mat-label>Nivel de estudios</mat-label>
+                                    <input matInput placeholder="Nivel de estudios"
                                            name="nivelEstudios"
                                            formControlName="nivelEstudios"
                                            required>
@@ -205,8 +196,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>carrera</mat-label>
-                                    <input matInput placeholder="carrera"
+                                    <mat-label>Carrera</mat-label>
+                                    <input matInput placeholder="Carrera"
                                            name="carrera"
                                            formControlName="carrera"
                                            required>
@@ -214,8 +205,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>universidad</mat-label>
-                                    <input matInput placeholder="universidad"
+                                    <mat-label>Universidad</mat-label>
+                                    <input matInput placeholder="Universidad"
                                            name="universidad"
                                            formControlName="universidad"
                                            required>
@@ -223,8 +214,8 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>ocupacion</mat-label>
-                                    <input matInput placeholder="ocupacion"
+                                    <mat-label>Ocupacion</mat-label>
+                                    <input matInput placeholder="Ocupacion"
                                            name="ocupacion"
                                            formControlName="ocupacion"
                                            required>
@@ -232,10 +223,7 @@
                             </div>
 
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                                    Previous
-                                </button>
-                                <button mat-raised-button matStepperNext type="button" color="accent">
+                                <button mat-raised-button matStepperNext type="button" color="accent" (click)="enviar()">
                                     Enviar
                                 </button>
                             </div>
@@ -255,7 +243,7 @@
 
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button type="button" color="accent" (click)="finishHorizontalStepper()">
-                                Finish
+                                Finalizar
                             </button>
                         </div>
 

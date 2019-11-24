@@ -16,6 +16,9 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if(request.url){
+            console.log(request.url);
+        }
         return from(this.auth.isLogin()).flatMap(_ => {
             return this.auth.GetTokenFirebase();
         }).mergeMap((token: string) => {

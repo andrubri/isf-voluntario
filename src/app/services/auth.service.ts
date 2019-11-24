@@ -44,7 +44,9 @@ export class AuthService {
             token = from(this.afAuth.auth.currentUser.getIdToken());
             return token;
         } else {
-            this.logout();
+            return new Observable((observer) => {
+                return observer.next('');
+            });
         }
 
     }
@@ -52,5 +54,6 @@ export class AuthService {
     public async logout(): Promise<void> {
         await this.afAuth.auth.signOut();
         this.router.navigate(['/login']);
+
     }
 }

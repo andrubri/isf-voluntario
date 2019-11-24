@@ -17,13 +17,12 @@
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
-                <div class="logo mb-24 mb-md-0"
-                     fxLayout="row" fxLayoutAlign="start center">
+                <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                         group
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" fxHide
-                          fxShow.gt-sm>
+                        fxShow.gt-sm>
                         {{equipo.nombre}} - Jornada {{jornada.fecha | date : 'dd/MM/yyyy'}}
                     </span>
                 </div>
@@ -43,14 +42,12 @@
                     <mat-tab label="Confirmados">
                         <div class="tab-content p-24">
                             <button mat-fab class="add-event-button mat-accent" (click)="addVoluntario()"
-                                    aria-label="Agregar Voluntario"
-                                    [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
+                                aria-label="Agregar Voluntario"
+                                [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
                                 <mat-icon>add</mat-icon>
                             </button>
-                            <mat-table class="products-table"
-                                       #table [dataSource]="dataPersonas"
-                                       [@animateStagger]="{value:'30'}"
-                                       fusePerfectScrollbar>
+                            <mat-table class="products-table" #table [dataSource]="dataPersonas"
+                                [@animateStagger]="{value:'30'}" fusePerfectScrollbar>
                                 <ng-container matColumnDef="nombre">
                                     <mat-header-cell *matHeaderCellDef>
                                         Nombre
@@ -64,24 +61,23 @@
                                         Apellido
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let voluntario">
-                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}</p>
+                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}
+                                        </p>
                                     </mat-cell>
                                 </ng-container>
 
-                                <mat-header-row
-                                    *matHeaderRowDef="displayedColumnsVoluntario; sticky:true"></mat-header-row>
+                                <mat-header-row *matHeaderRowDef="displayedColumnsVoluntario; sticky:true">
+                                </mat-header-row>
                                 <mat-row *matRowDef="let voluntario; columns: displayedColumnsVoluntario;"
-                                         class="product" matRipple>
+                                    class="product" matRipple>
                                 </mat-row>
                             </mat-table>
                         </div>
                     </mat-tab>
                     <mat-tab label="Asistencia">
                         <div class="tab-content p-24">
-                            <mat-table class="products-table"
-                                       #table [dataSource]="dataPersonas"
-                                       [@animateStagger]="{value:'30'}"
-                                       fusePerfectScrollbar>
+                            <mat-table class="products-table" #table [dataSource]="dataPersonas"
+                                [@animateStagger]="{value:'30'}" fusePerfectScrollbar>
                                 <ng-container matColumnDef="nombre">
                                     <mat-header-cell *matHeaderCellDef>
                                         Nombre
@@ -95,31 +91,49 @@
                                         Apellido
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let voluntario">
-                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}</p>
+                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}
+                                        </p>
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="presente">
                                     <mat-header-cell *matHeaderCellDef>
                                         Presente
                                     </mat-header-cell>
-                                    <mat-cell
-                                        *matCellDef="let voluntario;">
+                                    <mat-cell *matCellDef="let voluntario;">
                                         <p class="text-truncate">
                                             <mat-slide-toggle [checked]="getStatus(voluntario)"
-                                                              (change)="confAsistencia(voluntario.idPersona, $event)"></mat-slide-toggle>
+                                                (change)="confAsistencia(voluntario.idPersona, $event)">
+                                            </mat-slide-toggle>
                                         </p>
                                     </mat-cell>
                                 </ng-container>
-                                <mat-header-row
-                                    *matHeaderRowDef="displayedColumnsPresente; sticky:true"></mat-header-row>
-                                <mat-row *matRowDef="let voluntario; columns: displayedColumnsPresente;"
-                                         class="product" matRipple>
+                                <mat-header-row *matHeaderRowDef="displayedColumnsPresente; sticky:true">
+                                </mat-header-row>
+                                <mat-row *matRowDef="let voluntario; columns: displayedColumnsPresente;" class="product"
+                                    matRipple>
                                 </mat-row>
                             </mat-table>
                         </div>
                     </mat-tab>
                 </mat-tab-group>
 
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
+                    <div *ngFor="let persona of dataPersonas.data">
+                        <agm-marker [latitude]="persona.provinciaResidencia.split('&')[0]"
+                            [longitude]="persona.provinciaResidencia.split('&')[1]" 
+                            [iconUrl]="{ 
+                            url:'./assets/images/logos/isf.svg',
+                            scaledSize: {
+                                width: 30,
+                                height: 30
+                            }
+                            }">
+                            <agm-info-window [isOpen]="true">
+                                <h4>{{persona.nombre}}</h4>
+                            </agm-info-window>
+                        </agm-marker>
+                    </div>
+                </agm-map>
             </div>
             <!-- / CONTENT -->
 

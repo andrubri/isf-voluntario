@@ -18,15 +18,15 @@ export const navigation: FuseNavigation[] = [
         url      : '/equipos',
 
     },   
-     {
+     /* {
         id       : 'Jornadas',
         title    : 'Jornadas',
         translate: 'Jornadas',
         type     : 'item',
-        icon     : 'accessibility_new',
+        icon     : 'home',
         url      : '/jornadas',
 
-    },   
+    },    */
      {
         id       : 'Personas',
         title    : 'Personas',
@@ -36,7 +36,7 @@ export const navigation: FuseNavigation[] = [
         url      : '/personas',
 
     },   
-    {
+    /* {
        id       : 'Logistica',
        title    : 'Logistica',
        translate: 'Logistica',
@@ -44,5 +44,5 @@ export const navigation: FuseNavigation[] = [
        icon     : 'map',
        url      : '/Logistica',
 
-   }
+   } */
 ];

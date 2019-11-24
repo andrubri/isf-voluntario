@@ -49,6 +49,7 @@ import {EquiposJornadaModule} from './main/page/equiposjornada/equiposjornada.mo
 import { PersonasModule } from './main/page/personas/personas.module';
 import { PersonaModule } from './main/page/persona/persona.module';
 import {VoluntarioModule} from './main/page/outlayout/voluntario/voluntario.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 const appRoutes: Routes = [
@@ -68,6 +69,10 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDSYhDsbX7AnFGu4uiYb7vvP_W7am8qCLE',
+            libraries: ["places"]
+        }),
 
         TranslateModule.forRoot(),
 

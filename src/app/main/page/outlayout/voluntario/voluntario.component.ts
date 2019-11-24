@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {FuseProgressBarService} from '../../../../../@fuse/components/progress-bar/progress-bar.service';
 import {FuseConfigService} from '../../../../../@fuse/services/config.service';
+import {DOCUMENT} from '@angular/common';
+import {ISFService} from '../../../../services/isf.service';
 
 @Component({
     selector: 'voluntario',
@@ -34,7 +36,9 @@ export class VoluntarioComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _fuseProgressBarService: FuseProgressBarService,
         private _dialog: MatDialog,
-        private _fuseConfigService: FuseConfigService
+        private _isfService: ISFService,
+        private _fuseConfigService: FuseConfigService,
+        @Inject(DOCUMENT) private document: Document
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
@@ -71,24 +75,18 @@ export class VoluntarioComponent implements OnInit, OnDestroy {
         this.persona = {
             nombre: '',
             apellido: '',
-            tipoDocumento: ' ',
-            idDocumento: ' ',
+            tipoDocumento: '',
+            idDocumento: '',
             ciudadResidencia: '',
             provinciaResidencia: '',
             paisOrigen: '',
             telefono: '',
-            email: ' ',
-            nivelEstudios: ' ',
-            carrera: ' ',
-            universidad: ' ',
-            ocupacion: ' '
+            email: '',
+            nivelEstudios: '',
+            carrera: '',
+            universidad: '',
+            ocupacion: ''
         };
-
-        // Horizontal Stepper form steps
-        this.horizontalStepperStep1 = this._formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required]
-        });
 
         this.createPersonaForm();
         this._fuseProgressBarService.hide();
@@ -132,5 +130,17 @@ export class VoluntarioComponent implements OnInit, OnDestroy {
 
     }
 
+    async enviar(): Promise<void> {
+        this._fuseProgressBarService.show();
+        const data = Object.assign(this.horizontalStepperStep2.getRawValue(), this.horizontalStepperStep3.getRawValue(), this.horizontalStepperStep4.getRawValue());
+        data.handle = FuseUtils.handleize(data.nombre);
+
+        await this._isfService.addPersonaExterno(data);
+        this._fuseProgressBarService.hide();
+    }
+
+    finishHorizontalStepper(): void {
+        this.document.location.href = 'https://isf-argentina.org/';
+    }
 
 }

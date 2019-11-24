@@ -1,4 +1,4 @@
-<div id="persona" class="page-layout carded fullwidth inner-scroll">
+<div id="personas" class="page-layout carded fullwidth inner-scroll">
 
 
     <!-- TOP BACKGROUND -->
@@ -20,7 +20,7 @@
                     group
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    persona
+                    personas
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -62,7 +62,7 @@
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="apellido">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
                               [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.apellido}}</p>
@@ -73,20 +73,6 @@
                     <mat-cell *matCellDef="let persona" fxHide fxShow.gt-xs
                               [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.estado}}</p>
-                    </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="ciudadResidencia">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</mat-header-cell>
-                    <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/persona/'+ persona.idPersona">
-                        <p class="text-truncate">{{persona.ciudadResidencia}}</p>
-                    </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="provinciaResidencia">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Provincia</mat-header-cell>
-                    <mat-cell *matCellDef="let persona"
-                              [routerLink]="'/persona/'+ persona.idPersona">
-                        <p class="text-truncate">{{persona.provinciaResidencia}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
@@ -115,6 +101,14 @@
                     <mat-cell *matCellDef="let persona">
                         <button mat-button (click)="remove(persona.idPersona)" [matTooltip]="'Eliminar persona'">
                             <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="user" stickyEnd>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                    <mat-cell *matCellDef="let persona">
+                        <button mat-button (click)="createUser(persona)" [matTooltip]="'Crear Usuario'">
+                            <mat-icon>group_add</mat-icon>
                         </button>
                     </mat-cell>
                 </ng-container>
