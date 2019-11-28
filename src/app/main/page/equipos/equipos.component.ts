@@ -18,7 +18,7 @@ import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfir
 export class EquiposComponent implements OnInit
 {
     public dataSource: MatTableDataSource<any>;
-    public displayedColumns = ['nombre','descripcion', 'estado',  'ciudad', 'provincia','categoria','inicio','fin', 'accion'];
+    public displayedColumns = ['nombre','descripcion', 'estado', 'direccion','categoria','inicio','fin', 'accion'];
     public perfiles: [];
 
     @ViewChild(MatPaginator)

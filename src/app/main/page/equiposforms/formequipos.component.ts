@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input, ViewChildren, QueryList, ElementRef, AfterViewInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {Subject} from 'rxjs';
@@ -14,6 +14,7 @@ import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfir
 import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
 import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
 import { EmailComponent } from '../../modal/Email/email.component';
+import { AutocompleteService } from 'app/services/autocomplete-service';
 
 @Component({
     selector: 'formequipos',
@@ -22,7 +23,7 @@ import { EmailComponent } from '../../modal/Email/email.component';
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class FormequiposComponent implements OnInit, OnDestroy {
+export class FormequiposComponent implements OnInit, OnDestroy,AfterViewInit {
     pageType: string;
     equipoForm: FormGroup = null;
     perfiles: any;
@@ -31,12 +32,14 @@ export class FormequiposComponent implements OnInit, OnDestroy {
     jornada_act: any[];
     personas_act: any[];
     coordinador_act: any[];
+    equipoLocation: any = {};
     public dataSource: MatTableDataSource<any> = new MatTableDataSource();
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource();
     public displayedColumnsCoordinador = ['nombre', 'apellido'];
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
     public displayedColumnsJornada = ['fecha', 'accion'];
+    @ViewChildren('search') public searchElement: QueryList<ElementRef>;
 
     constructor(
         private _isfService: ISFService,
@@ -45,7 +48,8 @@ export class FormequiposComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _route: ActivatedRoute,
         private _fuseProgressBarService: FuseProgressBarService,
-        private _dialog: MatDialog
+        private _dialog: MatDialog,
+        private _autocompleteService : AutocompleteService
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
@@ -93,6 +97,13 @@ export class FormequiposComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
     }
 
+    ngAfterViewInit(): void {
+        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement,this.equipoLocation)
+        );
+        
+    }
+    
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -125,6 +136,7 @@ export class FormequiposComponent implements OnInit, OnDestroy {
         this._fuseProgressBarService.show();
         const data = this.equipoForm.getRawValue();
         data.handle = FuseUtils.handleize(data.nombre);
+        data.provincia = this.equipoLocation.lat + '&' + this.equipoLocation.lng;
 
         await this._isfService.saveEquipo(data, this.dataSource.data);
 
