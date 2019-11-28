@@ -115,25 +115,29 @@
                             </mat-table>
                         </div>
                     </mat-tab>
+                    <mat-tab label="Logistica">
+                        <div class="tab-content p-24">
+                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
+                                <div *ngFor="let persona of dataPersonas.data">
+                                    <agm-marker [latitude]="persona.provinciaResidencia.split('&')[0]"
+                                        [longitude]="persona.provinciaResidencia.split('&')[1]" [iconUrl]="{ 
+                                            url:'./assets/images/logos/isf.svg',
+                                            scaledSize: {
+                                                width: 30,
+                                                height: 30
+                                            }
+                                            }">
+                                        <agm-info-window [isOpen]="true">
+                                            <h4>{{persona.nombre}}</h4>
+                                        </agm-info-window>
+                                    </agm-marker>
+                                </div>
+                            </agm-map>
+                        </div>
+                    </mat-tab>
                 </mat-tab-group>
 
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
-                    <div *ngFor="let persona of dataPersonas.data">
-                        <agm-marker [latitude]="persona.provinciaResidencia.split('&')[0]"
-                            [longitude]="persona.provinciaResidencia.split('&')[1]" 
-                            [iconUrl]="{ 
-                            url:'./assets/images/logos/isf.svg',
-                            scaledSize: {
-                                width: 30,
-                                height: 30
-                            }
-                            }">
-                            <agm-info-window [isOpen]="true">
-                                <h4>{{persona.nombre}}</h4>
-                            </agm-info-window>
-                        </agm-marker>
-                    </div>
-                </agm-map>
+
             </div>
             <!-- / CONTENT -->
 
