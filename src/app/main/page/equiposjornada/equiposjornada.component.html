@@ -125,16 +125,16 @@
                                             <h4>{{persona.nombre}}</h4>
                                         </agm-info-window>
                                     </agm-marker>
-                                    <agm-marker [latitude]="equipo.provincia.split('&')[0]"
-                                        [longitude]="equipo.provincia.split('&')[1]" [iconUrl]="{ 
+                                </div>
+                                <agm-marker [latitude]="equipo.provincia.split('&')[0]"
+                                    [longitude]="equipo.provincia.split('&')[1]" [iconUrl]="{ 
                                         url:'./assets/images/logos/isf.svg',
                                         scaledSize: {
                                             width: 30,
                                             height: 30
                                         }
                                         }">
-                                    </agm-marker>
-                                </div>
+                                </agm-marker>
                             </agm-map>
                         </div>
                     </mat-tab>
