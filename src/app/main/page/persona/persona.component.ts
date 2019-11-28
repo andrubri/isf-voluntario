@@ -16,6 +16,7 @@ import { AccionConfirmarComponent } from '../../modal/AccionConfirmar/accionconf
 import { AddvoluntarioComponent } from '../../modal/AddVoluntario/addvoluntario.component';
 import { AddjornadaComponent } from '../../modal/AddJornada/addjornada.component';
 import { EmailComponent } from '../../modal/Email/email.component';
+import { AutocompleteService } from '../../../services/autocomplete-service';
 
 @Component({
     selector: 'persona',
@@ -30,7 +31,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
     personaForm: FormGroup = null;
     perfiles: any;
     persona: any;
-    personaLocation: string;
+    personaLocation: any = {};
     /* public dataSource: MatTableDataSource<any> = new MatTableDataSource();
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource(); */
@@ -48,8 +49,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         private _route: ActivatedRoute,
         private _fuseProgressBarService: FuseProgressBarService,
         private _dialog: MatDialog,
-        private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone
+        private _autocompleteService: AutocompleteService
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
@@ -115,7 +115,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     
     ngAfterViewInit(): void {
-        this.searchElement.changes.subscribe(val => this.autocompleteAdress(val.first.nativeElement)
+        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement,this.personaLocation)
         );
         
     }
@@ -171,7 +171,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         this._fuseProgressBarService.show();
         const data = this.personaForm.getRawValue();
         data.handle = FuseUtils.handleize(data.nombre);
-        data.provinciaResidencia = this.personaLocation
+        data.provinciaResidencia = this.personaLocation.lat + '&' + this.personaLocation.lng;
 
         await this._isfService.savePersona(data);
 
@@ -220,7 +220,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         this._fuseProgressBarService.hide();
     }
 
-    autocompleteAdress(element) {
+    /* autocompleteAdress(element,location) {
         this.mapsAPILoader.load().then(
             () => {
                 let autocomplete = new google.maps.places.Autocomplete(element, { types: ["address"] });
@@ -232,14 +232,14 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
                             return;
                         }
 
-                        this.personaLocation = place.geometry.location.lat() + '&' +
-                        place.geometry.location.lng();
+                        location.lat = place.geometry.location.lat();
+                        location.lng = place.geometry.location.lng();
                         
                     });
                 });
             }
         );
-    }
+    } */
 
 
 }
