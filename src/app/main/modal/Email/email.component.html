@@ -4,15 +4,25 @@
             <div style="text-align:right;margin-bottom: 34px;">
                 <mat-icon (click)="onCloseCancel()" style="cursor: pointer;color: #AEAEAE;">cancel</mat-icon>
             </div>
-            <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
-                <form class="w-100-p">
+            <form class="w-100-p">
+                <div fxLayout="row" fxLayoutAlign="space-around center">
+
                     <mat-form-field class="w-100-p">
-                        <textarea type="text" [placeholder]="datos.label"Mensaje aria-label="Assignee" matInput [formControl]="myControl"  rows="3" cols="50"></textarea>
+                        <textarea type="text" [placeholder]="datos.label" Mensaje aria-label="Assignee" matInput
+                                  [formControl]="myControl" rows="10" cols="25"></textarea>
                     </mat-form-field>
-                </form>
-            </div>
+
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="datos.tipo !== 'convocatiria'">
+                    <p class="text-truncate">
+                        <mat-slide-toggle (change)="changeFilter($event)"></mat-slide-toggle>
+                        Enviar mail solo a los integrantes del equipo
+                    </p>
+                </div>
+            </form>
             <div fxLayout="row" style="margin-top: 28%" fxLayoutAlign="space-around center">
-                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()" cdkFocusInitial>{{datos.txtBoton}}</button>
+                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()"
+                        cdkFocusInitial>{{datos.txtBoton}}</button>
             </div>
         </div>
     </mat-card-content>

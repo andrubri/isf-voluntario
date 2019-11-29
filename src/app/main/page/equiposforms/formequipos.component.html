@@ -34,23 +34,27 @@
             </div>
             <!-- / APP TITLE -->
 
-            <button mat-raised-button
-                    class="save-product-button"
-                    [disabled]="equipoForm?.invalid"
-                    *ngIf="pageType ==='new'" (click)="addEquipo()">
-                <span>AGREGAR</span>
-            </button>
+            <div fxLayout="column" fxLayoutGap="10px">
+                <button mat-raised-button
+                        class="save-product-button"
+                        [disabled]="equipoForm?.invalid"
+                        *ngIf="pageType ==='new'" (click)="addEquipo()">
+                    <span>AGREGAR</span>
+                </button>
 
-            <button mat-raised-button
-                    class="save-product-button"
-                    [disabled]="equipoForm?.invalid || equipoForm?.pristine"
-                    *ngIf="pageType ==='edit'" (click)="saveEquipo()">
-                <span>GRABAR</span>
-            </button>
+                <button mat-raised-button
+                        class="save-product-button"
+                        [disabled]="equipoForm?.invalid || equipoForm?.pristine"
+                        *ngIf="pageType ==='edit'" (click)="saveEquipo()">
+                    <span>GRABAR</span>
+                </button>
 
-            <button mat-raised-button (click)="sendEmail()" *ngIf="pageType ==='edit'" class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>MAIL</span>
-            </button>
+                <button mat-raised-button (click)="sendEmail()" *ngIf="pageType ==='edit'"
+                        class="add-product-button fuse-white mt-24 mt-md-0">
+                    <span>EMAIL EQUIPO</span>
+                </button>
+            </div>
+
         </div>
         <!-- / HEADER -->
 
@@ -234,10 +238,14 @@
                                     <ng-container matColumnDef="accion">
                                         <mat-header-cell *matHeaderCellDef>
                                         </mat-header-cell>
-                                        <mat-cell *matCellDef="let jornada">
+                                        <mat-cell *matCellDef="let jornada;">
                                             <button mat-button [routerLink]="'/equipos/jornada/' +jornada.idJornadas"
                                                     [matTooltip]="'Ver Jornada'">
                                                 <mat-icon>pageview</mat-icon>
+                                            </button>
+                                            <button mat-button (click)="sendEmailConvocatoria($event)" *ngIf="jornada.fecha > now"
+                                                    [matTooltip]="'Enviar mail convocatoria'">
+                                                <mat-icon>mail</mat-icon>
                                             </button>
                                         </mat-cell>
                                     </ng-container>

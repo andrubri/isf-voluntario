@@ -16,6 +16,7 @@ import {
 
 
 import { EmailComponent} from './email.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const routes = [
     {
@@ -40,7 +41,8 @@ const routes = [
         MatCardModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSlideToggleModule
     ],
     exports     : [
       EmailComponent

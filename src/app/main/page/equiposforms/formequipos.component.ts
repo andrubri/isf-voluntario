@@ -13,8 +13,8 @@ import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/
 import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
 import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
 import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
-import { EmailComponent } from '../../modal/Email/email.component';
-import { AutocompleteService } from 'app/services/autocomplete-service';
+import {EmailComponent} from '../../modal/Email/email.component';
+import {AutocompleteService} from 'app/services/autocomplete-service';
 
 @Component({
     selector: 'formequipos',
@@ -23,7 +23,7 @@ import { AutocompleteService } from 'app/services/autocomplete-service';
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class FormequiposComponent implements OnInit, OnDestroy,AfterViewInit {
+export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
     pageType: string;
     equipoForm: FormGroup = null;
     perfiles: any;
@@ -33,6 +33,7 @@ export class FormequiposComponent implements OnInit, OnDestroy,AfterViewInit {
     personas_act: any[];
     coordinador_act: any[];
     equipoLocation: any = {};
+    now: Date = new Date();
     public dataSource: MatTableDataSource<any> = new MatTableDataSource();
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource();
@@ -49,7 +50,7 @@ export class FormequiposComponent implements OnInit, OnDestroy,AfterViewInit {
         private _route: ActivatedRoute,
         private _fuseProgressBarService: FuseProgressBarService,
         private _dialog: MatDialog,
-        private _autocompleteService : AutocompleteService
+        private _autocompleteService: AutocompleteService
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
@@ -98,11 +99,11 @@ export class FormequiposComponent implements OnInit, OnDestroy,AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement,this.equipoLocation)
+        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement, this.equipoLocation)
         );
-        
+
     }
-    
+
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -247,13 +248,35 @@ export class FormequiposComponent implements OnInit, OnDestroy,AfterViewInit {
                 const info = this.dataSource.data;
                 if (this.equipo.idEquipo) {
                     const newItem: any = this._isfService.sendEmailToEquipo(this.equipo, item);
-                    
+
                 } else {
-                   
+
                 }
                 this.dataSource.data = info;
             },
-            altoModal: '300px',
+            altoModal: '600px',
+            anchoModal: '500px'
+        });
+    }
+
+    sendEmailConvocatoria(e: Event): void {
+        e.stopPropagation();
+        this.openEmailDialog({
+            etiqueta: 'SendEmail',
+            txtBoton: 'Enviar',
+            label: 'Mail',
+            tipo: 'convocatiria',
+            callback: async (item) => {
+                const info = this.dataSource.data;
+                if (this.equipo.idEquipo) {
+                    const newItem: any = this._isfService.sendEmailToEquipo(this.equipo, item);
+
+                } else {
+
+                }
+                this.dataSource.data = info;
+            },
+            altoModal: '500px',
             anchoModal: '450px'
         });
     }
