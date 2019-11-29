@@ -1,22 +1,22 @@
 /// <reference types="@types/googlemaps" />
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input, NgZone, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { Subject } from 'rxjs';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input, NgZone, ElementRef, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
+import {Subject} from 'rxjs';
 
-import { fuseAnimations } from '@fuse/animations';
-import { FuseUtils } from '@fuse/utils';
-import { MapsAPILoader } from '@agm/core'
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { formatDate } from '@angular/common';
-import { ISFService } from '../../../services/isf.service';
-import { FuseProgressBarService } from '../../../../@fuse/components/progress-bar/progress-bar.service';
-import { AccionConfirmarComponent } from '../../modal/AccionConfirmar/accionconfirmar.component';
-import { AddvoluntarioComponent } from '../../modal/AddVoluntario/addvoluntario.component';
-import { AddjornadaComponent } from '../../modal/AddJornada/addjornada.component';
-import { EmailComponent } from '../../modal/Email/email.component';
-import { AutocompleteService } from '../../../services/autocomplete-service';
+import {fuseAnimations} from '@fuse/animations';
+import {FuseUtils} from '@fuse/utils';
+import {MapsAPILoader} from '@agm/core';
+import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {formatDate} from '@angular/common';
+import {ISFService} from '../../../services/isf.service';
+import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
+import {AccionConfirmarComponent} from '../../modal/AccionConfirmar/accionconfirmar.component';
+import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
+import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
+import {EmailComponent} from '../../modal/Email/email.component';
+import {AutocompleteService} from '../../../services/autocomplete-service';
 
 @Component({
     selector: 'persona',
@@ -26,7 +26,7 @@ import { AutocompleteService } from '../../../services/autocomplete-service';
     encapsulation: ViewEncapsulation.None
 })
 export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
-    
+
     pageType: string;
     personaForm: FormGroup = null;
     perfiles: any;
@@ -53,7 +53,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
-        
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -80,25 +80,25 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
                 provinciaResidencia: '',
                 paisOrigen: '',
                 telefono: '',
-                email: ' ',
-                nivelEstudios: ' ',
-                carrera: ' ',
-                universidad: ' ',
-                ocupacion: ' ',
-                comentarios: ' ',
-                dieta: ' ',
-                fechaNacimiento:' ' ,
-    	        descripcion:' ',
-    	        empresa:' ',
-		        plan:' ',
-    	        grupoSanguineo:' ',
-		        emfermedades:' ',
-		        medicaciones:' ',
-    	        nombreContacto:' ',
-                apellidoContacto:' ',
-                telefonoContacto:' ',
-                relacion:' '
-            
+                email: '',
+                nivelEstudios: '',
+                carrera: '',
+                universidad: '',
+                ocupacion: '',
+                comentarios: '',
+                dieta: '',
+                fechaNacimiento: '',
+                descripcion: '',
+                empresa: '',
+                plan: '',
+                grupoSanguineo: '',
+                emfermedades: '',
+                medicaciones: '',
+                nombreContacto: '',
+                apellidoContacto: '',
+                telefonoContacto: '',
+                relacion: ' '
+
             };
 
         }
@@ -113,11 +113,11 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
     ngOnDestroy(): void {
     }
 
-    
+
     ngAfterViewInit(): void {
-        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement,this.personaLocation)
+        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement, this.personaLocation)
         );
-        
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -148,18 +148,18 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
             comentarios: [this.persona.comentarios],
             dieta: [this.persona.dieta],
             idPersona: [this.persona.idPersona],
-            fechaNacimiento:[this.persona.fechaNacimiento] ,
-    	    descripcion:[this.persona.descripcion],
-    	    empresa:[this.persona.empresa],
-		    plan:[this.persona.plan],
-    	    grupoSanguineo:[this.persona.grupoSanguineo],
-		    emfermedades:[this.persona.emfermedades],
-		    medicaciones:[this.persona.medicaciones],
-    	    nombreContacto:[this.persona.nombreContacto],
-            apellidoContacto:[this.persona.apellidoContacto],
-            telefonoContacto:[this.persona.telefonoContacto],
-            relacion:[this.persona.relacion]
-            
+            fechaNacimiento: [this.persona.fechaNacimiento],
+            descripcion: [this.persona.descripcion],
+            empresa: [this.persona.empresa],
+            plan: [this.persona.plan],
+            grupoSanguineo: [this.persona.grupoSanguineo],
+            emfermedades: [this.persona.emfermedades],
+            medicaciones: [this.persona.medicaciones],
+            nombreContacto: [this.persona.nombreContacto],
+            apellidoContacto: [this.persona.apellidoContacto],
+            telefonoContacto: [this.persona.telefonoContacto],
+            relacion: [this.persona.relacion]
+
 
         });
     }
