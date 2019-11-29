@@ -50,12 +50,13 @@ import { PersonasModule } from './main/page/personas/personas.module';
 import { PersonaModule } from './main/page/persona/persona.module';
 import {VoluntarioModule} from './main/page/outlayout/voluntario/voluntario.module';
 import { AgmCoreModule } from '@agm/core';
+import {DashboardModule} from './main/page/dashboard/dashboard.module';
 
 
 const appRoutes: Routes = [
     {
         path      : '**',
-        redirectTo: 'users'
+        redirectTo: 'dashboard'
     }
 ];
 
@@ -119,7 +120,8 @@ const appRoutes: Routes = [
         AddjornadaModule,
         EquiposJornadaModule,
         EmailModule,
-        VoluntarioModule
+        VoluntarioModule,
+        DashboardModule
         
 
     ],

@@ -1,0 +1,93 @@
+<div id="dashboard" class="page-layout simple right-sidebar" fxLayout="row">
+
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+
+        <!-- HEADER -->
+        <div class="header accent p-24 pb-0" fxLayout="column" fxLayoutAlign="space-between">
+
+            <div fxLayout="row" fxLayoutAlign="space-between start">
+
+                <span class="mat-display-1 my-0 my-sm-24 welcome-message"
+                      [@animate]="{value:'*',params:{x:'50px'}}">¡ Bienvenido al portal de ISF !
+                </span>
+
+                <button mat-icon-button class="sidebar-toggle mr-8" fxHide.gt-md
+                        (click)="toggleSidebar('project-dashboard-right-sidebar-1')">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+
+            <div fxLayout="row">
+
+                <div class="selected-project">{{selectedProject.nombre}}</div>
+
+                <button mat-icon-button class="project-selector" [matMenuTriggerFor]="projectsMenu"
+                        aria-label="Select project">
+                    <mat-icon>more_horiz</mat-icon>
+                </button>
+
+                <mat-menu #projectsMenu="matMenu">
+                    <button mat-menu-item *ngFor="let project of projects" (click)="changeEquipo(project)">
+                        <span>{{project.nombre}}</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
+                 [@animateStagger]="{value:'50'}">
+
+                <!-- WIDGET 5 -->
+                <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" fxLayout="row" fxFlex="100"
+                             class="widget widget5">
+
+                    <!-- Front -->
+                    <div class="fuse-widget-front">
+
+                        <div class="px-16 border-bottom" fxLayout="row wrap"
+                             fxLayoutAlign="space-between center">
+
+                            <div fxFlex class="py-16 h3">{{widgets.widget5.title}}</div>
+
+                        </div>
+
+                        <div fxLayout="row wrap" fxLayoutAlign="start start">
+
+                            <div class="h-420 my-16" fxLayout="row" fxFlex="100">
+                                <ngx-charts-bar-vertical-stacked
+                                    *fuseIfOnDom
+                                    [scheme]="widget5.scheme"
+                                    [results]="this.widgets.widget5.mainChart"
+                                    [gradient]="widget5.gradient"
+                                    [xAxis]="widget5.xAxis"
+                                    [yAxis]="widget5.yAxis"
+                                    [legend]="widget5.legend"
+                                    [showXAxisLabel]="widget5.showXAxisLabel"
+                                    [showYAxisLabel]="widget5.showYAxisLabel"
+                                    [xAxisLabel]="widget5.xAxisLabel"
+                                    [yAxisLabel]="widget5.yAxisLabel"
+                                    (select)="widget5.onSelect($event)">
+                                </ngx-charts-bar-vertical-stacked>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Front -->
+
+                </fuse-widget>
+                <!-- / WIDGET 5 -->
+
+            </div>
+            <!-- / WIDGET GROUP -->
+
+
+        </div>
+        <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+</div>
