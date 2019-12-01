@@ -41,6 +41,7 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
     public displayedColumnsJornada = ['fecha', 'accion'];
     @ViewChildren('search') public searchElement: QueryList<ElementRef>;
+    @ViewChild('tabGroup') tabGroup;
 
     constructor(
         private _isfService: ISFService,
@@ -65,6 +66,7 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
      */
     async ngOnInit(): Promise<void> {
         if (this._route.snapshot.paramMap.get('equipo') && this._route.snapshot.paramMap.get('equipo') !== 'new') {
+            this.pageType = 'edit';
             const idAct = Number(this._route.snapshot.paramMap.get('equipo'));
             this.equipo = await this._isfService.getEquipoById(idAct);
             this.dataSource.data = await this._isfService.getCoordinadoresAct(idAct);
@@ -72,15 +74,14 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
             this.dataPersonas.data = await this._isfService.getPersonasAct(idAct);
             this.personas_act = await this._isfService.getPersonas();
             this.dataJornadas.data = await this._isfService.getJornadasAct(idAct);
-            this.pageType = 'edit';
         } else {
             this.pageType = 'new';
             this.equipo = {
+                idEquipo: null,
                 nombre: '',
                 descripcion: '',
                 estado: '',
-                ciudad: '',
-                provincia: '',
+                direccion: '',
                 categoria: '',
                 inicio: '',
                 fin: ''
@@ -99,9 +100,11 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement, this.equipoLocation)
-        );
-
+        if (this.pageType === 'edit') {
+            this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement, this.equipoLocation));
+        } else {
+            this._autocompleteService.autocompleteAdress(document.getElementsByName('direccion')[0], this.equipoLocation);
+        }
     }
 
 
@@ -119,8 +122,7 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
             nombre: [this.equipo.nombre],
             descripcion: [this.equipo.descripcion],
             estado: [this.equipo.estado],
-            ciudad: [this.equipo.ciudad],
-            provincia: [this.equipo.provincia],
+            direccion: [this.equipo.direccion],
             categoria: [this.equipo.categoria],
             inicio: [this.equipo.inicio],
             fin: [this.equipo.fin],
@@ -135,19 +137,33 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
      */
     async saveEquipo(): Promise<void> {
         this._fuseProgressBarService.show();
+
         const data = this.equipoForm.getRawValue();
+
         data.handle = FuseUtils.handleize(data.nombre);
-        data.provincia = this.equipoLocation.lat + '&' + this.equipoLocation.lng;
 
-        await this._isfService.saveEquipo(data, this.dataSource.data);
+        const infoDir = this.searchElement.first.nativeElement.value.split(',');
+        if (infoDir.length > 1 && this.equipoLocation.lat) {
+            data.coordenadas = this.equipoLocation.lat + '&' + this.equipoLocation.lng;
+            data.direccion = this.searchElement.first.nativeElement.value;
+            data.provincia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
+            data.ciudad = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
 
-        this._matSnackBar.open('Equipo grabada', 'OK', {
-            verticalPosition: 'top',
-            duration: 2000
-        });
+            await this._isfService.saveEquipo(data, this.dataSource.data);
 
-        this._fuseProgressBarService.hide();
-        this._router.navigate(['equipos']);
+            this._matSnackBar.open('Equipo grabada', 'OK', {
+                verticalPosition: 'top',
+                duration: 2000
+            });
+
+            this._fuseProgressBarService.hide();
+            this._router.navigate(['equipos']);
+        } else {
+            this._matSnackBar.open('Debe ingresar una dirección valida', 'Aceptar', {
+                verticalPosition: 'top',
+                duration: 2000
+            });
+        }
     }
 
     /**
@@ -158,17 +174,29 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
         try {
             const data = this.equipoForm.getRawValue();
             data.handle = FuseUtils.handleize(data.nombre);
+            const infoDir = this.searchElement.first.nativeElement.value.split(',');
+            if (infoDir.length > 1 && this.equipoLocation.lat) {
+                data.coordenadas = this.equipoLocation.lat + '&' + this.equipoLocation.lng;
+                data.direccion = this.searchElement.first.nativeElement.value;
+                data.provincia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
+                data.ciudad = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
 
-            await this._isfService.addEquipo(data, this.dataSource.data);
+                await this._isfService.addEquipo(data, this.dataSource.data);
 
-            // Show the success message
-            this._matSnackBar.open('Equipo grabada', 'OK', {
-                verticalPosition: 'top',
-                duration: 2000
-            });
+                // Show the success message
+                this._matSnackBar.open('Equipo grabada', 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
 
-            // Change the location with new one
-            this._router.navigate(['equipos']);
+                // Change the location with new one
+                this._router.navigate(['equipos']);
+            } else {
+                this._matSnackBar.open('Debe ingresar una dirección valida', 'Aceptar', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
+            }
         } catch (e) {
             if (e.error) {
                 this._matSnackBar.open(e.error, 'Aceptar', {

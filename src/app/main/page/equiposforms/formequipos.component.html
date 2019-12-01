@@ -45,7 +45,7 @@
                 <button mat-raised-button
                         class="save-product-button"
                         [disabled]="equipoForm?.invalid || equipoForm?.pristine"
-                        *ngIf="pageType ==='edit'" (click)="saveEquipo()">
+                        *ngIf="pageType ==='edit' && tabGroup?.selectedIndex == 0" (click)="saveEquipo()">
                     <span>GRABAR</span>
                 </button>
 
@@ -66,7 +66,7 @@
 
                 <form name="equipoForm" [formGroup]="equipoForm" class="product w-100-p" fxLayout="column" fxFlex>
                     <input name="idEquipo" formControlName="idEquipo" type="hidden">
-                    <mat-tab-group>
+                    <mat-tab-group #tabGroup>
                         <mat-tab label="Equipo">
                             <div class="tab-content p-24">
 
@@ -101,21 +101,12 @@
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Direccion</mat-label>
                                         <input matInput placeholder="Direccion"
-                                               name="ciudad"
-                                               formControlName="ciudad"
+                                               name="direccion"
+                                               formControlName="direccion"
                                                #search
                                                required>
                                     </mat-form-field>
                                 </div>
-                                <!-- <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Provincia</mat-label>
-                                        <input matInput placeholder="provincia"
-                                               name="provincia"
-                                               formControlName="provincia"
-                                               required>
-                                    </mat-form-field>
-                                </div> -->
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Categoria</mat-label>
@@ -144,7 +135,7 @@
                                 </div>
                             </div>
                         </mat-tab>
-                        <mat-tab label="Coordinadores">
+                        <mat-tab label="Coordinadores" [disabled]="equipo.idEquipo === null">
                             <div class="tab-content p-24">
                                 <button mat-fab class="add-event-button mat-accent" (click)="addCoordinador()"
                                         aria-label="Agregar Coordinador"
@@ -180,7 +171,7 @@
                                 </mat-table>
                             </div>
                         </mat-tab>
-                        <mat-tab label="Voluntarios">
+                        <mat-tab label="Voluntarios" [disabled]="equipo.idEquipo === null">
                             <div class="tab-content p-24">
                                 <button mat-fab class="add-event-button mat-accent" (click)="addVoluntario()"
                                         aria-label="Agregar Voluntario"
@@ -216,7 +207,7 @@
                                 </mat-table>
                             </div>
                         </mat-tab>
-                        <mat-tab label="Jornadas">
+                        <mat-tab label="Jornadas" [disabled]="equipo.idEquipo === null">
                             <div class="tab-content p-24">
                                 <button mat-fab class="add-event-button mat-accent" (click)="addJornada()"
                                         aria-label="Agregar Jornada"
