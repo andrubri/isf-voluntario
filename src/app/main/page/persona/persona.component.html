@@ -58,6 +58,8 @@
 
                 <form name="personaForm" [formGroup]="personaForm" class="product w-100-p" fxLayout="column" fxFlex>
                     <input name="idPersona" formControlName="idPersona" type="hidden">
+                    <mat-tab-group>
+                        <mat-tab label="Datos Personales">
                             <div class="tab-content p-24">
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
@@ -80,10 +82,11 @@
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Tipo Documento</mat-label>
-                                        <input matInput placeholder="Tipo Documento"
-                                               name="tipoDocumento"
-                                               formControlName="tipoDocumento"
-                                               required>
+                                        <mat-select formControlName="tipoDocumento" required>
+                                            <mat-option *ngFor="let tipoDoc of tiposDoc" [value]="tipoDoc">
+                                                {{tipoDoc}}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div>
@@ -97,29 +100,63 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Estado</mat-label>
-                                        <input matInput placeholder="Estado"
-                                               name="estado"
-                                               formControlName="estado"
+                                        <mat-label>Fecha de Nacimiento</mat-label>
+                                        <input matInput [matDatepicker]="fechaNacimiento" name="fechaNacimiento"
+                                               formControlName="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                                        <mat-datepicker-toggle matSuffix
+                                                               [for]="fechaNacimiento"></mat-datepicker-toggle>
+                                        <mat-datepicker #fechaNacimiento></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Nacionalidad</mat-label>
+                                        <input matInput placeholder="Nacionalidad"
+                                               name="paisOrigen"
+                                               formControlName="paisOrigen"
                                                required>
                                     </mat-form-field>
                                 </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>¿Cómo te enteraste de ISF Argentina? </mat-label>
+                                        <mat-select formControlName="idOrigenContacto" required>
+                                            <mat-option *ngFor="let oContacto of origenContacto" [value]="oContacto.idOrigenContacto">
+                                                {{oContacto.descripcion}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Comentarios</mat-label>
+                                        <input matInput placeholder="Comentarios"
+                                               name="comentarios"
+                                               formControlName="comentarios"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Estado</mat-label>
+                                        <mat-select formControlName="estado" required>
+                                            <mat-option *ngFor="let estado of estados" [value]="estado">
+                                                {{estado}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Datos de Contacto">
+                            <div class="tab-content p-24">
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Direccion</mat-label>
                                         <input matInput placeholder="Direccion"
-                                               name="ciudadResidencia"
-                                               formControlName="ciudadResidencia" 
+                                               name="direccionResidencia"
+                                               formControlName="direccionResidencia"
                                                #search
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Pais</mat-label>
-                                        <input matInput placeholder="Pais"
-                                               name="paisOrigen"
-                                               formControlName="paisOrigen"
                                                required>
                                     </mat-form-field>
                                 </div>
@@ -143,6 +180,10 @@
                                                required>
                                     </mat-form-field>
                                 </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Ocupación">
+                            <div class="tab-content p-24">
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Nivel Estudios</mat-label>
@@ -179,15 +220,10 @@
                                                required>
                                     </mat-form-field>
                                 </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Comentarios</mat-label>
-                                        <input matInput placeholder="Comentarios"
-                                               name="comentarios"
-                                               formControlName="comentarios"
-                                               required>
-                                    </mat-form-field>
-                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Datos del Seguro">
+                            <div class="tab-content p-24">
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Dieta</mat-label>
@@ -199,37 +235,12 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <input matInput [matDatepicker]="fechaNacimiento" name="fechaNacimiento"
-                                               formControlName="fechaNacimiento" placeholder="Fecha de Nacimiento">
-                                        <mat-datepicker-toggle matSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
-                                        <mat-datepicker #fechaNacimiento></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Origen Contacto</mat-label>
-                                        <input matInput placeholder="Origen Contacto"
-                                               name="descripcion"
-                                               formControlName="descripcion"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Obra social</mat-label>
-                                        <input matInput placeholder="Obra Social"
-                                               name="empresa"
-                                               formControlName="empresa"
-                                               required>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Plan</mat-label>
-                                        <input matInput placeholder="Plan"
-                                               name="plan"
-                                               formControlName="plan"
-                                               required>
+                                        <mat-label>Obra Social</mat-label>
+                                        <mat-select formControlName="idObraSocial" required>
+                                            <mat-option *ngFor="let oSocial of obrasSociales" [value]="oSocial.idObraSocial">
+                                                {{oSocial.empresa}} - {{oSocial.plan}}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div>
@@ -259,10 +270,14 @@
                                                required>
                                     </mat-form-field>
                                 </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Datos de Contacto Emergencia">
+                            <div class="tab-content p-24">
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Contacto Emergencia - Nombre</mat-label>
-                                        <input matInput placeholder="Contacto Emergencia - Nombre"
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="Nombre"
                                                name="nombreContacto"
                                                formControlName="nombreContacto"
                                                required>
@@ -270,8 +285,8 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Contacto Emergencia - Apellido</mat-label>
-                                        <input matInput placeholder="Contacto Emergencia - Apellido"
+                                        <mat-label>Apellido</mat-label>
+                                        <input matInput placeholder="Apellido"
                                                name="apellidoContacto"
                                                formControlName="apellidoContacto"
                                                required>
@@ -279,8 +294,8 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Contacto Emergencia - Telefono</mat-label>
-                                        <input matInput placeholder="Contacto Emergencia - Telefono"
+                                        <mat-label>Telefono</mat-label>
+                                        <input matInput placeholder="Telefono"
                                                name="telefonoContacto"
                                                formControlName="telefonoContacto"
                                                required>
@@ -288,14 +303,16 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Contacto Emergencia - Relacion</mat-label>
-                                        <input matInput placeholder="Contacto Emergencia - Relacion"
+                                        <mat-label>Relacion</mat-label>
+                                        <input matInput placeholder="Relacion"
                                                name="relacion"
                                                formControlName="relacion"
                                                required>
                                     </mat-form-field>
                                 </div>
                             </div>
+                        </mat-tab>
+                    </mat-tab-group>
 
                 </form>
 

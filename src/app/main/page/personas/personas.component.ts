@@ -7,6 +7,7 @@ import { FuseProgressBarService } from '../../../../@fuse/components/progress-ba
 import { ISFService } from '../../../services/isf.service';
 import { fromEvent } from 'rxjs';
 import { AccionConfirmarComponent } from '../../modal/AccionConfirmar/accionconfirmar.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'personas',
@@ -17,7 +18,7 @@ import { AccionConfirmarComponent } from '../../modal/AccionConfirmar/accionconf
 })
 export class PersonasComponent implements OnInit {
     public dataSource: MatTableDataSource<any>;
-    public displayedColumns = ['nombre', 'apellido', 'estado', 'email', 'dieta', 'ocupacion', 'accion', 'user'];
+    public displayedColumns = ['nombre', 'apellido', 'estado', 'email', 'dieta', 'ocupacion', 'accion'];
     public perfiles: [];
 
     @ViewChild(MatPaginator)
@@ -38,6 +39,7 @@ export class PersonasComponent implements OnInit {
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _fuseProgressBarService: FuseProgressBarService,
         private _isfService: ISFService,
+        private _matSnackBar: MatSnackBar,
         private _dialog: MatDialog
     ) {
         this._fuseProgressBarService.show();
@@ -103,7 +105,11 @@ export class PersonasComponent implements OnInit {
                     await this._isfService.addUser(user);
 
                 } catch (error) {
-                    alert('La persona ya existe')
+                    this._matSnackBar.open('Ya existe un usuario con este email!', 'Aceptar', {
+                        verticalPosition: 'top',
+                        panelClass: 'errorSnackBar',
+                        duration: 2000
+                    });
                 }
                 this.ngOnInit();
             },

@@ -32,12 +32,10 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
     perfiles: any;
     persona: any;
     personaLocation: any = {};
-    /* public dataSource: MatTableDataSource<any> = new MatTableDataSource();
-    public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
-    public dataJornadas: MatTableDataSource<any> = new MatTableDataSource(); */
-    public displayedColumnsCoordinador = ['nombre', 'apellido'];
-    public displayedColumnsVoluntario = ['nombre', 'apellido'];
-    public displayedColumnsJornada = ['fecha', 'accion'];
+    origenContacto: any[] = [];
+    obrasSociales: any[] = [];
+    estados: string[] = ['Activo', 'Inactivo', 'Pendiente'];
+    tiposDoc: string[] = ['DNI', 'Pasaporte'];
     @ViewChildren('search') public searchElement: QueryList<ElementRef>;
 
 
@@ -53,7 +51,12 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
     ) {
         this.perfiles = [];
         this._fuseProgressBarService.show();
-
+        this._isfService.getOrigenContacto().then(items => {
+            this.origenContacto = items;
+        });
+        this._isfService.getObrasSociales().then(items => {
+            this.obrasSociales = items;
+        });
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -67,15 +70,17 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this._route.snapshot.paramMap.get('persona') && this._route.snapshot.paramMap.get('persona') !== 'new') {
             const idAct = Number(this._route.snapshot.paramMap.get('persona'));
             this.persona = await this._isfService.getPersonaById(idAct);
+            console.log(this.persona);
             this.pageType = 'edit';
         } else {
             this.pageType = 'new';
             this.persona = {
                 nombre: '',
                 apellido: '',
-                tipoDocumento: ' ',
-                idDocumento: ' ',
+                tipoDocumento: '',
+                idDocumento: '',
                 estado: '',
+                direccionResidencia: '',
                 ciudadResidencia: '',
                 provinciaResidencia: '',
                 paisOrigen: '',
@@ -88,17 +93,19 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
                 comentarios: '',
                 dieta: '',
                 fechaNacimiento: '',
-                descripcion: '',
-                empresa: '',
-                plan: '',
-                grupoSanguineo: '',
-                emfermedades: '',
-                medicaciones: '',
-                nombreContacto: '',
-                apellidoContacto: '',
-                telefonoContacto: '',
-                relacion: ' '
-
+                idOrigenContacto: '',
+                DatosSeguro: {
+                    idObraSocial: '',
+                    grupoSanguineo: '',
+                    emfermedades: '',
+                    medicaciones: ''
+                },
+                ContactoEmergencium: {
+                    nombre: '',
+                    apellido: '',
+                    telefono: '',
+                    relacion: ''
+                }
             };
 
         }
@@ -136,6 +143,7 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
             tipoDocumento: [this.persona.tipoDocumento],
             idDocumento: [this.persona.idDocumento],
             estado: [this.persona.estado],
+            direccionResidencia: [this.persona.direccionResidencia],
             ciudadResidencia: [this.persona.ciudadResidencia],
             provinciaResidencia: [this.persona.provinciaResidencia],
             paisOrigen: [this.persona.paisOrigen],
@@ -149,16 +157,15 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
             dieta: [this.persona.dieta],
             idPersona: [this.persona.idPersona],
             fechaNacimiento: [this.persona.fechaNacimiento],
-            descripcion: [this.persona.descripcion],
-            empresa: [this.persona.empresa],
-            plan: [this.persona.plan],
-            grupoSanguineo: [this.persona.grupoSanguineo],
-            emfermedades: [this.persona.emfermedades],
-            medicaciones: [this.persona.medicaciones],
-            nombreContacto: [this.persona.nombreContacto],
-            apellidoContacto: [this.persona.apellidoContacto],
-            telefonoContacto: [this.persona.telefonoContacto],
-            relacion: [this.persona.relacion]
+            idOrigenContacto: [this.persona.idOrigenContacto],
+            idObraSocial: [this.persona.DatosSeguro.idObraSocial],
+            grupoSanguineo: [this.persona.DatosSeguro.grupoSanguineo],
+            emfermedades: [this.persona.DatosSeguro.emfermedades],
+            medicaciones: [this.persona.DatosSeguro.medicaciones],
+            nombreContacto: [this.persona.ContactoEmergencium.nombre],
+            apellidoContacto: [this.persona.ContactoEmergencium.apellido],
+            telefonoContacto: [this.persona.ContactoEmergencium.telefono],
+            relacion: [this.persona.ContactoEmergencium.relacion]
 
 
         });
@@ -169,19 +176,46 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
      */
     async savePersona(): Promise<void> {
         this._fuseProgressBarService.show();
-        const data = this.personaForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.nombre);
-        data.provinciaResidencia = this.personaLocation.lat + '&' + this.personaLocation.lng;
+        try {
+            const data = this.personaForm.getRawValue();
+            data.handle = FuseUtils.handleize(data.nombre);
+            const infoDir = this.searchElement.first.nativeElement.value.split(',');
+            if (infoDir.length > 1 && this.personaLocation.lat) {
+                data.coordenadasResidencia = this.personaLocation.lat + '&' + this.personaLocation.lng;
+                data.direccionResidencia = this.searchElement.first.nativeElement.value;
+                data.provinciaResidencia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
+                data.ciudadResidencia = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
+                data.paisResidencia = (infoDir.length >= 4) ? infoDir[3].trim() : infoDir[2].trim();
 
-        await this._isfService.savePersona(data);
+                await this._isfService.savePersona(data);
 
-        this._matSnackBar.open('Persona grabada', 'OK', {
-            verticalPosition: 'top',
-            duration: 2000
-        });
+                this._matSnackBar.open('Persona grabada', 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
 
+                this._router.navigate(['personas']);
+            } else {
+                this._matSnackBar.open('Debe ingresar una dirección valida', 'Aceptar', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
+            }
+        } catch (e) {
+            if (e.error) {
+                this._matSnackBar.open(e.error, 'Aceptar', {
+                    verticalPosition: 'top',
+                    panelClass: 'errorSnackBar',
+                    duration: 2000
+                });
+            } else {
+                this._matSnackBar.open('Ocurrio un error al grabar la persona!. Intente más tarde.', 'Aceptar', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
+            }
+        }
         this._fuseProgressBarService.hide();
-        this._router.navigate(['personas']);
     }
 
     /**
@@ -192,17 +226,30 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         try {
             const data = this.personaForm.getRawValue();
             data.handle = FuseUtils.handleize(data.nombre);
+            const infoDir = this.searchElement.first.nativeElement.value.split(',');
+            if (infoDir.length > 1 && this.personaLocation.lat) {
+                data.coordenadasResidencia = this.personaLocation.lat + '&' + this.personaLocation.lng;
+                data.direccionResidencia = this.searchElement.first.nativeElement.value;
+                data.provinciaResidencia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
+                data.ciudadResidencia = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
+                data.paisResidencia = (infoDir.length >= 4) ? infoDir[3].trim() : infoDir[2].trim();
 
-            await this._isfService.addPersona(data);
+                await this._isfService.addPersona(data);
 
-            // Show the success message
-            this._matSnackBar.open('Persona grabada', 'OK', {
-                verticalPosition: 'top',
-                duration: 2000
-            });
+                // Show the success message
+                this._matSnackBar.open('Persona grabada', 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
 
-            // Change the location with new one
-            this._router.navigate(['personas']);
+                // Change the location with new one
+                this._router.navigate(['personas']);
+            } else {
+                this._matSnackBar.open('Debe ingresar una dirección valida', 'Aceptar', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                });
+            }
         } catch (e) {
             if (e.error) {
                 this._matSnackBar.open(e.error, 'Aceptar', {

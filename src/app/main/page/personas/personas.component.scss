@@ -76,34 +76,8 @@ personas {
             align-items: center;
         }
 
-        .mat-column-id {
-            flex: 0 1 84px;
-        }
-
-        .mat-column-image {
-            flex: 0 1 84px;
-
-            .product-image {
-                width: 52px;
-                height: 52px;
-                border: 1px solid rgba(0, 0, 0, .12);
-            }
-        }
-
-        .mat-column-category {
-            flex: 0 1 240px;
-        }
-
-        .mat-column-price {
-            flex: 0 1 160px;
-        }
-
-        .mat-column-perfil {
-            flex: 0 1 160px;
-        }
-
         .mat-column-accion {
-            flex: 0 1 80px;
+            flex: 0 1 150px;
             text-align: center;
         }
 

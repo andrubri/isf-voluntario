@@ -223,4 +223,14 @@ export class ISFService {
         const url =  `${this._urlBE}/equipo/estadistica`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
+
+    public async getOrigenContacto(): Promise<any>{
+        const url =  `${this._urlBE}/personas/origencontacto`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async getObrasSociales(): Promise<any>{
+        const url =  `${this._urlBE}/personas/obrasocial`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
 }

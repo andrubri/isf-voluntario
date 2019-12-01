@@ -10,6 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { AuthGuard } from '../../../services/auth-guard.service';
 import { PersonaComponent } from './persona.component';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 
 const routes = [
@@ -40,6 +41,9 @@ const routes = [
 
         FuseSharedModule,
 
+    ],
+    providers: [
+        {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
     ]
 })
 export class PersonaModule {

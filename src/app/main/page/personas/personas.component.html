@@ -20,7 +20,7 @@
                     group
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    personas
+                    Personas
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -76,21 +76,21 @@
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>email</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
                               [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.email}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="dieta">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>dieta</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Dieta</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
                               [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.dieta }}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="ocupacion">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ocupacion</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ocupacion</mat-header-cell>
                     <mat-cell *matCellDef="let persona"
                               [routerLink]="'/persona/'+ persona.idPersona">
                         <p class="text-truncate">{{persona.ocupacion}}</p>
@@ -102,17 +102,11 @@
                         <button mat-button (click)="remove(persona.idPersona)" [matTooltip]="'Eliminar persona'">
                             <mat-icon>delete</mat-icon>
                         </button>
-                    </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="user" stickyEnd>
-                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-                    <mat-cell *matCellDef="let persona">
                         <button mat-button (click)="createUser(persona)" [matTooltip]="'Crear Usuario'">
                             <mat-icon>group_add</mat-icon>
                         </button>
                     </mat-cell>
                 </ng-container>
-
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
                 <mat-row *matRowDef="let persona; columns: displayedColumns;"
                          class="product" matRipple>
