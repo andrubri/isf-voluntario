@@ -37,6 +37,11 @@ export class ISFService {
         return this._me;
     }
 
+    public async getPerfiles(): Promise<any> {
+        const url = `${this._urlBE}/user/perfiles`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
     public async getUserByToken(token: string): Promise<any> {
         const url = `${this._urlBE}/user/${token}`;
         return await this._http.get(url, this._httpOptions).toPromise();

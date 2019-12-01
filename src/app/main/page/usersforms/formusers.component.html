@@ -13,35 +13,38 @@
             <!-- APP TITLE -->
             <div fxLayout="row" fxLayoutAlign="start center">
 
-                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'./users'">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/users'">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
-                <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <div class="logo mb-24 mb-md-0"
+                     fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                         account_circle
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
-                        *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
-                        {{user.nombre}} {{user.apellido}}
+                          *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
+                        {{user.nombre}}
                     </span>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
-                        *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
+                          *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>
                         Nuevo Usuario
                     </span>
                 </div>
             </div>
             <!-- / APP TITLE -->
 
-            <!--  <button mat-raised-button
+            <button mat-raised-button
                     class="save-product-button"
                     [disabled]="userForm?.invalid"
                     *ngIf="pageType ==='new'" (click)="addUser()">
                 <span>AGREGAR</span>
-            </button> -->
+            </button>
 
-            <button mat-raised-button class="save-product-button" [disabled]="userForm?.invalid || userForm?.pristine"
-                *ngIf="pageType ==='edit'" (click)="saveUser()">
+            <button mat-raised-button
+                    class="save-product-button"
+                    [disabled]="userForm?.invalid || userForm?.pristine"
+                    *ngIf="pageType ==='edit'" (click)="saveUser()">
                 <span>GRABAR</span>
             </button>
         </div>
@@ -56,15 +59,58 @@
                 <form name="userForm" [formGroup]="userForm" class="product w-100-p" fxLayout="column" fxFlex>
                     <input name="token" formControlName="token" type="hidden">
                     <div class="tab-content p-24">
-
-                        <div>
-                            Email: {{user.email}}
+                        <div style="" *ngIf="user.idPersona !== null">
+                            <div class="w-100-p" style="margin-bottom: 32px;" fxFlex>
+                                <div class="mat-form-field-wrapper message-box warning">Este usuario depende de una Persona</div>
+                            </div>
                         </div>
                         <div>
                             <mat-form-field appearance="standard" class="w-100-p">
-                                <mat-label>Modificar clave (6-8 caracteres)</mat-label>
-                                <input matInput placeholder="Clave" name="clave" minlength="6" maxlength="8"
-                                    formControlName="clave" type="password" required >
+                                <mat-label>Apellido</mat-label>
+                                <input matInput placeholder="Apellido"
+                                       name="apellido"
+                                       formControlName="apellido"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="Nombre"
+                                       name="nombre"
+                                       formControlName="nombre"
+                                       required>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="user.idPersona !== null">
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Perfil</mat-label>
+                                <mat-select formControlName="idPerfil" >
+                                    <mat-option *ngFor="let perfil of perfiles" [value]="perfil.idPerfil">
+                                        {{perfil.descripcion}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="Email"
+                                       name="email"
+                                       formControlName="email"
+                                       required email>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field appearance="standard" class="w-100-p">
+                                <mat-label>Clave</mat-label>
+                                <input matInput placeholder="Clave"
+                                       name="clave"
+                                       minlength="6"
+                                       maxlength="8"
+                                       formControlName="clave"
+                                       type="password"
+                                       required>
                             </mat-form-field>
                         </div>
                     </div>

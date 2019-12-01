@@ -54,11 +54,14 @@ export class FormUsersComponent implements OnInit, OnDestroy {
                 email: '',
                 nombre: '',
                 apellido: '',
+                idPersona: null,
+                idPerfil: 0,
                 clave: '',
                 token: ''
             };
         }
 
+        this.perfiles = await this._isfService.getPerfiles();
         this.userForm = this.createUserForm();
         this._fuseProgressBarService.hide();
     }
@@ -79,11 +82,12 @@ export class FormUsersComponent implements OnInit, OnDestroy {
      * @returns {FormGroup}
      */
     createUserForm(): FormGroup {
-        console.log(this.user.createdAt);
+        console.log(this.user);
         return this._formBuilder.group({
-            email: [this.user.email, []],
-            nombre: [this.user.nombre],
-            apellido: [this.user.apellido],
+            email: [{value: this.user.email, disabled: (this.user.idPersona !== null)}],
+            nombre: [{value: this.user.nombre, disabled: (this.user.idPersona !== null)}],
+            apellido: [{value: this.user.apellido, disabled: (this.user.idPersona !== null)}],
+            idPerfil: [this.user.idPerfil],
             clave: [this.user.clave],
             token: [this.user.token]
         });
@@ -96,7 +100,7 @@ export class FormUsersComponent implements OnInit, OnDestroy {
         this._fuseProgressBarService.show();
         const data = this.userForm.getRawValue();
         data.handle = FuseUtils.handleize(data.nombre);
-
+        console.log(data);
         await this._isfService.saveUser(data);
 
         this._matSnackBar.open('Usuario grabado', 'OK', {
