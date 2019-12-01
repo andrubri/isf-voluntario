@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import {AuthService} from '../../../services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
     selector     : 'forgot-password',
@@ -23,7 +26,10 @@ export class ForgotPasswordComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _snackBar: MatSnackBar,
+        private _auth: AuthService,
+        private _router: Router
     )
     {
         // Configure the layout
@@ -57,5 +63,11 @@ export class ForgotPasswordComponent implements OnInit
         this.forgotPasswordForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]]
         });
+    }
+
+    enviarMail(): void{
+        this._auth.mailRecupero(this.forgotPasswordForm.get('email').value);
+        this._router.navigate(['login']);
+        this._snackBar.open('SE ENVIO UN MAIL DE RECUPERO DE CLAVE', 'Cerrar', {duration: 4000, verticalPosition: 'top'});
     }
 }

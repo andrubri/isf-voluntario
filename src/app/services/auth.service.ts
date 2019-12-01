@@ -56,4 +56,8 @@ export class AuthService {
         this.router.navigate(['/login']);
 
     }
+
+    public async mailRecupero(mail: string): Promise<void>{
+        this.afAuth.auth.sendPasswordResetEmail(mail);
+    }
 }
