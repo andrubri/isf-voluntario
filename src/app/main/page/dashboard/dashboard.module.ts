@@ -7,7 +7,6 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 
 import { DashboardComponent } from 'app/main/page/dashboard/dashboard.component';
-import { DashboardService } from 'app/main/page/dashboard/dashboard.service';
 import {AgmCoreModule} from '@agm/core';
 import {ChartsModule} from 'ng2-charts';
 import {AuthGuard} from '../../../services/auth-guard.service';
@@ -42,9 +41,6 @@ const routes: Routes = [
 
         FuseSharedModule,
         FuseWidgetModule
-    ],
-    providers   : [
-        DashboardService
     ]
 })
 export class DashboardModule

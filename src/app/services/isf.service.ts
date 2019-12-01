@@ -215,5 +215,8 @@ export class ISFService {
         const url =  `${this._urlBE}/equipo/${idEquipo}/estadistica`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
-
+    public async getDashboardGeneral(): Promise<any>{
+        const url =  `${this._urlBE}/equipo/estadistica`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
 }

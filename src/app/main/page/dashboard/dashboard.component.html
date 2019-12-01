@@ -41,10 +41,13 @@
 
             <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                  [@animateStagger]="{value:'50'}">
-
+                <div *ngIf="widgets.widget5.mainChart.length == 0 &&  selectedProject.idEquipo != 0"
+                     style="font-size: 20pt; text-align: center" class="w-100-p">
+                    NO HAY DATOS PARA MOSTRAR
+                </div>
                 <!-- WIDGET 5 -->
                 <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" fxLayout="row" fxFlex="100"
-                             class="widget widget5">
+                             class="widget widget5" *ngIf="widgets.widget5.mainChart.length > 0">
 
                     <!-- Front -->
                     <div class="fuse-widget-front">
@@ -62,7 +65,7 @@
                                 <ngx-charts-bar-vertical-stacked
                                     *fuseIfOnDom
                                     [scheme]="widget5.scheme"
-                                    [results]="this.widgets.widget5.mainChart"
+                                    [results]="widgets.widget5.mainChart"
                                     [gradient]="widget5.gradient"
                                     [xAxis]="widget5.xAxis"
                                     [yAxis]="widget5.yAxis"
@@ -80,7 +83,29 @@
 
                 </fuse-widget>
                 <!-- / WIDGET 5 -->
+                <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" fxLayout="row" fxFlex="100"
+                             class="widget widget5" *ngIf="selectedProject.idEquipo == 0">
+                    <div class="fuse-card auto-width">
 
+                        <div class="position-relative p-24"
+                             fxLayout="row" fxLayoutAlign="space-between center">
+                            <div fxLayout="column" fxLayoutAlign="start start">
+                                <span class="h2">Asistencias por equipos</span>
+                            </div>
+                        </div>
+
+                        <div class="position-relative h-368 pb-16">
+                            <canvas baseChart
+                                    [datasets]="widgetTotal.datasets"
+                                    [labels]="widgetTotal.labels"
+                                    [colors]="widgetTotal.colors"
+                                    [options]="widgetTotal.options"
+                                    [chartType]="widgetTotal.chartType">
+                            </canvas>
+                        </div>
+
+                    </div>
+                </fuse-widget>
             </div>
             <!-- / WIDGET GROUP -->
 
