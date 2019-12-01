@@ -4,20 +4,25 @@
             <div style="text-align:right;margin-bottom: 34px;">
                 <mat-icon (click)="onCloseCancel()" style="cursor: pointer;color: #AEAEAE;">cancel</mat-icon>
             </div>
-            <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
-                <form class="w-100-p">
+            <form class="w-100-p">
+                <div fxLayout="column" class="tituloModal1" fxLayoutAlign="space-around center">
+
                     <mat-form-field class="w-100-p">
-                        <input type="text" [placeholder]="datos.label" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-label>{{datos.label}}</mat-label>
+                        <input type="text" [placeholder]="datos.label" aria-label="Assignee" matInput
+                               [formControl]="myControl" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                 {{option.nombre || option.Persona.nombre}} {{option.apellido || option.Persona.apellido}}
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-                </form>
-            </div>
+
+                </div>
+            </form>
             <div fxLayout="row" style="margin-top: 8%" fxLayoutAlign="space-around center">
-                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()" cdkFocusInitial>{{datos.txtBoton}}</button>
+                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()"
+                        cdkFocusInitial>{{datos.txtBoton}}</button>
             </div>
         </div>
     </mat-card-content>

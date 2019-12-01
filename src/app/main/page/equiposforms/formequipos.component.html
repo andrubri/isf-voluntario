@@ -226,6 +226,14 @@
                                             <p class="text-truncate">{{jornada.fecha | date : 'dd/MM/yyyy'}}</p>
                                         </mat-cell>
                                     </ng-container>
+                                    <ng-container matColumnDef="descripcion">
+                                        <mat-header-cell *matHeaderCellDef>
+                                            Descripcion
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let jornada">
+                                            <p class="text-truncate">{{jornada.descripcion}}</p>
+                                        </mat-cell>
+                                    </ng-container>
                                     <ng-container matColumnDef="accion">
                                         <mat-header-cell *matHeaderCellDef>
                                         </mat-header-cell>
@@ -234,7 +242,8 @@
                                                     [matTooltip]="'Ver Jornada'">
                                                 <mat-icon>pageview</mat-icon>
                                             </button>
-                                            <button mat-button (click)="sendEmailConvocatoria($event)" *ngIf="jornada.fecha > now"
+                                            <button mat-button (click)="sendEmailConvocatoria($event)"
+                                                    *ngIf="jornada.fecha > now"
                                                     [matTooltip]="'Enviar mail convocatoria'">
                                                 <mat-icon>mail</mat-icon>
                                             </button>

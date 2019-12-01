@@ -14,6 +14,7 @@ import {startWith, map} from 'rxjs/operators';
 export class AddjornadaComponent implements OnInit {
     datos: any;
     myControl = new FormControl();
+    ctrDescripcion = new FormControl();
     options: any[] = [
         {name: 'Mary'},
         {name: 'Shelley'},
@@ -31,22 +32,7 @@ export class AddjornadaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.filteredOptions = this.myControl.valueChanges
-            .pipe(
-                startWith(''),
-                map(value => typeof value === 'string' ? value : value.nombre + ' ' + value.apellido),
-                map(name => name ? this._filter(name) : this.options.slice())
-            );
-    }
 
-    displayFn(user?: any): string | undefined {
-        return user ? user.nombre + ' ' + user.apellido : undefined;
-    }
-
-    private _filter(name: string): any[] {
-        const filterValue = name.toLowerCase();
-
-        return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
     }
 
     onCloseCancel() {
@@ -54,9 +40,11 @@ export class AddjornadaComponent implements OnInit {
     }
 
     ConfirmarAccion() {
-        const data = {fecha: this.myControl.value};
-        this.datos.callback(data);
-        this.dialogRef.close('Confirm');
+        if(this.myControl.status == 'VALID' && this.ctrDescripcion.status == 'VALID'){
+            const data = {fecha: this.myControl.value, descripcion: this.ctrDescripcion.value};
+            this.datos.callback(data);
+            this.dialogRef.close('Confirm');
+        }
     }
 
 

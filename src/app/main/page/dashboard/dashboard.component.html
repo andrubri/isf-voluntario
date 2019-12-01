@@ -41,7 +41,7 @@
 
             <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                  [@animateStagger]="{value:'50'}">
-                <div *ngIf="widgets.widget5.mainChart.length == 0 &&  selectedProject.idEquipo != 0"
+                <div *ngIf="widgets.widget5.mainChart.length == 0 && (selectedProject.idEquipo != 0 || projects.length == 1)"
                      style="font-size: 20pt; text-align: center" class="w-100-p">
                     NO HAY DATOS PARA MOSTRAR
                 </div>
@@ -84,7 +84,7 @@
                 </fuse-widget>
                 <!-- / WIDGET 5 -->
                 <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" fxLayout="row" fxFlex="100"
-                             class="widget widget5" *ngIf="selectedProject.idEquipo == 0">
+                             class="widget widget5" *ngIf="projects.length > 1 && selectedProject.idEquipo == 0">
                     <div class="fuse-card auto-width">
 
                         <div class="position-relative p-24"

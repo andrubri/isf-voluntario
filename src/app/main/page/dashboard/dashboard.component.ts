@@ -33,34 +33,8 @@ export class DashboardComponent implements OnInit {
     ) {
         this.widgetTotal = {
             'chartType': 'line',
-            'datasets': [
-
-                {
-                    'label': 'Pileta',
-                    'data': [
-                        410,
-                        380,
-                        320,
-                    ],
-                    'fill': 'start'
-                },
-                {
-                    'label': 'Salas',
-                    'data': [
-                        3000,
-                        3400,
-                        4100,
-                        3800
-                    ],
-                    'fill': 'start'
-                }
-            ],
-            'labels': [
-                '6/2018',
-                '7/2018',
-                '8/2018',
-                '9/2018'
-            ],
+            'datasets': [],
+            'labels': [],
             'options': {
                 'spanGaps': false,
                 'legend': {

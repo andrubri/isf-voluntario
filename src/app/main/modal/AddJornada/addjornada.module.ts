@@ -16,6 +16,7 @@ import {
 
 
 import { AddjornadaComponent} from './addjornada.component';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 const routes = [
     {
@@ -45,6 +46,9 @@ const routes = [
     ],
     exports     : [
       AddjornadaComponent
+    ],
+    providers: [
+        {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
     ]
 })
 

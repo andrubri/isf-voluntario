@@ -138,10 +138,9 @@ export class ISFService {
         return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
-    public async addEquipoJornada(idEquipo: number, fecha: Date): Promise<any> {
+    public async addEquipoJornada(idEquipo: number, data: any): Promise<any> {
         const url = `${this._urlBE}/equipo/${idEquipo}/jornada`;
-        const req = {fecha: fecha};
-        return await this._http.post(url, req, this._httpOptions).toPromise();
+        return await this._http.post(url, data, this._httpOptions).toPromise();
     }
 
     public async getEquipoById(idEquipo: number): Promise<any> {

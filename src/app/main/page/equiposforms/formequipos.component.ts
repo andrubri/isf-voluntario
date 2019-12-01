@@ -15,6 +15,7 @@ import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.co
 import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
 import {EmailComponent} from '../../modal/Email/email.component';
 import {AutocompleteService} from 'app/services/autocomplete-service';
+import {isObject} from 'util';
 
 @Component({
     selector: 'formequipos',
@@ -39,7 +40,7 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
     public dataJornadas: MatTableDataSource<any> = new MatTableDataSource();
     public displayedColumnsCoordinador = ['nombre', 'apellido'];
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
-    public displayedColumnsJornada = ['fecha', 'accion'];
+    public displayedColumnsJornada = ['fecha', 'descripcion', 'accion'];
     @ViewChildren('search') public searchElement: QueryList<ElementRef>;
     @ViewChild('tabGroup') tabGroup;
 
@@ -253,12 +254,13 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
                 const info = this.dataSource.data;
                 if (this.equipo.idEquipo) {
                     try {
-                        const newItem: any = await this._isfService.addEquipoCoordinador(this.equipo.idEquipo, item.idPersona);
+                        const newItem: any = {};
+                        await this._isfService.addEquipoCoordinador(this.equipo.idEquipo, item.idPersona);
                         newItem.nombre = item.nombre;
                         newItem.apellido = item.apellido;
                         info.push(newItem);
                     } catch (e) {
-                        if (e.error) {
+                        if (e.error && !isObject(e.error)) {
                             this._matSnackBar.open(e.error, 'Aceptar', {
                                 verticalPosition: 'top',
                                 panelClass: 'errorSnackBar',
@@ -272,8 +274,6 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
                             });
                         }
                     }
-                } else {
-                    info.push(item);
                 }
                 this.dataSource.data = info;
             },
@@ -336,12 +336,13 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
                 const info = this.dataPersonas.data;
                 if (this.equipo.idEquipo) {
                     try {
-                        const newItem: any = await this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
+                        const newItem: any = {};
+                        await this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
                         newItem.nombre = item.nombre;
                         newItem.apellido = item.apellido;
                         info.push(newItem);
                     } catch (e) {
-                        if (e.error) {
+                        if (e.error && !isObject(e.error)) {
                             this._matSnackBar.open(e.error, 'Aceptar', {
                                 verticalPosition: 'top',
                                 panelClass: 'errorSnackBar',
@@ -355,8 +356,6 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
                             });
                         }
                     }
-                } else {
-                    info.push(item);
                 }
                 this.dataPersonas.data = info;
             },
@@ -369,19 +368,36 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.openDialogAddJornada({
             etiqueta: 'AddJornada',
-            txtBoton: 'Seleccionar',
+            txtBoton: 'Agregar',
             callback: async (item) => {
                 const info = this.dataJornadas.data;
                 if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.addEquipoJornada(this.equipo.idEquipo, item.fecha);
-                    newItem.fecha = item.fecha;
-                    info.push(newItem);
-                } else {
-                    info.push(item);
+                    try {
+                        const newItem: any = {};
+                        await this._isfService.addEquipoJornada(this.equipo.idEquipo, item);
+                        newItem.fecha = item.fecha;
+                        newItem.descripcion = item.descripcion;
+                        info.push(newItem);
+                    } catch (e) {
+                        console.log(e.error);
+                        if (e.error && !isObject(e.error)) {
+                            this._matSnackBar.open(e.error, 'Aceptar', {
+                                verticalPosition: 'top',
+                                panelClass: 'errorSnackBar',
+                                duration: 2000
+                            });
+                        } else {
+                            this._matSnackBar.open('Ocurrio un error al grabar el coordinador!. Intente más tarde.', 'Aceptar', {
+                                verticalPosition: 'top',
+                                panelClass: 'errorSnackBar',
+                                duration: 2000
+                            });
+                        }
+                    }
                 }
                 this.dataJornadas.data = info;
             },
-            altoModal: '300px',
+            altoModal: '400px',
             anchoModal: '450px'
         });
     }

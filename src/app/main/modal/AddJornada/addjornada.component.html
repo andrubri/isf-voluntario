@@ -4,18 +4,27 @@
             <div style="text-align:right;margin-bottom: 34px;">
                 <mat-icon (click)="onCloseCancel()" style="cursor: pointer;color: #AEAEAE;">cancel</mat-icon>
             </div>
-            <div fxLayout="row" class="tituloModal1" fxLayoutAlign="space-around center">
-                <form class="w-100-p">
+            <form>
+                <div fxLayout="column" fxFlow="1 1 100%" class="tituloModal1" fxLayoutAlign="space-around center" class="w-100-p">
+
                     <mat-form-field appearance="standard" class="w-100-p">
+                        <mat-label>Fecha</mat-label>
                         <input matInput [matDatepicker]="fecha" name="fecha"
-                               [formControl]="myControl" placeholder="Fecha">
+                               [formControl]="myControl" placeholder="Fecha" required>
                         <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
                         <mat-datepicker #fecha></mat-datepicker>
                     </mat-form-field>
-                </form>
-            </div>
+                    <mat-form-field appearance="standard" class="w-100-p">
+                        <mat-label>Descripcion</mat-label>
+                        <input matInput name="descripcion"
+                               [formControl]="ctrDescripcion" placeholder="Descripcion" required>
+                    </mat-form-field>
+
+                </div>
+            </form>
             <div fxLayout="row" style="margin-top: 8%" fxLayoutAlign="space-around center">
-                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()" cdkFocusInitial>{{datos.txtBoton}}</button>
+                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()"
+                        cdkFocusInitial>{{datos.txtBoton}}</button>
             </div>
             <!-- <div fxLayout="row" fxLayoutAlign="space-around center">
                 <a (click)="onCloseCancel()" class="volver"> Volver </a>
