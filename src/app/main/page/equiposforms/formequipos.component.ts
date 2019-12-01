@@ -252,10 +252,26 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
             callback: async (item) => {
                 const info = this.dataSource.data;
                 if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.addEquipoCoordinador(this.equipo.idEquipo, item.idPersona);
-                    newItem.nombre = item.nombre;
-                    newItem.apellido = item.apellido;
-                    info.push(newItem);
+                    try {
+                        const newItem: any = await this._isfService.addEquipoCoordinador(this.equipo.idEquipo, item.idPersona);
+                        newItem.nombre = item.nombre;
+                        newItem.apellido = item.apellido;
+                        info.push(newItem);
+                    } catch (e) {
+                        if (e.error) {
+                            this._matSnackBar.open(e.error, 'Aceptar', {
+                                verticalPosition: 'top',
+                                panelClass: 'errorSnackBar',
+                                duration: 2000
+                            });
+                        } else {
+                            this._matSnackBar.open('Ocurrio un error al grabar el coordinador!. Intente más tarde.', 'Aceptar', {
+                                verticalPosition: 'top',
+                                panelClass: 'errorSnackBar',
+                                duration: 2000
+                            });
+                        }
+                    }
                 } else {
                     info.push(item);
                 }
@@ -319,10 +335,26 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
             callback: async (item) => {
                 const info = this.dataPersonas.data;
                 if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
-                    newItem.nombre = item.nombre;
-                    newItem.apellido = item.apellido;
-                    info.push(newItem);
+                    try {
+                        const newItem: any = await this._isfService.addEquipoVoluntario(this.equipo.idEquipo, item.idPersona);
+                        newItem.nombre = item.nombre;
+                        newItem.apellido = item.apellido;
+                        info.push(newItem);
+                    } catch (e) {
+                        if (e.error) {
+                            this._matSnackBar.open(e.error, 'Aceptar', {
+                                verticalPosition: 'top',
+                                panelClass: 'errorSnackBar',
+                                duration: 2000
+                            });
+                        } else {
+                            this._matSnackBar.open('Ocurrio un error al grabar el voluntario!. Intente más tarde.', 'Aceptar', {
+                                verticalPosition: 'top',
+                                panelClass: 'errorSnackBar',
+                                duration: 2000
+                            });
+                        }
+                    }
                 } else {
                     info.push(item);
                 }

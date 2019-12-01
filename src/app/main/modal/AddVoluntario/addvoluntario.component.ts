@@ -55,8 +55,12 @@ export class AddvoluntarioComponent implements OnInit {
     }
 
     ConfirmarAccion() {
-        this.datos.callback(this.myControl.value);
-        this.dialogRef.close('Confirm');
+        if (this.myControl.value.idPersona) {
+            this.datos.callback(this.myControl.value);
+            this.dialogRef.close('Confirm');
+        } else {
+            this.myControl.status = 'INVALID';
+        }
     }
 
 
