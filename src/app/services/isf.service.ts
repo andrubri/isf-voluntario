@@ -125,6 +125,12 @@ export class ISFService {
         return await this._http.post(url, req, this._httpOptions).toPromise();
     }
 
+    public async sendEmailToJornada(jornada: any, req: any): Promise<any> {
+        const url = `${this._urlBE}/email/jornada/${jornada.idJornadas}`;
+        return await this._http.post(url, req, this._httpOptions).toPromise();
+    }
+
+
     public async addEquipoCoordinador(idEquipo: number, idPersona: number): Promise<any> {
         const url = `${this._urlBE}/equipo/${idEquipo}/coordinador`;
         const req = {idPersona: idPersona};

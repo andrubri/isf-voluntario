@@ -308,7 +308,7 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
-    sendEmailConvocatoria(e: Event): void {
+    sendEmailConvocatoria(jornada: any, e: Event): void {
         e.stopPropagation();
         this.openEmailDialog({
             etiqueta: 'SendEmail',
@@ -316,14 +316,13 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
             label: 'Mail',
             tipo: 'convocatiria',
             callback: async (item) => {
-                const info = this.dataSource.data;
-                if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.sendEmailToEquipo(this.equipo, item);
-
-                } else {
-
+                if (jornada.idJornadas) {
+                    const newItem: any = this._isfService.sendEmailToJornada(jornada, item);
+                    this._matSnackBar.open('Se envio correctamente el email!', 'Aceptar', {
+                        verticalPosition: 'top',
+                        duration: 2000
+                    });
                 }
-                this.dataSource.data = info;
             },
             altoModal: '500px',
             anchoModal: '450px'
