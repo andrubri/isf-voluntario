@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ISFService} from '../../../services/isf.service';
 import {FuseProgressBarService} from '../../../../@fuse/components/progress-bar/progress-bar.service';
 import {AddvoluntarioComponent} from '../../modal/AddVoluntario/addvoluntario.component';
-import {isObject} from "util";
+import {isObject} from 'util';
 
 @Component({
     selector: 'formequipos',
@@ -22,7 +22,7 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
     perfiles: any;
     equipo: any;
     jornada: any;
-    personas_act: any[];
+    personas_act: any[] = [];
     public dataPersonas: MatTableDataSource<any> = new MatTableDataSource();
     public displayedColumnsPresente = ['nombre', 'apellido', 'presente'];
     public displayedColumnsVoluntario = ['nombre', 'apellido'];
@@ -57,7 +57,7 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
             this.jornada = await this._isfService.getJornadaById(idAct);
             this.equipo = await this._isfService.getEquipoById(this.jornada.idEquipo);
             this.dataPersonas.data = await this._isfService.getPersonasJornadaAct(idAct);
-            this.personas_act = await this._isfService.getPersonasAct(this.jornada.idEquipo);
+            this.personas_act = this.personas_act.concat(await this._isfService.getPersonasAct(this.jornada.idEquipo), await this._isfService.getCoordinadoresAct(this.jornada.idEquipo));
             this.pageType = 'edit';
         } else {
             this._router.navigate(['equipos']);
@@ -90,13 +90,8 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
             items: this.personas_act,
             callback: async (item) => {
                 try {
-                    const info = this.dataPersonas.data;
                     await this._isfService.addPersonaJornada(this.jornada.idJornadas, item.idPersona);
-                    const newItem: any = {};
-                    newItem.nombre = item.Persona.nombre;
-                    newItem.apellido = item.Persona.apellido;
-                    info.push(newItem);
-                    this.dataPersonas.data = info;
+                    this.dataPersonas.data = await this._isfService.getPersonasJornadaAct(this.jornada.idJornadas);
                 } catch (e) {
                     if (e.error && !isObject(e.error)) {
                         this._matSnackBar.open(e.error, 'Aceptar', {
@@ -122,7 +117,7 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
     async confAsistencia(idVoluntario: number, valor: any): Promise<void> {
         try {
             await this._isfService.AsistenciaJornada(this.jornada.idJornadas, idVoluntario, valor.checked);
-        }catch (e) {
+        } catch (e) {
             if (e.error && !isObject(e.error)) {
                 this._matSnackBar.open(e.error, 'Aceptar', {
                     verticalPosition: 'top',

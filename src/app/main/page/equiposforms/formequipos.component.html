@@ -24,7 +24,7 @@
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                           *ngIf="pageType === 'edit'" fxHide fxShow.gt-sm>
-                        {{equipo.nombre}}
+                        {{equipo?.nombre}}
                     </span>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}"
                           *ngIf="pageType === 'new'" fxHide fxShow.gt-sm>

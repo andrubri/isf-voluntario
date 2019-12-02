@@ -53,7 +53,7 @@
                                         Nombre
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let voluntario">
-                                        <p class="text-truncate">{{voluntario.nombre || voluntario.Persona.nombre}}</p>
+                                        <p class="text-truncate">{{voluntario.nombre}}</p>
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="apellido">
@@ -61,7 +61,7 @@
                                         Apellido
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let voluntario">
-                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}
+                                        <p class="text-truncate">{{voluntario.apellido}}
                                         </p>
                                     </mat-cell>
                                 </ng-container>
