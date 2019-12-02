@@ -102,7 +102,7 @@
                         <button mat-button (click)="remove(persona.idPersona)" [matTooltip]="'Eliminar persona'">
                             <mat-icon>delete</mat-icon>
                         </button>
-                        <button mat-button (click)="createUser(persona)" [matTooltip]="'Crear Usuario'">
+                        <button mat-button (click)="createUser(persona)" [matTooltip]="'Crear Usuario'" *ngIf="!persona.Usuario">
                             <mat-icon>group_add</mat-icon>
                         </button>
                     </mat-cell>

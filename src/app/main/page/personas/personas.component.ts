@@ -103,12 +103,15 @@ export class PersonasComponent implements OnInit {
                 this._fuseProgressBarService.show();
                 try {
                     await this._isfService.addUser(user);
-
+                    this._matSnackBar.open('Se creo el usaurio para el voluntario!', 'Aceptar', {
+                        verticalPosition: 'top',
+                        duration: 4000
+                    });
                 } catch (error) {
                     this._matSnackBar.open('Ya existe un usuario con este email!', 'Aceptar', {
                         verticalPosition: 'top',
                         panelClass: 'errorSnackBar',
-                        duration: 2000
+                        duration: 4000
                     });
                 }
                 this.ngOnInit();
