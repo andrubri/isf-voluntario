@@ -51,6 +51,7 @@ import { PersonaModule } from './main/page/persona/persona.module';
 import {VoluntarioModule} from './main/page/outlayout/voluntario/voluntario.module';
 import { AgmCoreModule } from '@agm/core';
 import {DashboardModule} from './main/page/dashboard/dashboard.module';
+import {ConfirmarModule} from './main/page/outlayout/confirmar/confirmar.module';
 
 
 const appRoutes: Routes = [
@@ -121,7 +122,8 @@ const appRoutes: Routes = [
         EquiposJornadaModule,
         EmailModule,
         VoluntarioModule,
-        DashboardModule
+        DashboardModule,
+        ConfirmarModule
         
 
     ],
