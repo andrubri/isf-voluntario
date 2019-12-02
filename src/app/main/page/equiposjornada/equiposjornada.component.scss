@@ -28,9 +28,10 @@
 
         .mat-tab-group,
         .mat-tab-body-wrapper,
-        .tab-content{
+        .tab-content {
             flex: 1 1 auto;
             max-width: 100%;
+            min-height: 100%;
         }
 
         .mat-tab-body-content {
@@ -63,15 +64,17 @@
         }
 
     }
+
     .add-event-button {
         position: relative;
         left: 95%;
         top: -10px;
         z-index: 100;
 
-        
+
     }
+
     agm-map {
-        height: 300px;
-      }
+        height: 100%;
+    }
 }

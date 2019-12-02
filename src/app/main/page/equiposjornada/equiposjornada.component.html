@@ -23,7 +23,7 @@
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" fxHide
                         fxShow.gt-sm>
-                        {{equipo.nombre}} - Jornada {{jornada.fecha | date : 'dd/MM/yyyy'}}
+                        {{equipo.nombre}} - Jornada {{jornada.fecha | date : 'dd/MM/yyyy'}} - {{jornada.descripcion}}
                     </span>
                 </div>
             </div>
@@ -119,15 +119,15 @@
                         <div class="tab-content p-24">
                             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
                                 <div *ngFor="let persona of dataPersonas.data">
-                                    <agm-marker [latitude]="persona.provinciaResidencia.split('&')[0]"
-                                        [longitude]="persona.provinciaResidencia.split('&')[1]">
-                                        <agm-info-window [isOpen]="true">
+                                    <agm-marker [latitude]="persona.coordenadasResidencia.split('&')[0]"
+                                        [longitude]="persona.coordenadasResidencia.split('&')[1]">
+                                        <agm-info-window >
                                             <h4>{{persona.nombre}}</h4>
                                         </agm-info-window>
                                     </agm-marker>
                                 </div>
-                                <agm-marker [latitude]="equipo.provincia.split('&')[0]"
-                                    [longitude]="equipo.provincia.split('&')[1]" [iconUrl]="{ 
+                                <agm-marker [latitude]="equipo.coordenadas.split('&')[0]"
+                                    [longitude]="equipo.coordenadas.split('&')[1]" [iconUrl]="{
                                         url:'./assets/images/logos/isf.svg',
                                         scaledSize: {
                                             width: 30,
