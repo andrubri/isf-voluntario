@@ -13,7 +13,8 @@ import {startWith, map} from 'rxjs/operators';
 export class EmailComponent implements OnInit {
     datos: any;
     myControl = new FormControl();
-    options: any[] =  [];
+    ctrAsunto = new FormControl();
+    options: any[] = [];
     filteredOptions: Observable<any[]>;
 
     constructor(
@@ -25,7 +26,7 @@ export class EmailComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+
     }
 
 
@@ -34,8 +35,11 @@ export class EmailComponent implements OnInit {
     }
 
     ConfirmarAccion() {
-        this.datos.callback(this.myControl.value);
-        this.dialogRef.close('Confirm');
+        if (this.myControl.status === 'VALID' && this.ctrAsunto.status === 'VALID') {
+            const resp = {mensaje: this.myControl.value, asunto: this.ctrAsunto.value};
+            this.datos.callback(resp);
+            this.dialogRef.close('Confirm');
+        }
     }
 
 

@@ -71,10 +71,16 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
             const idAct = Number(this._route.snapshot.paramMap.get('equipo'));
             this.equipo = await this._isfService.getEquipoById(idAct);
             this.dataSource.data = await this._isfService.getCoordinadoresAct(idAct);
-            this.coordinador_act = await this._isfService.getCoordinadores();
             this.dataPersonas.data = await this._isfService.getPersonasAct(idAct);
+            this.coordinador_act = await this._isfService.getCoordinadores();
             this.personas_act = await this._isfService.getPersonas();
-            this.dataJornadas.data = await this._isfService.getJornadasAct(idAct);
+
+            this._isfService.getJornadasAct(idAct).then(jornadas => {
+                for (const jornada of jornadas) {
+                    jornada.fecha = new Date(Date.parse(jornada.fecha));
+                }
+                this.dataJornadas.data = jornadas;
+            });
         } else {
             this.pageType = 'new';
             this.equipo = {
@@ -287,19 +293,18 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
         this.openEmailDialog({
             etiqueta: 'SendEmail',
             txtBoton: 'Enviar',
-            label: 'Mail',
+            label: 'Mensaje a enviar',
             callback: async (item) => {
-                const info = this.dataSource.data;
                 if (this.equipo.idEquipo) {
-                    const newItem: any = this._isfService.sendEmailToEquipo(this.equipo, item);
-
-                } else {
-
+                    this._isfService.sendEmailToEquipo(this.equipo, item);
+                    this._matSnackBar.open('Se envio correctamente el email!', 'Aceptar', {
+                        verticalPosition: 'top',
+                        duration: 2000
+                    });
                 }
-                this.dataSource.data = info;
             },
-            altoModal: '600px',
-            anchoModal: '500px'
+            altoModal: '500px',
+            anchoModal: '450px'
         });
     }
 

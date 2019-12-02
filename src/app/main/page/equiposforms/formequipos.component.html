@@ -243,7 +243,7 @@
                                                 <mat-icon>pageview</mat-icon>
                                             </button>
                                             <button mat-button (click)="sendEmailConvocatoria($event)"
-                                                    *ngIf="jornada.fecha > now"
+                                                    *ngIf="jornada.fecha > now.getTime()"
                                                     [matTooltip]="'Enviar mail convocatoria'">
                                                 <mat-icon>mail</mat-icon>
                                             </button>
