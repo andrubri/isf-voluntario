@@ -20,15 +20,12 @@ import {ISFService} from '../../../../services/isf.service';
 })
 export class ConfirmarComponent implements OnInit, OnDestroy {
     pageType: string;
-    personaForm: FormGroup = null;
-    jornada: any;
+    confirmacion: any;
     persona: any;
-    nombre: string;
-
+    jornada: any;
     // Horizontal Stepper
     horizontalStepperStep2: FormGroup;
     horizontalStepperStep3: FormGroup;
-    horizontalStepperStep4: FormGroup;
 
     constructor(
         private _formBuilder: FormBuilder,
@@ -59,15 +56,17 @@ export class ConfirmarComponent implements OnInit, OnDestroy {
             }
         };
 
-        let hash: any = this._route.snapshot.paramMap.get('hash');
-        hash = atob(hash.replace(/%3D/g, '=')).split(':');
 
-        if (hash.length === 3) {
-            this.persona = hash[1];
-            this.jornada = hash[0];
-            this.nombre = hash[2];
-        }
-
+        this.confirmacion = {
+            direccion: '',
+            idMedioTrasporte: '',
+            espacioLibre: '',
+            nombreEmergencia: '',
+            apellidoEmergencia: '',
+            telefonoEmergencia: '',
+            relacionEmergencia: '',
+        };
+        this.createPersonaForm();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -78,25 +77,15 @@ export class ConfirmarComponent implements OnInit, OnDestroy {
      * On init
      */
     async ngOnInit(): Promise<void> {
-
-        this.pageType = 'new';
-        this.persona = {
-            nombre: '',
-            apellido: '',
-            tipoDocumento: '',
-            idDocumento: '',
-            ciudadResidencia: '',
-            provinciaResidencia: '',
-            paisOrigen: '',
-            telefono: '',
-            email: '',
-            nivelEstudios: '',
-            carrera: '',
-            universidad: '',
-            ocupacion: ''
-        };
-
-        this.createPersonaForm();
+        const hash: any = this._route.snapshot.paramMap.get('hash');
+        try {
+            const info: any = await this._isfService.getConfirmacion(hash);
+            this.jornada = info.jornada;
+            this.persona = info.voluntario;
+            console.log(this.persona);
+        } catch (e) {
+            console.log(e);
+        }
         this._fuseProgressBarService.hide();
     }
 
@@ -117,30 +106,21 @@ export class ConfirmarComponent implements OnInit, OnDestroy {
      */
     createPersonaForm(): void {
         this.horizontalStepperStep2 = this._formBuilder.group({
-            nombre: [this.persona.nombre],
-            apellido: [this.persona.apellido],
-            tipoDocumento: [this.persona.tipoDocumento],
-            idDocumento: [this.persona.idDocumento],
-            telefono: [this.persona.telefono],
-            email: [this.persona.email]
+            direccion: [this.confirmacion.direccion],
+            idMedioTrasporte: [this.confirmacion.idMedioTrasporte],
+            espacioLibre: [this.confirmacion.espacioLibre],
         });
         this.horizontalStepperStep3 = this._formBuilder.group({
-            ciudadResidencia: [this.persona.ciudadResidencia],
-            provinciaResidencia: [this.persona.provinciaResidencia],
-            paisOrigen: [this.persona.paisOrigen]
+            nombreEmergencia: [this.confirmacion.nombreEmergencia],
+            apellidoEmergencia: [this.confirmacion.apellidoEmergencia],
+            telefonoEmergencia: [this.confirmacion.telefonoEmergencia],
+            relacionEmergencia: [this.confirmacion.relacionEmergencia],
         });
-        this.horizontalStepperStep4 = this._formBuilder.group({
-            nivelEstudios: [this.persona.nivelEstudios],
-            carrera: [this.persona.carrera],
-            universidad: [this.persona.universidad],
-            ocupacion: [this.persona.ocupacion]
-        });
-
     }
 
     async enviar(): Promise<void> {
         this._fuseProgressBarService.show();
-        const data = Object.assign(this.horizontalStepperStep2.getRawValue(), this.horizontalStepperStep3.getRawValue(), this.horizontalStepperStep4.getRawValue());
+        const data = Object.assign(this.horizontalStepperStep2.getRawValue(), this.horizontalStepperStep3.getRawValue());
         data.handle = FuseUtils.handleize(data.nombre);
 
         await this._isfService.addPersonaExterno(data);

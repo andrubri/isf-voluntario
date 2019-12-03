@@ -20,7 +20,7 @@
 
             <div fxLayout="row">
 
-                <div class="selected-project">{{selectedProject.nombre}}</div>
+                <div class="selected-project">{{selectedProject?.nombre}}</div>
 
                 <button mat-icon-button class="project-selector" [matMenuTriggerFor]="projectsMenu"
                         aria-label="Select project">
@@ -41,7 +41,7 @@
 
             <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                  [@animateStagger]="{value:'50'}">
-                <div *ngIf="widgets.widget5.mainChart.length == 0 && (selectedProject.idEquipo != 0 || projects.length == 1)"
+                <div *ngIf="widgets.widget5.mainChart.length == 0 && (selectedProject?.idEquipo != 0 || projects.length == 1)"
                      style="font-size: 20pt; text-align: center" class="w-100-p">
                     NO HAY DATOS PARA MOSTRAR
                 </div>
@@ -84,7 +84,7 @@
                 </fuse-widget>
                 <!-- / WIDGET 5 -->
                 <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" fxLayout="row" fxFlex="100"
-                             class="widget widget5" *ngIf="projects.length > 1 && selectedProject.idEquipo == 0">
+                             class="widget widget5" *ngIf="projects.length > 1 && selectedProject?.idEquipo == 0">
                     <div class="fuse-card auto-width">
 
                         <div class="position-relative p-24"
@@ -94,13 +94,13 @@
                             </div>
                         </div>
 
-                        <div class="position-relative h-368 pb-16">
+                        <div class="position-relative h-368 pb-16" *ngIf="widgetTotal?.datasets.length > 0">
                             <canvas baseChart
-                                    [datasets]="widgetTotal.datasets"
-                                    [labels]="widgetTotal.labels"
-                                    [colors]="widgetTotal.colors"
-                                    [options]="widgetTotal.options"
-                                    [chartType]="widgetTotal.chartType">
+                                    [datasets]="widgetTotal?.datasets"
+                                    [labels]="widgetTotal?.labels"
+                                    [colors]="widgetTotal?.colors"
+                                    [options]="widgetTotal?.options"
+                                    [chartType]="widgetTotal?.chartType">
                             </canvas>
                         </div>
 

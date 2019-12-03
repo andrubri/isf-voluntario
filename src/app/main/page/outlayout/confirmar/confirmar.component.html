@@ -28,7 +28,7 @@
 
                             <div fxFlex="1 0 auto" fxLayout="column">
                                 <div class="w-100-p" style="font-size: 12pt;">
-                                    <span style="font-size: 20px; font-weight: bold;">Hola {{nombre}} para confirmar tu asistencia te vamos a pedir unos datos!</span><br><br>
+                                    <span style="font-size: 20px; font-weight: bold;">Hola {{persona?.nombre}} para confirmar tu asistencia te vamos a pedir unos datos!</span><br><br>
 
                                     <span>Recorda que la misión de ISF es:</span><br>
                                     <ul>
@@ -109,7 +109,7 @@
                                     <mat-label>Nombre</mat-label>
                                     <input matInput placeholder="Nombre"
                                            name="nombreEmergencia"
-                                           formControlName="ciudadResidencia"
+                                           formControlName="nombreEmergencia"
                                            required>
                                 </mat-form-field>
                             </div>
@@ -147,21 +147,19 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="horizontalStepperStep4" [editable]="false">
-                        <form fxLayout="column" [formGroup]="horizontalStepperStep4">
-                            <ng-template matStepLabel>Confirmado!</ng-template>
+                    <mat-step [editable]="false">
+                        <ng-template matStepLabel>Confirmado!</ng-template>
 
-                            <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
-                                Ya se registro correctamente tu asistencia, GRACIAS!.
-                            </div>
+                        <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                            Ya se registro correctamente tu asistencia, GRACIAS!.
+                        </div>
 
-                            <div fxLayout="row" fxLayoutAlign="center center">
-                                <button mat-raised-button type="button" color="accent"
-                                        (click)="finishHorizontalStepper()">
-                                    Finalizar
-                                </button>
-                            </div>
-                        </form>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button type="button" color="accent"
+                                    (click)="finishHorizontalStepper()">
+                                Finalizar
+                            </button>
+                        </div>
                     </mat-step>
 
                 </mat-horizontal-stepper>

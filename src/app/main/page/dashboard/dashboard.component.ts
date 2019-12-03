@@ -187,7 +187,6 @@ export class DashboardComponent implements OnInit {
                     }
                     this.widgetTotal.datasets.push(nElem);
                 }
-                console.log(this.widgetTotal.datasets)
             }
 
         }

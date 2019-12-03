@@ -76,10 +76,12 @@ export class ISFService {
         const url = `${this._urlBE}/equipo/${idEquipo}`;
         return await this._http.delete(url, this._httpOptions).toPromise();
     }
+
     public async getAllPersonas(): Promise<any> {
         const url = `${this._urlBE}/persona`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
+
     public async getPersonaById(idPersona: number): Promise<any> {
         const url = `${this._urlBE}/persona/${idPersona}`;
         return await this._http.get(url, this._httpOptions).toPromise();
@@ -163,17 +165,17 @@ export class ISFService {
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getPersonas(): Promise<any>{
+    public async getPersonas(): Promise<any> {
         const url = `${this._urlBE}/persona`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getPersonasAct(idEquipo: number): Promise<any>{
+    public async getPersonasAct(idEquipo: number): Promise<any> {
         const url = `${this._urlBE}/equipo/${idEquipo}/voluntario`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getJornadasAct(idEquipo: number): Promise<any>{
+    public async getJornadasAct(idEquipo: number): Promise<any> {
         const url = `${this._urlBE}/equipo/${idEquipo}/jornada`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
@@ -220,22 +222,28 @@ export class ISFService {
         return await this._http.put(url, {idPersona: idPersona, confirmacion: confirmacion}, this._httpOptions).toPromise();
     }
 
-    public async getDashboard(idEquipo: number): Promise<any>{
-        const url =  `${this._urlBE}/equipo/${idEquipo}/estadistica`;
-        return await this._http.get(url, this._httpOptions).toPromise();
-    }
-    public async getDashboardGeneral(): Promise<any>{
-        const url =  `${this._urlBE}/equipo/estadistica`;
+    public async getDashboard(idEquipo: number): Promise<any> {
+        const url = `${this._urlBE}/equipo/${idEquipo}/estadistica`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getOrigenContacto(): Promise<any>{
-        const url =  `${this._urlBE}/personas/origencontacto`;
+    public async getDashboardGeneral(): Promise<any> {
+        const url = `${this._urlBE}/equipo/estadistica`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 
-    public async getObrasSociales(): Promise<any>{
-        const url =  `${this._urlBE}/personas/obrasocial`;
+    public async getOrigenContacto(): Promise<any> {
+        const url = `${this._urlBE}/personas/origencontacto`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async getObrasSociales(): Promise<any> {
+        const url = `${this._urlBE}/personas/obrasocial`;
+        return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async getConfirmacion(hash: string): Promise<any> {
+        const url = `${this._urlBE}/jornada/persona/${hash}`;
         return await this._http.get(url, this._httpOptions).toPromise();
     }
 }
