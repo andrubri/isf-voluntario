@@ -18,7 +18,7 @@
 
             <!-- CONTENT -->
             <div class="content horizontal-stepper-wrapper">
-                <mat-horizontal-stepper class="mat-elevation-z4" [linear]="true">
+                <mat-horizontal-stepper class="mat-elevation-z4" #stepper [linear]="true">
 
                     <mat-step [editable]="false">
 
@@ -65,37 +65,38 @@
 
                         <form fxLayout="column" [formGroup]="horizontalStepperStep2">
 
-                            <ng-template matStepLabel>Como vas?</ng-template>
+                            <ng-template matStepLabel>¿Como vas a ir?</ng-template>
 
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>Dirección de salida</mat-label>
-                                    <input matInput placeholder="Dirección de salida"
+                                    <mat-label>¿Desde que direccion salis?</mat-label>
+                                    <input matInput placeholder="¿Desde que direccion salis?"
                                            name="direccion"
                                            formControlName="direccion"
+                                           #search
                                            required>
                                 </mat-form-field>
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>Medio de trasporte</mat-label>
-                                    <input matInput placeholder="Medio de trasporte"
-                                           name="idMedioTrasporte"
-                                           formControlName="idMedioTrasporte"
-                                           required>
+                                    <mat-label>¿Que medio de trasporte vas a utilizar?</mat-label>
+                                    <mat-select formControlName="idMedioTransporte" required>
+                                        <mat-option *ngFor="let medio of medioTransporte" [value]="medio.idMedioTransporte">
+                                            {{medio.descripcion}}
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>Espacio Libre</mat-label>
-                                    <input matInput placeholder="Espacio Libre"
+                                    <mat-label>Si vas en un traporte privado. ¿Cuanto espacio libre tenes?</mat-label>
+                                    <input matInput placeholder="Si vas en un traporte privado. ¿Cuanto espacio libre tenes?"
                                            name="espacioLibre"
-                                           formControlName="espacioLibre"
-                                           required>
+                                           formControlName="espacioLibre" >
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <button mat-raised-button matStepperNext type="button" color="accent">
+                                <button mat-raised-button type="button" color="accent" (click)="validarStep2(stepper)">
                                     Siguiente
                                 </button>
                             </div>
@@ -141,7 +142,7 @@
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <button mat-raised-button matStepperNext type="button" color="accent">
+                                <button mat-raised-button (click)="enviar(stepper)" type="button" color="accent">
                                     Siguiente
                                 </button>
                             </div>

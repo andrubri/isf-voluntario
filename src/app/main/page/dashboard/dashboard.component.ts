@@ -103,9 +103,6 @@ export class DashboardComponent implements OnInit {
             scheme: {
                 domain: ['#42BFF7', '#C6ECFD', '#C7B42C', '#AAAAAA']
             },
-            onSelect: (ev) => {
-                console.log(ev);
-            },
             supporting: {
                 currentRange: '',
                 xAxis: false,

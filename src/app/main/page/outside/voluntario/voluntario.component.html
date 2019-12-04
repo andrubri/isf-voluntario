@@ -80,7 +80,7 @@
 
                         <form fxLayout="column" [formGroup]="horizontalStepperStep2">
 
-                            <ng-template matStepLabel>Datos Personales</ng-template>
+                            <ng-template matStepLabel>Datos Generales</ng-template>
 
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
@@ -103,10 +103,11 @@
                             <div>
                                 <mat-form-field appearance="standard" class="w-100-p">
                                     <mat-label>Tipo Documento</mat-label>
-                                    <input matInput placeholder="Tipo Documento"
-                                           name="tipoDocumento"
-                                           formControlName="tipoDocumento"
-                                           required>
+                                    <mat-select formControlName="tipoDocumento" required>
+                                        <mat-option *ngFor="let tipoDoc of tiposDoc" [value]="tipoDoc">
+                                            {{tipoDoc}}
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div>
@@ -115,6 +116,55 @@
                                     <input matInput placeholder="Documento"
                                            name="idDocumento"
                                            formControlName="idDocumento"
+                                           required>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="standard" class="w-100-p">
+                                    <mat-label>Nacionalidad</mat-label>
+                                    <input matInput placeholder="Nacionalidad"
+                                           name="paisOrigen"
+                                           formControlName="paisOrigen"
+                                           required>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="standard" class="w-100-p">
+                                    <mat-label>Fecha de Nacimiento</mat-label>
+                                    <input matInput [matDatepicker]="fechaNacimiento" name="fechaNacimiento"
+                                           formControlName="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                                    <mat-datepicker-toggle matSuffix
+                                                           [for]="fechaNacimiento"></mat-datepicker-toggle>
+                                    <mat-datepicker #fechaNacimiento></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="standard" class="w-100-p">
+                                    <mat-label>¿Cómo te enteraste de ISF Argentina? </mat-label>
+                                    <mat-select formControlName="idOrigenContacto" required>
+                                        <mat-option *ngFor="let oContacto of origenContacto" [value]="oContacto.idOrigenContacto">
+                                            {{oContacto.descripcion}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <button mat-raised-button matStepperNext type="button" color="accent">
+                                    Siguiente
+                                </button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="horizontalStepperStep3" [editable]="false">
+                        <form fxLayout="column" [formGroup]="horizontalStepperStep3">
+                            <ng-template matStepLabel>Datos de contacto</ng-template>
+                            <div>
+                                <mat-form-field appearance="standard" class="w-100-p">
+                                    <mat-label>Direccion</mat-label>
+                                    <input matInput placeholder="Direccion"
+                                           name="direccionResidencia"
+                                           formControlName="direccionResidencia"
+                                           #search
                                            required>
                                 </mat-form-field>
                             </div>
@@ -133,45 +183,9 @@
                                     <mat-label>Email</mat-label>
                                     <input matInput placeholder="Email"
                                            name="email"
-                                           type="email"
                                            formControlName="email"
-                                           required>
-                                </mat-form-field>
-                            </div>
-                            <div fxLayout="row" fxLayoutAlign="center center">
-                                <button mat-raised-button matStepperNext type="button" color="accent">
-                                    Siguiente
-                                </button>
-                            </div>
-                        </form>
-                    </mat-step>
-                    <mat-step [stepControl]="horizontalStepperStep3" [editable]="false">
-                        <form fxLayout="column" [formGroup]="horizontalStepperStep3">
-                            <ng-template matStepLabel>Lugar de residencia</ng-template>
-                            <div>
-                                <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>Ciudad de residencia</mat-label>
-                                    <input matInput placeholder="Ciudad de residencia"
-                                           name="ciudadResidencia"
-                                           formControlName="ciudadResidencia"
-                                           required>
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>Provincia de residencia</mat-label>
-                                    <input matInput placeholder="Provincia de residencia"
-                                           name="provinciaResidencia"
-                                           formControlName="provinciaResidencia"
-                                           required>
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <mat-form-field appearance="standard" class="w-100-p">
-                                    <mat-label>Pais</mat-label>
-                                    <input matInput placeholder="Pais"
-                                           name="paisOrigen"
-                                           formControlName="paisOrigen"
+                                           type="email"
+                                           email="true"
                                            required>
                                 </mat-form-field>
                             </div>

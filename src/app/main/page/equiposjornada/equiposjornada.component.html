@@ -13,7 +13,7 @@
             <!-- APP TITLE -->
             <div fxLayout="row" fxLayoutAlign="start center">
 
-                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/equipos/' + equipo.idEquipo">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/equipos/' + equipo?.idEquipo">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
@@ -23,7 +23,7 @@
                     </mat-icon>
                     <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" fxHide
                         fxShow.gt-sm>
-                        {{equipo.nombre}} - Jornada {{jornada.fecha | date : 'dd/MM/yyyy'}} - {{jornada.descripcion}}
+                        {{equipo?.nombre}} - Jornada {{jornada?.fecha | date : 'dd/MM/yyyy'}} - {{jornada?.descripcion}}
                     </span>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                         Nombre
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let voluntario">
-                                        <p class="text-truncate">{{voluntario.nombre}}</p>
+                                        <p class="text-truncate">{{voluntario.nombre || voluntario.Persona.nombre}}</p>
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="apellido">
@@ -61,7 +61,7 @@
                                         Apellido
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let voluntario">
-                                        <p class="text-truncate">{{voluntario.apellido}}
+                                        <p class="text-truncate">{{voluntario.apellido || voluntario.Persona.apellido}}
                                         </p>
                                     </mat-cell>
                                 </ng-container>
@@ -119,15 +119,17 @@
                         <div class="tab-content p-24">
                             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
                                 <div *ngFor="let persona of dataPersonas.data">
-                                    <agm-marker [latitude]="persona.coordenadasResidencia.split('&')[0]"
-                                        [longitude]="persona.coordenadasResidencia.split('&')[1]">
+                                    <agm-marker [latitude]="persona.coordenadasOrigen.split('&')[0]"
+                                        [longitude]="persona.coordenadasOrigen.split('&')[1]">
                                         <agm-info-window >
-                                            <h4>{{persona.nombre}}</h4>
+                                            <h4>{{persona.Persona.nombre}} {{persona.Persona.apellido}}</h4>
+                                            <span><strong>Medio Trasporte:</strong> {{persona.MedioTransporte?.descripcion}}</span><br>
+                                            <span><strong>Lugares Libres:</strong> {{persona.lugaresLibres}}</span>
                                         </agm-info-window>
                                     </agm-marker>
                                 </div>
-                                <agm-marker [latitude]="equipo.coordenadas.split('&')[0]"
-                                    [longitude]="equipo.coordenadas.split('&')[1]" [iconUrl]="{
+                                <agm-marker [latitude]="equipo?.coordenadas.split('&')[0]"
+                                    [longitude]="equipo?.coordenadas.split('&')[1]" [iconUrl]="{
                                         url:'./assets/images/logos/isf.svg',
                                         scaledSize: {
                                             width: 30,

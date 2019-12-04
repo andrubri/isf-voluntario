@@ -1,15 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from 'environments/environment';
-import {BehaviorSubject} from 'rxjs';
-import {AuthService} from './auth.service';
-//
 import {FuseNavigationService} from '../../@fuse/components/navigation/navigation.service';
-import Socket = NodeJS.Socket;
-import {MatSnackBar} from '@angular/material';
-import {__await} from 'tslib';
-
-
 @Injectable({
     providedIn: 'root',
 })
@@ -234,7 +226,8 @@ export class ISFService {
 
     public async getOrigenContacto(): Promise<any> {
         const url = `${this._urlBE}/personas/origencontacto`;
-        return await this._http.get(url, this._httpOptions).toPromise();
+        const response = await this._http.get(url).toPromise();
+        return response;
     }
 
     public async getObrasSociales(): Promise<any> {
@@ -245,5 +238,10 @@ export class ISFService {
     public async getConfirmacion(hash: string): Promise<any> {
         const url = `${this._urlBE}/jornada/persona/${hash}`;
         return await this._http.get(url, this._httpOptions).toPromise();
+    }
+
+    public async setConfirmacion(hash: string, data: any): Promise<any>{
+        const url = `${this._urlBE}/jornada/persona/${hash}`;
+        return await this._http.put(url, data, this._httpOptions).toPromise();
     }
 }

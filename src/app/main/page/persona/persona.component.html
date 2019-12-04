@@ -119,6 +119,15 @@
                                 </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
+                                        <mat-label>Dieta</mat-label>
+                                        <input matInput placeholder="Dieta"
+                                               name="dieta"
+                                               formControlName="dieta"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>¿Cómo te enteraste de ISF Argentina? </mat-label>
                                         <mat-select formControlName="idOrigenContacto" required>
                                             <mat-option *ngFor="let oContacto of origenContacto" [value]="oContacto.idOrigenContacto">
@@ -224,15 +233,6 @@
                         </mat-tab>
                         <mat-tab label="Datos del Seguro">
                             <div class="tab-content p-24">
-                                <div>
-                                    <mat-form-field appearance="standard" class="w-100-p">
-                                        <mat-label>Dieta</mat-label>
-                                        <input matInput placeholder="Dieta"
-                                               name="dieta"
-                                               formControlName="dieta"
-                                               required>
-                                    </mat-form-field>
-                                </div>
                                 <div>
                                     <mat-form-field appearance="standard" class="w-100-p">
                                         <mat-label>Obra Social</mat-label>

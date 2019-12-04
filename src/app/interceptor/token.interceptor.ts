@@ -9,6 +9,7 @@ import {AuthService} from '../services/auth.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import {from} from 'rxjs';
+import {switchMap, take} from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -16,21 +17,15 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(request.url){
-            console.log(request.url);
-        }
-        return from(this.auth.isLogin()).flatMap(_ => {
-            return this.auth.GetTokenFirebase();
-        }).mergeMap((token: string) => {
-            if (token) {
-                request = request.clone({
-                    setHeaders: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-            }
-
-            return next.handle(request);
-        });
+        return this.auth.isLoginInterceptor().pipe(
+            take(1),
+            switchMap(idToken => {
+                let clone = request.clone();
+                if (idToken) {
+                    clone = clone.clone({headers: request.headers.set('Authorization', 'Bearer ' + idToken)});
+                }
+                return next.handle(clone);
+            })
+        );
     }
 }

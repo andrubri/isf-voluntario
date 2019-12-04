@@ -23,6 +23,10 @@ export class AuthService {
         });
     }
 
+    public isLoginInterceptor(): Observable<string>{
+        return this.afAuth.idToken;
+    }
+
     public isLogin(): Promise<boolean> {
         const isLogin = new Promise<boolean>((resolve, reject) => {
             this.afAuth.authState.subscribe(res => {

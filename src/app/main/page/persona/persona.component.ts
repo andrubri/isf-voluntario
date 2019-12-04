@@ -70,7 +70,22 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this._route.snapshot.paramMap.get('persona') && this._route.snapshot.paramMap.get('persona') !== 'new') {
             const idAct = Number(this._route.snapshot.paramMap.get('persona'));
             this.persona = await this._isfService.getPersonaById(idAct);
-            console.log(this.persona);
+            if (!this.persona.ContactoEmergencium) {
+                this.persona.ContactoEmergencium = {
+                    nombre: '',
+                    apellido: '',
+                    telefono: '',
+                    relacion: ''
+                };
+            }
+            if (!this.persona.DatosSeguro) {
+                this.persona.DatosSeguro = {
+                    idObraSocial: '',
+                    grupoSanguineo: '',
+                    emfermedades: '',
+                    medicaciones: ''
+                };
+            }
             this.pageType = 'edit';
         } else {
             this.pageType = 'new';
