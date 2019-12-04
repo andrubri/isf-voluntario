@@ -53,6 +53,10 @@
                         class="add-product-button fuse-white mt-24 mt-md-0">
                     <span>EMAIL EQUIPO</span>
                 </button>
+                <button mat-raised-button (click)="exportarExcel()" *ngIf="pageType ==='edit'"
+                        class="add-product-button fuse-white mt-24 mt-md-0">
+                    <span>EXCEL SEGUROS</span>
+                </button>
             </div>
 
         </div>

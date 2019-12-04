@@ -16,6 +16,8 @@ import {AddjornadaComponent} from '../../modal/AddJornada/addjornada.component';
 import {EmailComponent} from '../../modal/Email/email.component';
 import {AutocompleteService} from 'app/services/autocomplete-service';
 import {isObject} from 'util';
+import {ExportarComponent} from '../../modal/Exportar/exportar.component';
+import * as XLSX from 'xlsx';
 
 @Component({
     selector: 'formequipos',
@@ -249,6 +251,15 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
+    private openDialogExportar(datos: any) {
+        this._dialog.open(ExportarComponent, {
+            width: datos.anchoModal ? datos.anchoModal : '50%',
+            height: datos.altoModal ? datos.altoModal : '17%',
+            data: datos,
+            panelClass: 'popup'
+        });
+    }
+
     addCoordinador(): void {
 
         this.openDialogAdd({
@@ -301,6 +312,34 @@ export class FormequiposComponent implements OnInit, OnDestroy, AfterViewInit {
                         verticalPosition: 'top',
                         duration: 2000
                     });
+                }
+            },
+            altoModal: '500px',
+            anchoModal: '450px'
+        });
+    }
+
+    exportarExcel(): void {
+
+        this.openDialogExportar({
+            etiqueta: 'exportar',
+            txtBoton: 'Exportar',
+            callback: async (item) => {
+                if (this.equipo.idEquipo) {
+                    const datos = await this._isfService.getDataSeguros(this.equipo.idEquipo, item);
+                    if (datos.length > 0) {
+
+                        const h1: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datos);
+                        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(wb, h1, 'Datos Seguro');
+                        XLSX.writeFile(wb, 'datos-seguro.xlsx');
+                    } else {
+                        this._matSnackBar.open('No se encontraron datos para exportar', 'Aceptar', {
+                            verticalPosition: 'top',
+                            duration: 2000
+                        });
+                    }
+
                 }
             },
             altoModal: '500px',

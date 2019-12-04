@@ -1,0 +1,36 @@
+<div>
+    <mat-card-content>
+        <div mat-dialog-content>
+            <div style="text-align:right;margin-bottom: 34px;">
+                <mat-icon (click)="onCloseCancel()" style="cursor: pointer;color: #AEAEAE;">cancel</mat-icon>
+            </div>
+            <form>
+                <div fxLayout="column" fxFlow="1 1 100%" class="tituloModal1" fxLayoutAlign="space-around center" class="w-100-p">
+
+                    <mat-form-field appearance="standard" class="w-100-p">
+                        <mat-label>Fecha Desde</mat-label>
+                        <input matInput [matDatepicker]="fechaDesde" name="fechaDesde"
+                               [formControl]="ctrFechaDesde" placeholder="Fecha Desde" required>
+                        <mat-datepicker-toggle matSuffix [for]="fechaDesde"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaDesde></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard" class="w-100-p">
+                        <mat-label>Fecha Hasta</mat-label>
+                        <input matInput [matDatepicker]="fechaHasta" name="fechaHasta"
+                               [formControl]="ctrFechaHasta" placeholder="Fecha Hasta" required>
+                        <mat-datepicker-toggle matSuffix [for]="fechaHasta"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaHasta></mat-datepicker>
+                    </mat-form-field>
+
+                </div>
+            </form>
+            <div fxLayout="row" style="margin-top: 8%" fxLayoutAlign="space-around center">
+                <button class="btnConfirmar" mat-button (click)="ConfirmarAccion()"
+                        cdkFocusInitial>{{datos.txtBoton}}</button>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="space-around center">
+                <a (click)="onCloseCancel()" class="volver"> Volver </a>
+            </div> -->
+        </div>
+    </mat-card-content>
+</div>

@@ -52,6 +52,7 @@ import {VoluntarioModule} from './main/page/outside/voluntario/voluntario.module
 import {AgmCoreModule} from '@agm/core';
 import {DashboardModule} from './main/page/dashboard/dashboard.module';
 import {ConfirmarModule} from './main/page/outside/confirmar/confirmar.module';
+import {ExportarModule} from './main/modal/Exportar/exportar.module';
 
 
 const appRoutes: Routes = [
@@ -123,7 +124,8 @@ const appRoutes: Routes = [
         EmailModule,
         VoluntarioModule,
         DashboardModule,
-        ConfirmarModule
+        ConfirmarModule,
+        ExportarModule
 
 
     ],

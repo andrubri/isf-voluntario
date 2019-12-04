@@ -244,4 +244,9 @@ export class ISFService {
         const url = `${this._urlBE}/jornada/persona/${hash}`;
         return await this._http.put(url, data, this._httpOptions).toPromise();
     }
+
+    public async getDataSeguros(idEquipo: number, fecha: any): Promise<any>{
+        const url = `${this._urlBE}/equipo/${idEquipo}/seguro`;
+        return await this._http.post(url, fecha, this._httpOptions).toPromise();
+    }
 }
