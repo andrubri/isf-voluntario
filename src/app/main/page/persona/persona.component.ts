@@ -194,14 +194,22 @@ export class PersonaComponent implements OnInit, OnDestroy, AfterViewInit {
         try {
             const data = this.personaForm.getRawValue();
             data.handle = FuseUtils.handleize(data.nombre);
-            const infoDir = this.searchElement.first.nativeElement.value.split(',');
-            if (infoDir.length > 1 && this.personaLocation.lat) {
-                data.coordenadasResidencia = this.personaLocation.lat + '&' + this.personaLocation.lng;
-                data.direccionResidencia = this.searchElement.first.nativeElement.value;
-                data.provinciaResidencia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
-                data.ciudadResidencia = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
-                data.paisResidencia = (infoDir.length >= 4) ? infoDir[3].trim() : infoDir[2].trim();
 
+            const infoDir = this.searchElement.first.nativeElement.value.split(',');
+            if ((this.searchElement.first.nativeElement.value === this.persona.direccionResidencia) || (infoDir.length > 1 && this.personaLocation.lat)) {
+                if ((this.searchElement.first.nativeElement.value === this.persona.direccionResidencia)) {
+                    data.coordenadasResidencia = this.persona.coordenadasResidencia;
+                    data.direccionResidencia = this.persona.direccionResidencia;
+                    data.provinciaResidencia = this.persona.provinciaResidencia;
+                    data.ciudadResidencia = this.persona.ciudadResidencia;
+                    data.paisResidencia = this.persona.paisResidencia;
+                } else {
+                    data.coordenadasResidencia = this.personaLocation.lat + '&' + this.personaLocation.lng;
+                    data.direccionResidencia = this.searchElement.first.nativeElement.value;
+                    data.provinciaResidencia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
+                    data.ciudadResidencia = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
+                    data.paisResidencia = (infoDir.length >= 4) ? infoDir[3].trim() : infoDir[2].trim();
+                }
                 await this._isfService.savePersona(data);
 
                 this._matSnackBar.open('Persona grabada', 'OK', {
