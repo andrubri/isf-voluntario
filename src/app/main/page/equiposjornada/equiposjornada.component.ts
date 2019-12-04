@@ -138,4 +138,11 @@ export class EquiposJornadaComponent implements OnInit, OnDestroy {
         return (value.confirmacion === 'true') ? true : false;
     }
 
+    getLat(persona: any): any {
+        return (persona.coordenadasOrigen) ? persona.coordenadasOrigen.split('&')[0] : persona.Persona.coordenadasResidencia.split('&')[0];
+    }
+
+    getLon(persona: any): any {
+        return (persona.coordenadasOrigen) ? persona.coordenadasOrigen.split('&')[1] : persona.Persona.coordenadasResidencia.split('&')[1];
+    }
 }

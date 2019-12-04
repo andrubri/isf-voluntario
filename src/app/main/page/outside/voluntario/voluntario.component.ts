@@ -11,6 +11,8 @@ import {FuseConfigService} from '../../../../../@fuse/services/config.service';
 import {DOCUMENT} from '@angular/common';
 import {ISFService} from '../../../../services/isf.service';
 import {AutocompleteService} from '../../../../services/autocomplete-service';
+import {isObject} from "util";
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
     selector: 'voluntario',
@@ -108,6 +110,7 @@ export class VoluntarioComponent implements OnInit, OnDestroy, AfterViewInit {
         this.searchElement.changes.subscribe(val => this._autocompleteService.autocompleteAdress(val.first.nativeElement, this.personaLocation)
         );
     }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -141,7 +144,7 @@ export class VoluntarioComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
 
-    async enviar(): Promise<void> {
+    async enviar(stepper: MatStepper): Promise<void> {
         this._fuseProgressBarService.show();
         const data = Object.assign(this.horizontalStepperStep2.getRawValue(), this.horizontalStepperStep3.getRawValue(), this.horizontalStepperStep4.getRawValue());
         data.handle = FuseUtils.handleize(data.nombre);
@@ -153,13 +156,24 @@ export class VoluntarioComponent implements OnInit, OnDestroy, AfterViewInit {
             data.provinciaResidencia = (infoDir.length >= 4) ? infoDir[2].trim() : infoDir[1].trim();
             data.ciudadResidencia = (infoDir.length >= 4) ? infoDir[1].trim() : infoDir[1].trim();
             data.paisResidencia = (infoDir.length >= 4) ? infoDir[3].trim() : infoDir[2].trim();
-
-            await this._isfService.addPersonaExterno(data);
-        } else {
-            this._matSnackBar.open('Debe ingresar una dirección valida', 'Aceptar', {
-                verticalPosition: 'top',
-                duration: 2000
-            });
+            try {
+                await this._isfService.addPersonaExterno(data);
+                stepper.next();
+            } catch (e) {
+                if (e.error && !isObject(e.error)) {
+                    this._matSnackBar.open(e.error, 'Aceptar', {
+                        verticalPosition: 'top',
+                        panelClass: 'errorSnackBar',
+                        duration: 2000
+                    });
+                } else {
+                    this._matSnackBar.open('Ocurrio un error al grabar el voluntario!. Intente más tarde.', 'Aceptar', {
+                        verticalPosition: 'top',
+                        panelClass: 'errorSnackBar',
+                        duration: 2000
+                    });
+                }
+            }
         }
 
         this._fuseProgressBarService.hide();

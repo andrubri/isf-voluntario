@@ -119,8 +119,8 @@
                         <div class="tab-content p-24">
                             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
                                 <div *ngFor="let persona of dataPersonas.data">
-                                    <agm-marker [latitude]="persona.coordenadasOrigen.split('&')[0]"
-                                        [longitude]="persona.coordenadasOrigen.split('&')[1]">
+                                    <agm-marker [latitude]="getLat(persona)"
+                                        [longitude]="getLon(persona)">
                                         <agm-info-window >
                                             <h4>{{persona.Persona.nombre}} {{persona.Persona.apellido}}</h4>
                                             <span><strong>Medio Trasporte:</strong> {{persona.MedioTransporte?.descripcion}}</span><br>
