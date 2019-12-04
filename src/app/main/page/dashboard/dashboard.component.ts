@@ -196,7 +196,7 @@ export class DashboardComponent implements OnInit {
             for (const elem of info) {
                 const nElem: any = {};
                 const fechaJo: Date = new Date(Date.parse(elem.fecha));
-                nElem.name = fechaJo.getDate() + '/' + fechaJo.getMonth() + 1 + '/' + fechaJo.getFullYear();
+                nElem.name = fechaJo.getDate() + '/' + (Number(fechaJo.getMonth()) + 1) + '/' + fechaJo.getFullYear();
                 nElem.series = [
                     {
                         'name': 'Confirmados',
