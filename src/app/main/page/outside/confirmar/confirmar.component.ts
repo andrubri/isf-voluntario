@@ -12,6 +12,7 @@ import {DOCUMENT} from '@angular/common';
 import {ISFService} from '../../../../services/isf.service';
 import {AutocompleteService} from '../../../../services/autocomplete-service';
 import {MatStepper} from '@angular/material/stepper';
+import {isObject} from "util";
 
 @Component({
     selector: 'voluntario',
@@ -27,6 +28,8 @@ export class ConfirmarComponent implements OnInit, OnDestroy, AfterViewInit {
     jornada: any;
     medioTransporte: any;
     personaLocation: any = {};
+    mensajeError: string = '';
+    novalido: boolean = false;
     // Horizontal Stepper
     horizontalStepperStep2: FormGroup;
     horizontalStepperStep3: FormGroup;
@@ -102,7 +105,13 @@ export class ConfirmarComponent implements OnInit, OnDestroy, AfterViewInit {
             }
 
         } catch (e) {
-            console.log(e);
+            if (e.error && !isObject(e.error)) {
+                this.mensajeError = e.error;
+            } else {
+                this.mensajeError = 'Hubo un error al intentar recuperar la confirmación.  Por favor vuelva a intentar más tarde!'
+            }
+
+            this.novalido = true;
         }
         this.createPersonaForm();
         this._fuseProgressBarService.hide();

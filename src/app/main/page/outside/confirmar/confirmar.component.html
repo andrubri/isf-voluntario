@@ -16,8 +16,11 @@
         <!-- CONTENT CARD -->
         <div class="content-card">
 
+            <div class="content" *ngIf="novalido" style="padding-top:50px;">
+                <div class="mat-form-field-wrapper message-box error">{{mensajeError}}</div>
+            </div>
             <!-- CONTENT -->
-            <div class="content horizontal-stepper-wrapper">
+            <div class="content horizontal-stepper-wrapper" *ngIf="!novalido">
                 <mat-horizontal-stepper class="mat-elevation-z4" #stepper [linear]="true">
 
                     <mat-step [editable]="false">
