@@ -64,7 +64,7 @@
         "if-env": "1.0.4",
         "lodash": "4.17.11",
         "minimist": "1.2.0",
-        "moment": "2.23.0",
+        "moment": "2.29.4",
         "ng2-charts": "1.6.0",
         "ngrx-store-freeze": "0.2.4",
         "ngx-color-picker": "7.3.0",
